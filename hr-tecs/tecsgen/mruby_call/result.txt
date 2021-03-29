@@ -1,0 +1,566 @@
+require_lib: tecslib/version.rb
+require_lib: tecslib/core/tecs_lang.rb
+require_lib: tecslib/messages/messages_console_ja_JP.rb
+require_lib: tecslib/messages/messages_file_ja_JP.rb
+LANG_FILE=ja_JP.utf8, LANG_CONSOLE=ja_JP.utf8
+KCODE_CDL=UTF8(UTF-8) KCODE_CONSOLE=UTF8(UTF-8)
+Ruby19_File_Encode=ASCII-8BIT
+require_lib: tecslib/core/bnf.tab.rb
+require_lib: tecslib/core/syntaxobj.rb
+require_lib: tecslib/core/pluginModule.rb
+require_lib: tecslib/core/plugin.rb
+require_lib: tecslib/core/messages.rb
+require_lib: tecslib/core/types.rb
+require_lib: tecslib/core/value.rb
+require_lib: tecslib/core/componentobj.rb
+require_lib: tecslib/core/expression.rb
+require_lib: tecslib/core/optimize.rb
+require_lib: tecslib/core/tecsgen.rb
+require_lib: tecslib/core/generate.rb
+require_lib: tecslib/core/gen_xml.rb
+require_lib: tecslib/core/tool_info.rb
+require_lib: tecslib/core/tecsinfo.rb
+require_lib: tecslib/plugin/CelltypePlugin.rb
+require_lib: tecslib/plugin/CellPlugin.rb
+require_lib: tecslib/plugin/SignaturePlugin.rb
+require_lib: tecslib/plugin/ThroughPlugin.rb
+require_lib: tecslib/plugin/DomainPlugin.rb
+require_lib: tecslib/plugin/MultiPlugin.rb
+require_lib: tecslib/core/C_parser.tab.rb
+require_lib: tecslib/core/ctypes.rb
+add_import_path: '/home/yamas/TECS2MrubyBridgePlugin/hr-tecs/tecsgen/tecsgen/tecs'
+add_import_path: '/home/yamas/TECS2MrubyBridgePlugin/hr-tecs/tecsgen/tecsgen/tecs/mruby'
+add_import_path: '/home/yamas/TECS2MrubyBridgePlugin/hr-tecs/tecsgen/tecsgen/tecs/posix'
+add_import_path: '/home/yamas/TECS2MrubyBridgePlugin/hr-tecs/tecsgen/tecsgen/tecs/rpc'
+add_import_path: '/home/yamas/TECS2MrubyBridgePlugin/hr-tecs/tecsgen/tecsgen/tecs/TECSInfo'
+add_import_path: '/home/yamas/TECS2MrubyBridgePlugin/hr-tecs/tecsgen/tecsgen/tecs/TLSFMalloc'
+tecspath: /home/yamas/TECS2MrubyBridgePlugin/hr-tecs/tecsgen/tecsgen, __FILE__=/home/yamas/TECS2MrubyBridgePlugin/hr-tecs/tecsgen/tecsgen/tecsgen.rb
+ARGV(remained): ["mruby_call.cdl"], argments= -I ../../include -I ../../target/ev3_gcc -I ../../arch/arm_gcc/am1808 -I ../../arch -I ../../arch/arm_gcc/common mruby_call.cdl -t
+Namespace.PUSH 0 ::
+Region.new: ::
+set_region_family_line: Region: ::  
+new LinkRoot: ::
+## Import: mruby_call.cdl
+mruby_call.cdl is found in .
+base_dir=. while searching mruby_call.cdl
+push Namespace
+mruby_call.cdl: line 1 : IMPORT 'import'
+mruby_call.cdl: line 1 : ( '('
+mruby_call.cdl: line 1 : STRING_LITERAL '"../../tecsgen/test/cygwin/kernel.cdl"'
+mruby_call.cdl: line 1 : ) ')'
+mruby_call.cdl: line 1 : ; ';'
+base_dir=. while searching ../../tecsgen/test/cygwin/kernel.cdl
+error: mruby_call.cdl: line 1 S1148 ../../tecsgen/test/cygwin/kernel.cdl が検索パスの中に見つかりません．
+mruby_call.cdl: line 2 : IMPORT 'import'
+mruby_call.cdl: line 2 : ( '('
+mruby_call.cdl: line 2 : STRING_LITERAL '"../../tecs_lib/common/TECS2MrubyVM.cdl"'
+mruby_call.cdl: line 2 : ) ')'
+mruby_call.cdl: line 2 : ; ';'
+../../tecs_lib/common/TECS2MrubyVM.cdl is found in .
+base_dir=. while searching ../../tecs_lib/common/TECS2MrubyVM.cdl
+push Namespace
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 1 : IMPORT_C 'import_C'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 1 : ( '('
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 1 : STRING_LITERAL '"tecs_mruby.h"'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 1 : ) ')'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 1 : ; ';'
+tecs_mruby.h is found in /home/yamas/TECS2MrubyBridgePlugin/hr-tecs/tecsgen/tecsgen/tecs/mruby
+base_dir=. while searching tecs_mruby.h
+import_C header=/home/yamas/TECS2MrubyBridgePlugin/hr-tecs/tecsgen/tecsgen/tecs/mruby/tecs_mruby.h, define=
+CPP: gcc -E -DTECSGEN   -I . -I ../../include -I ../../target/ev3_gcc -I ../../arch/arm_gcc/am1808 -I ../../arch -I ../../arch/arm_gcc/common -I /home/yamas/TECS2MrubyBridgePlugin/hr-tecs/tecsgen/tecsgen/tecs -I /home/yamas/TECS2MrubyBridgePlugin/hr-tecs/tecsgen/tecsgen/tecs/mruby -I /home/yamas/TECS2MrubyBridgePlugin/hr-tecs/tecsgen/tecsgen/tecs/posix -I /home/yamas/TECS2MrubyBridgePlugin/hr-tecs/tecsgen/tecsgen/tecs/rpc -I /home/yamas/TECS2MrubyBridgePlugin/hr-tecs/tecsgen/tecsgen/tecs/TECSInfo -I /home/yamas/TECS2MrubyBridgePlugin/hr-tecs/tecsgen/tecsgen/tecs/TLSFMalloc gen/tmp_C_src.c
+push Namespace
+gen/tmp_tecs_mruby.h: line 6 : TYPEDEF 'typedef'
+gen/tmp_tecs_mruby.h: line 6 : STRUCT 'struct'
+gen/tmp_tecs_mruby.h: line 6 : { '{'
+gen/tmp_tecs_mruby.h: line 6 : INT 'int'
+gen/tmp_tecs_mruby.h: line 6 : IDENTIFIER 'dummy'
+gen/tmp_tecs_mruby.h: line 6 : ; ';'
+set_owner: CStructType
+gen/tmp_tecs_mruby.h: line 6 : } '}'
+gen/tmp_tecs_mruby.h: line 6 : IDENTIFIER 'va_list'
+gen/tmp_tecs_mruby.h: line 6 : ; ';'
+set_owner: Typedef
+set_owner: Region
+gen/tmp_tecs_mruby.h: line 10 : TYPEDEF 'typedef'
+gen/tmp_tecs_mruby.h: line 10 : INT 'int'
+gen/tmp_tecs_mruby.h: line 10 : IDENTIFIER 'mrb_state'
+gen/tmp_tecs_mruby.h: line 10 : ; ';'
+set_owner: Typedef
+set_owner: Region
+gen/tmp_tecs_mruby.h: line 11 : TYPEDEF 'typedef'
+gen/tmp_tecs_mruby.h: line 11 : INT 'int'
+gen/tmp_tecs_mruby.h: line 11 : IDENTIFIER 'mrb_irep'
+gen/tmp_tecs_mruby.h: line 11 : ; ';'
+set_owner: Typedef
+set_owner: Region
+gen/tmp_tecs_mruby.h: line 12 : TYPEDEF 'typedef'
+gen/tmp_tecs_mruby.h: line 12 : INT 'int'
+gen/tmp_tecs_mruby.h: line 12 : IDENTIFIER 'mrbc_context'
+gen/tmp_tecs_mruby.h: line 12 : ; ';'
+set_owner: Typedef
+set_owner: Region
+gen/tmp_tecs_mruby.h: line 13 : STRUCT 'struct'
+gen/tmp_tecs_mruby.h: line 13 : IDENTIFIER 'RClass'
+gen/tmp_tecs_mruby.h: line 13 : { '{'
+gen/tmp_tecs_mruby.h: line 13 : INT 'int'
+gen/tmp_tecs_mruby.h: line 13 : IDENTIFIER 'dummy'
+gen/tmp_tecs_mruby.h: line 13 : ; ';'
+set_owner: CStructType
+gen/tmp_tecs_mruby.h: line 13 : } '}'
+gen/tmp_tecs_mruby.h: line 13 : ; ';'
+gen/tmp_tecs_mruby.h: line 14 : STRUCT 'struct'
+gen/tmp_tecs_mruby.h: line 14 : IDENTIFIER 'RProc'
+gen/tmp_tecs_mruby.h: line 14 : { '{'
+gen/tmp_tecs_mruby.h: line 14 : INT 'int'
+gen/tmp_tecs_mruby.h: line 14 : IDENTIFIER 'dummy'
+gen/tmp_tecs_mruby.h: line 14 : ; ';'
+set_owner: CStructType
+gen/tmp_tecs_mruby.h: line 14 : } '}'
+gen/tmp_tecs_mruby.h: line 14 : ; ';'
+gen/tmp_tecs_mruby.h: line 16 : TYPEDEF 'typedef'
+gen/tmp_tecs_mruby.h: line 16 : INT 'int'
+gen/tmp_tecs_mruby.h: line 16 : IDENTIFIER 'CELLCB'
+gen/tmp_tecs_mruby.h: line 16 : ; ';'
+set_owner: Typedef
+set_owner: Region
+pop Namespace
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 3 : SIGNATURE 'signature'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 3 : IDENTIFIER 'sTECS2MrubyVM'
+set_owner: Region
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 3 : { '{'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 4 : VOID 'void'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 4 : IDENTIFIER 'init'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 4 : ( '('
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 4 : VOID 'void'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 4 : ) ')'
+set_owner: FuncType
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 4 : ; ';'
+set_owner: FuncHead
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 5 : TYPE_NAME 'mrb_state'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 5 : * '*'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 5 : IDENTIFIER 'get_mrb'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 5 : ( '('
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 5 : VOID 'void'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 5 : ) ')'
+set_owner: FuncType
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 5 : ; ';'
+set_owner: FuncHead
+warning: ../../tecs_lib/common/TECS2MrubyVM.cdl: line 5 W3004 get_mrb pointer type has returned. specify deviate or stop return pointer
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 6 : VOID 'void'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 6 : IDENTIFIER 'fin'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 6 : ( '('
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 6 : VOID 'void'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 6 : ) ')'
+set_owner: FuncType
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 6 : ; ';'
+set_owner: FuncHead
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 7 : } '}'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 7 : ; ';'
+set_owner: Signature
+set_owner: Signature
+set_owner: Signature
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 9 : CELLTYPE 'celltype'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 9 : IDENTIFIER 'tTECS2MrubyVM'
+set_owner: Region
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 9 : { '{'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 12 : ENTRY 'entry'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 12 : IDENTIFIER 'sTECS2MrubyVM'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 12 : IDENTIFIER 'eTECS2MrubyVM'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 12 : ; ';'
+set_owner: Celltype
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 13 : VAR 'var'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 13 : { '{'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 15 : TYPE_NAME 'mrb_state'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 15 : * '*'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 15 : IDENTIFIER 'mrb'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 15 : ; ';'
+set_owner: Celltype
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 16 : TYPE_NAME 'mrbc_context'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 16 : * '*'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 16 : IDENTIFIER 'context'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 16 : ; ';'
+set_owner: Celltype
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 17 : } '}'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 17 : ; ';'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 18 : ATTRIBUTE 'attr'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 18 : { '{'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 19 : [ '['
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 19 : OMIT 'omit'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 19 : ] ']'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 19 : CHAR_T 'char_t'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 19 : * '*'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 19 : IDENTIFIER 'mrubyFile'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 19 : ; ';'
+set_owner: Celltype
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 20 : CONST 'const'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 20 : UINT8_T 'uint8_t'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 20 : * '*'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 20 : IDENTIFIER 'irep'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 20 : = '='
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 20 : C_EXP 'C_EXP'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 20 : ( '('
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 20 : STRING_LITERAL '"$cell_global$_irep"'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 20 : ) ')'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 20 : ; ';'
+set_owner: Celltype
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 21 : } '}'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 21 : ; ';'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 23 : CTFACTORY 'FACTORY'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 23 : { '{'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 24 : IDENTIFIER 'write'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 24 : ( '('
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 24 : STRING_LITERAL '"Makefile.tecsgen"'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 24 : , ','
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 24 : STRING_LITERAL '"clean_mrb_c :"'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 24 : ) ')'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 24 : ; ';'
+set_owner: Celltype
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 25 : IDENTIFIER 'write'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 25 : ( '('
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 25 : STRING_LITERAL '"Makefile.tecsgen"'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 25 : , ','
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 25 : STRING_LITERAL '"	rm -f $(MRB_C)"'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 25 : ) ')'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 25 : ; ';'
+set_owner: Celltype
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 26 : } '}'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 26 : ; ';'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 27 : FACTORY 'factory'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 27 : { '{'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 28 : IDENTIFIER 'write'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 28 : ( '('
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 28 : STRING_LITERAL '"Makefile.tecsgen"'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 28 : , ','
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 28 : STRING_LITERAL '"POST_TECSGEN_TARGET := $(POST_TECSGEN_TARGET) $cell_global$_mrb.c"'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 28 : ) ')'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 28 : ; ';'
+set_owner: Celltype
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 29 : IDENTIFIER 'write'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 29 : ( '('
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 29 : STRING_LITERAL '"Makefile.tecsgen"'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 29 : , ','
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 29 : STRING_LITERAL '"$cell_global$_mrb.c : %s tecsgen.timestamp Makefile"'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 29 : , ','
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 29 : IDENTIFIER 'mrubyFile'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 29 : ) ')'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 29 : ; ';'
+set_owner: Celltype
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 30 : IDENTIFIER 'write'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 30 : ( '('
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 30 : STRING_LITERAL '"Makefile.tecsgen"'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 30 : , ','
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 30 : STRING_LITERAL '"	$(MRBC) -B$cell_global$_irep -o$cell_global$_mrb.c %s"'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 30 : , ','
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 30 : IDENTIFIER 'mrubyFile'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 30 : ) ')'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 30 : ; ';'
+set_owner: Celltype
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 31 : IDENTIFIER 'write'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 31 : ( '('
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 31 : STRING_LITERAL '"Makefile.tecsgen"'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 31 : , ','
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 31 : STRING_LITERAL '"TECS_COBJS := $(TECS_COBJS) $cell_global$_mrb.o"'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 31 : ) ')'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 31 : ; ';'
+set_owner: Celltype
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 32 : IDENTIFIER 'write'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 32 : ( '('
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 32 : STRING_LITERAL '"Makefile.tecsgen"'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 32 : , ','
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 32 : STRING_LITERAL '"MRB_C := $(MRB_C) $cell_global$_mrb.c"'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 32 : ) ')'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 32 : ; ';'
+set_owner: Celltype
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 33 : IDENTIFIER 'write'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 33 : ( '('
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 33 : STRING_LITERAL '"$ct_global$_factory.h"'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 33 : , ','
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 33 : STRING_LITERAL '"extern const uint8_t $cell_global$_irep[];"'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 33 : ) ')'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 33 : ; ';'
+set_owner: Celltype
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 34 : } '}'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 34 : ; ';'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 35 : } '}'
+../../tecs_lib/common/TECS2MrubyVM.cdl: line 35 : ; ';'
+pop Namespace
+mruby_call.cdl: line 4 : SIGNATURE 'signature'
+mruby_call.cdl: line 4 : IDENTIFIER 'sMcall'
+set_owner: Region
+mruby_call.cdl: line 4 : { '{'
+mruby_call.cdl: line 5 : VOID 'void'
+mruby_call.cdl: line 5 : IDENTIFIER 'Hello'
+mruby_call.cdl: line 5 : ( '('
+mruby_call.cdl: line 5 : VOID 'void'
+mruby_call.cdl: line 5 : ) ')'
+set_owner: FuncType
+mruby_call.cdl: line 5 : ; ';'
+set_owner: FuncHead
+mruby_call.cdl: line 7 : } '}'
+mruby_call.cdl: line 7 : ; ';'
+set_owner: Signature
+mruby_call.cdl: line 9 : CELLTYPE 'celltype'
+mruby_call.cdl: line 9 : IDENTIFIER 'tTestMain'
+set_owner: Region
+mruby_call.cdl: line 9 : { '{'
+mruby_call.cdl: line 10 : CALL 'call'
+mruby_call.cdl: line 10 : IDENTIFIER 'sTECS2MrubyVM'
+mruby_call.cdl: line 10 : IDENTIFIER 'cTECS2MrubyVM'
+mruby_call.cdl: line 10 : ; ';'
+set_owner: Celltype
+mruby_call.cdl: line 11 : CALL 'call'
+mruby_call.cdl: line 11 : IDENTIFIER 'sMcall'
+mruby_call.cdl: line 11 : IDENTIFIER 'cBody2'
+mruby_call.cdl: line 11 : ; ';'
+set_owner: Celltype
+mruby_call.cdl: line 12 : ENTRY 'entry'
+mruby_call.cdl: line 12 : IDENTIFIER 'sTaskBody'
+mruby_call.cdl: line 12 : IDENTIFIER 'eBody'
+mruby_call.cdl: line 12 : ; ';'
+error: mruby_call.cdl: line 12 S1075 'sTaskBody' シグニチャが見つかりません．
+set_owner: Celltype
+mruby_call.cdl: line 14 : } '}'
+mruby_call.cdl: line 14 : ; ';'
+mruby_call.cdl: line 15 : CELL 'cell'
+mruby_call.cdl: line 15 : IDENTIFIER 'tTECS2MrubyVM'
+mruby_call.cdl: line 15 : IDENTIFIER 'TECS2MrubyVM'
+Namespace.new_cell: ::::TECS2MrubyVM
+set_owner: Region
+Cell new_cell: TECS2MrubyVM false #<Cell:0x00000006009128e0>
+mruby_call.cdl: line 15 : { '{'
+mruby_call.cdl: line 16 : IDENTIFIER 'mrubyFile'
+mruby_call.cdl: line 16 : = '='
+mruby_call.cdl: line 16 : STRING_LITERAL '"test_stub.rb"'
+mruby_call.cdl: line 16 : ; ';'
+Join#new: mrubyFile, 
+set_owner: Cell
+new_join: cell=TECS2MrubyVM add_item=mrubyFile
+mruby_call.cdl: line 17 : } '}'
+mruby_call.cdl: line 17 : ; ';'
+mruby_call.cdl: line 18 : GENERATE 'generate'
+mruby_call.cdl: line 18 : ( '('
+mruby_call.cdl: line 18 : IDENTIFIER 'TECS2MrubyBridgePlugin'
+mruby_call.cdl: line 18 : , ','
+mruby_call.cdl: line 18 : IDENTIFIER 'sMcall'
+mruby_call.cdl: line 18 : , ','
+mruby_call.cdl: line 18 : STRING_LITERAL '""'
+mruby_call.cdl: line 18 : ) ')'
+mruby_call.cdl: line 18 : ; ';'
+generate: TECS2MrubyBridgePlugin sMcall option=""
+PluginModule: load_plugin: TECS2MrubyBridgePlugin
+load 'TECS2MrubyBridgePlugin.rb'
+require_lib: TECS2MrubyBridgePlugin.rb
+new through: plugin_object = Class.new( sMcall, "" )
+generate_and_parse: TECS2MrubyBridgePlugin: gen_cdl_file
+  TECS2MrubyBridgePlugin: [celltype] TECS2Mruby::tsMcall. Create cell then join to entry port 'eEntry' from the caller cell
+push Namespace
+gen/tmp_TECS2MrubyBridgePlugin_0.cdl: line 1 : NAMESPACE 'namespace'
+gen/tmp_TECS2MrubyBridgePlugin_0.cdl: line 1 : IDENTIFIER 'nTECS2Mruby'
+namespace: 1st-appear nTECS2Mruby
+new_namespace: :::#<Region:0x00000006002078e8> nTECS2Mruby:#<Namespace:0x00000006008f43e0> 
+set_owner: Region
+Namespace.PUSH 1 nTECS2Mruby
+gen/tmp_TECS2MrubyBridgePlugin_0.cdl: line 1 : { '{'
+gen/tmp_TECS2MrubyBridgePlugin_0.cdl: line 2 : CELLTYPE 'celltype'
+gen/tmp_TECS2MrubyBridgePlugin_0.cdl: line 2 : IDENTIFIER 'tsMcall'
+set_owner: Namespace
+gen/tmp_TECS2MrubyBridgePlugin_0.cdl: line 2 : { '{'
+gen/tmp_TECS2MrubyBridgePlugin_0.cdl: line 3 : CALL 'call'
+gen/tmp_TECS2MrubyBridgePlugin_0.cdl: line 3 : IDENTIFIER 'sTECS2MrubyVM'
+gen/tmp_TECS2MrubyBridgePlugin_0.cdl: line 3 : IDENTIFIER 'cMethodCall'
+gen/tmp_TECS2MrubyBridgePlugin_0.cdl: line 3 : ; ';'
+set_owner: Celltype
+gen/tmp_TECS2MrubyBridgePlugin_0.cdl: line 4 : ENTRY 'entry'
+gen/tmp_TECS2MrubyBridgePlugin_0.cdl: line 4 : :: '::'
+gen/tmp_TECS2MrubyBridgePlugin_0.cdl: line 4 : IDENTIFIER 'sMcall'
+gen/tmp_TECS2MrubyBridgePlugin_0.cdl: line 4 : IDENTIFIER 'eEnt'
+gen/tmp_TECS2MrubyBridgePlugin_0.cdl: line 4 : ; ';'
+set_owner: Celltype
+gen/tmp_TECS2MrubyBridgePlugin_0.cdl: line 5 : } '}'
+gen/tmp_TECS2MrubyBridgePlugin_0.cdl: line 5 : ; ';'
+gen/tmp_TECS2MrubyBridgePlugin_0.cdl: line 6 : } '}'
+gen/tmp_TECS2MrubyBridgePlugin_0.cdl: line 6 : ; ';'
+Namespace.POP 1 nTECS2Mruby
+pop Namespace
+mruby_call.cdl: line 19 : CELL 'cell'
+mruby_call.cdl: line 19 : IDENTIFIER 'nTECS2Mruby'
+mruby_call.cdl: line 19 : :: '::'
+mruby_call.cdl: line 19 : IDENTIFIER 'tsMcall'
+mruby_call.cdl: line 19 : IDENTIFIER 'McallBridge'
+Namespace.new_cell: ::::McallBridge
+set_owner: Region
+Cell new_cell: McallBridge false #<Cell:0x00000006009d9800>
+mruby_call.cdl: line 19 : { '{'
+mruby_call.cdl: line 20 : IDENTIFIER 'cMethodCall'
+mruby_call.cdl: line 20 : = '='
+mruby_call.cdl: line 20 : IDENTIFIER 'TECS2MrubyVM'
+mruby_call.cdl: line 20 : . '.'
+mruby_call.cdl: line 20 : IDENTIFIER 'eTECS2MrubyVM'
+mruby_call.cdl: line 20 : ; ';'
+Join#new: cMethodCall, 
+set_owner: Cell
+new_join: cell=McallBridge add_item=cMethodCall
+mruby_call.cdl: line 21 : } '}'
+mruby_call.cdl: line 21 : ; ';'
+mruby_call.cdl: line 23 : CELL 'cell'
+mruby_call.cdl: line 23 : IDENTIFIER 'tTestMain'
+mruby_call.cdl: line 23 : IDENTIFIER 'TestMain'
+Namespace.new_cell: ::::TestMain
+set_owner: Region
+Cell new_cell: TestMain false #<Cell:0x00000006009d8338>
+mruby_call.cdl: line 23 : { '{'
+mruby_call.cdl: line 24 : IDENTIFIER 'cBody2'
+mruby_call.cdl: line 24 : = '='
+mruby_call.cdl: line 24 : IDENTIFIER 'McallBridge'
+mruby_call.cdl: line 24 : . '.'
+mruby_call.cdl: line 24 : IDENTIFIER 'eEnt'
+mruby_call.cdl: line 24 : ; ';'
+Join#new: cBody2, 
+set_owner: Cell
+new_join: cell=TestMain add_item=cBody2
+mruby_call.cdl: line 25 : IDENTIFIER 'cTECS2MrubyVM'
+mruby_call.cdl: line 25 : = '='
+mruby_call.cdl: line 25 : IDENTIFIER 'TECS2MrubyVM'
+mruby_call.cdl: line 25 : . '.'
+mruby_call.cdl: line 25 : IDENTIFIER 'eTECS2MrubyVM'
+mruby_call.cdl: line 25 : ; ';'
+Join#new: cTECS2MrubyVM, 
+set_owner: Cell
+new_join: cell=TestMain add_item=cTECS2MrubyVM
+mruby_call.cdl: line 26 : } '}'
+mruby_call.cdl: line 26 : ; ';'
+mruby_call.cdl: line 28 : CELL 'cell'
+mruby_call.cdl: line 28 : IDENTIFIER 'tTask'
+mruby_call.cdl: line 28 : IDENTIFIER 'Task'
+error: mruby_call.cdl: line 28 S1027 セルタイプ 'tTask' が見つかりません
+Namespace.new_cell: ::::Task
+set_owner: Region
+Cell new_cell: Task false #<Cell:0x0000000600a0e4d8>
+mruby_call.cdl: line 28 : { '{'
+mruby_call.cdl: line 29 : IDENTIFIER 'cBody'
+mruby_call.cdl: line 29 : = '='
+mruby_call.cdl: line 29 : IDENTIFIER 'TestMain'
+mruby_call.cdl: line 29 : . '.'
+mruby_call.cdl: line 29 : IDENTIFIER 'eBody'
+mruby_call.cdl: line 29 : ; ';'
+Join#new: cBody, 
+set_owner: Cell
+new_join: cell=Task add_item=cBody
+mruby_call.cdl: line 30 : IDENTIFIER 'stackSize'
+mruby_call.cdl: line 30 : = '='
+mruby_call.cdl: line 30 : INTEGER_CONSTANT '81960'
+mruby_call.cdl: line 30 : ; ';'
+Join#new: stackSize, 
+set_owner: Cell
+new_join: cell=Task add_item=stackSize
+mruby_call.cdl: line 31 : IDENTIFIER 'priority'
+mruby_call.cdl: line 31 : = '='
+mruby_call.cdl: line 31 : INTEGER_CONSTANT '10'
+mruby_call.cdl: line 31 : ; ';'
+Join#new: priority, 
+set_owner: Cell
+new_join: cell=Task add_item=priority
+mruby_call.cdl: line 32 : IDENTIFIER 'taskAttribute'
+mruby_call.cdl: line 32 : = '='
+mruby_call.cdl: line 32 : C_EXP 'C_EXP'
+mruby_call.cdl: line 32 : ( '('
+mruby_call.cdl: line 32 : STRING_LITERAL '"TA_ACT"'
+mruby_call.cdl: line 32 : ) ')'
+mruby_call.cdl: line 32 : ; ';'
+Join#new: taskAttribute, 
+set_owner: Cell
+new_join: cell=Task add_item=taskAttribute
+mruby_call.cdl: line 34 : } '}'
+mruby_call.cdl: line 34 : ; ';'
+pop Namespace
+## End all parse (except Post Code)
+## Creating reverse join 
+## Checking all join
+set_definition_join TECS2MrubyVM
+set_definition_join in TECS2MrubyVM
+ set_definition_join: checking TECS2MrubyVM.mrubyFile
+set_definition_join: TECS2MrubyVM.mrubyFile celltype=tTECS2MrubyVM
+set_definition: TECS2MrubyVM.mrubyFile = Decl
+set_definition_join McallBridge
+set_definition_join in McallBridge
+ set_definition_join: checking McallBridge.cMethodCall
+set_definition_join: McallBridge.cMethodCall celltype=tsMcall
+set_definition: McallBridge.cMethodCall = Port
+set_definition: set_f_ref McallBridge.cMethodCall => TECS2MrubyVM
+set_f_ref: TECS2MrubyVM
+Join OK McallBridge.cMethodCall = TECS2MrubyVM.eTECS2MrubyVM #<Join:0x00000006009d8b58>
+check_region McallBridge.cMethodCall => TECS2MrubyVM
+check_and_gen_through McallBridge.cMethodCall
+create_allocator_join: McallBridge.cMethodCall=>TECS2MrubyVM
+set_definition_join TestMain
+set_definition_join in TestMain
+ set_definition_join: checking TestMain.cBody2
+set_definition_join: TestMain.cBody2 celltype=tTestMain
+set_definition: TestMain.cBody2 = Port
+set_definition: set_f_ref TestMain.cBody2 => McallBridge
+set_f_ref: McallBridge
+Join OK TestMain.cBody2 = McallBridge.eEnt #<Join:0x0000000600a0f6a8>
+check_region TestMain.cBody2 => McallBridge
+check_and_gen_through TestMain.cBody2
+create_allocator_join: TestMain.cBody2=>McallBridge
+ set_definition_join: checking TestMain.cTECS2MrubyVM
+set_definition_join: TestMain.cTECS2MrubyVM celltype=tTestMain
+set_definition: TestMain.cTECS2MrubyVM = Port
+set_definition: set_f_ref TestMain.cTECS2MrubyVM => TECS2MrubyVM
+set_f_ref: TECS2MrubyVM
+Join OK TestMain.cTECS2MrubyVM = TECS2MrubyVM.eTECS2MrubyVM #<Join:0x0000000600a0ecf8>
+check_region TestMain.cTECS2MrubyVM => TECS2MrubyVM
+check_and_gen_through TestMain.cTECS2MrubyVM
+create_allocator_join: TestMain.cTECS2MrubyVM=>TECS2MrubyVM
+set_definition_join Task
+## Generating Post Code
+PluginModule {:TECS2MrubyBridgePlugin=>1}
+PluginModule: TECS2MrubyBridgePlugin
+gen_plugin_post_code: TECS2MrubyBridgePlugin.gen_post_code( file )
+## Import Post Code
+gen/tmp_plugin_post_code.cdl is found in .
+base_dir=. while searching gen/tmp_plugin_post_code.cdl
+push Namespace
+pop Namespace
+## Creating reverse join (for post code) 
+## Checking all join (for cells generated by Post Code
+set_definition_join TECS2MrubyVM
+set_definition_join McallBridge
+set_definition_join TestMain
+set_definition_join Task
+set_max_entry_port_inner_cell name=TECS2MrubyVM entry_array_max_subscript.len=0
+set_max_entry_port_inner_cell name=McallBridge entry_array_max_subscript.len=0
+set_max_entry_port_inner_cell name=TestMain entry_array_max_subscript.len=0
+set_max_entry_port_inner_cell name=Task entry_array_max_subscript.len=0
+## Set require join
+## Set fixed join
+## Setting port reference count
+set_port_reference_count: McallBridge.cMethodCall => TECS2MrubyVM.eTECS2MrubyVM
+set_port_reference_count: TestMain.cBody2 => McallBridge.eEnt
+set_port_reference_count: TestMain.cTECS2MrubyVM => TECS2MrubyVM.eTECS2MrubyVM
+## Checking all join
+check_join TECS2MrubyVM
+check_join McallBridge
+check_join: McallBridge tsMcall cMethodCall
+get_path_string: ::
+check_region2 McallBridge => ::TECS2MrubyVM.eTECS2MrubyVM
+check_join TestMain
+check_join: TestMain tTestMain cTECS2MrubyVM
+get_path_string: ::
+check_region2 TestMain => ::TECS2MrubyVM.eTECS2MrubyVM
+check_join: TestMain tTestMain cBody2
+get_path_string: ::
+check_region2 TestMain => ::McallBridge.eEnt
+check_join Task
+## Checking referenced but undefined cell
+check_ref_but_undef: TECS2MrubyVM
+check_ref_but_undef: McallBridge
+check_ref_but_undef: TestMain
+warning: gen/tmp_TECS2MrubyBridgePlugin_0.cdl: line 6 W1007 ::TestMain : 非アクティブセルに受け口の結合及びファクトリがありません．
+check_ref_but_undef: Task
+:: has  cells
+=====================================
+=== Region.path_str: ::
+=====================================
+## Unset optimize variables
+3 errors  2 warnings
