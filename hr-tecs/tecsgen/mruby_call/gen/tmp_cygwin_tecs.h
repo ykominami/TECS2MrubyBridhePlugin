@@ -9,9 +9,12 @@ typedef struct { int dummy; } va_list;
 /*  13 "../test/cygwin/cygwin_tecs.h" */
 /*  1 "../test/cygwin/kernel.h" 1 */
 /*  67 "../test/cygwin/kernel.h" */
-/*  1 "../test/cygwin/t_stddef.h" 1 */
-/*  68 "../test/cygwin/t_stddef.h" */
-/*  1 "../test/cygwin/target_stddef.h" 1 */
+/*  1 "../../include/t_stddef.h" 1 */
+/*  68 "../../include/t_stddef.h" */
+/*  1 "../../target/ev3_gcc/target_stddef.h" 1 */
+/*  16 "../../target/ev3_gcc/target_stddef.h" */
+/*  1 "../../arch/arm_gcc/am1808/chip_stddef.h" 1 */
+/*  22 "../../arch/arm_gcc/am1808/chip_stddef.h" */
 /*  1 "/usr/lib/gcc/x86_64-pc-cygwin/7.3.0/include/stdint.h" 1 3 4 */
 /*  9 "/usr/lib/gcc/x86_64-pc-cygwin/7.3.0/include/stdint.h" 3 4 */
 /*  1 "/usr/include/stdint.h" 1 3 4 */
@@ -207,14 +210,80 @@ typedef __uint_least64_t uint_least64_t;
   typedef long int int_fast64_t;
   typedef long unsigned int uint_fast64_t;
 /*  10 "/usr/lib/gcc/x86_64-pc-cygwin/7.3.0/include/stdint.h" 2 3 4 */
-/*  2 "../test/cygwin/target_stddef.h" 2 */
+/*  23 "../../arch/arm_gcc/am1808/chip_stddef.h" 2 */
 
 
-/*  3 "../test/cygwin/target_stddef.h" */
-typedef float float32_t;
-typedef double double64_t;
-/*  69 "../test/cygwin/t_stddef.h" 2 */
-/*  91 "../test/cygwin/t_stddef.h" */
+
+/*  1 "../../arch/gcc/tool_stddef.h" 1 */
+/*  81 "../../arch/gcc/tool_stddef.h" */
+/*  1 "/usr/lib/gcc/x86_64-pc-cygwin/7.3.0/include/stddef.h" 1 3 4 */
+/*  149 "/usr/lib/gcc/x86_64-pc-cygwin/7.3.0/include/stddef.h" 3 4 */
+typedef long int ptrdiff_t;
+/*  216 "/usr/lib/gcc/x86_64-pc-cygwin/7.3.0/include/stddef.h" 3 4 */
+typedef long unsigned int size_t;
+/*  328 "/usr/lib/gcc/x86_64-pc-cygwin/7.3.0/include/stddef.h" 3 4 */
+typedef short unsigned int wchar_t;
+/*  426 "/usr/lib/gcc/x86_64-pc-cygwin/7.3.0/include/stddef.h" 3 4 */
+typedef struct {
+  long long __max_align_ll ;
+  long double __max_align_ld ;
+/*  437 "/usr/lib/gcc/x86_64-pc-cygwin/7.3.0/include/stddef.h" 3 4 */
+} max_align_t;
+/*  82 "../../arch/gcc/tool_stddef.h" 2 */
+/*  1 "/usr/lib/gcc/x86_64-pc-cygwin/7.3.0/include/limits.h" 1 3 4 */
+/*  34 "/usr/lib/gcc/x86_64-pc-cygwin/7.3.0/include/limits.h" 3 4 */
+/*  1 "/usr/lib/gcc/x86_64-pc-cygwin/7.3.0/include/syslimits.h" 1 3 4 */
+
+
+
+
+
+
+/*  1 "/usr/lib/gcc/x86_64-pc-cygwin/7.3.0/include/limits.h" 1 3 4 */
+/*  194 "/usr/lib/gcc/x86_64-pc-cygwin/7.3.0/include/limits.h" 3 4 */
+/*  1 "/usr/include/limits.h" 1 3 4 */
+/*  11 "/usr/include/limits.h" 3 4 */
+/*  1 "/usr/include/features.h" 1 3 4 */
+/*  12 "/usr/include/features.h" 3 4 */
+/*  1 "/usr/include/sys/cdefs.h" 1 3 4 */
+/*  47 "/usr/include/sys/cdefs.h" 3 4 */
+/*  1 "/usr/lib/gcc/x86_64-pc-cygwin/7.3.0/include/stddef.h" 1 3 4 */
+/*  48 "/usr/include/sys/cdefs.h" 2 3 4 */
+/*  13 "/usr/include/features.h" 2 3 4 */
+/*  12 "/usr/include/limits.h" 2 3 4 */
+/*  1 "/usr/include/bits/wordsize.h" 1 3 4 */
+/*  13 "/usr/include/limits.h" 2 3 4 */
+/*  195 "/usr/lib/gcc/x86_64-pc-cygwin/7.3.0/include/limits.h" 2 3 4 */
+/*  8 "/usr/lib/gcc/x86_64-pc-cygwin/7.3.0/include/syslimits.h" 2 3 4 */
+/*  35 "/usr/lib/gcc/x86_64-pc-cygwin/7.3.0/include/limits.h" 2 3 4 */
+/*  83 "../../arch/gcc/tool_stddef.h" 2 */
+/*  27 "../../arch/arm_gcc/am1808/chip_stddef.h" 2 */
+
+
+
+
+
+
+
+/*  33 "../../arch/arm_gcc/am1808/chip_stddef.h" */
+static __inline__ void
+TOPPERS_assert_abort(void)
+{
+
+}
+
+
+
+
+
+
+/*  1 "../../arch/arm_gcc/common/core_stddef.h" 1 */
+/*  68 "../../arch/arm_gcc/common/core_stddef.h" */
+typedef uint32_t ldsymbol_t;
+/*  45 "../../arch/arm_gcc/am1808/chip_stddef.h" 2 */
+/*  17 "../../target/ev3_gcc/target_stddef.h" 2 */
+/*  69 "../../include/t_stddef.h" 2 */
+/*  91 "../../include/t_stddef.h" */
 struct TOPPERS_dummy_t { int TOPPERS_dummy_field; };
 typedef void (*TOPPERS_fp_t)(struct TOPPERS_dummy_t);
 
@@ -225,7 +294,6 @@ typedef void (*TOPPERS_fp_t)(struct TOPPERS_dummy_t);
 
 typedef int bool_t;
 
-
 typedef signed int int_t;
 typedef unsigned int uint_t;
 
@@ -234,9 +302,7 @@ typedef unsigned long ulong_t;
 
 typedef int_t FN;
 typedef int_t ER;
-
 typedef int_t ID;
-
 typedef uint_t ATR;
 typedef uint_t STAT;
 typedef uint_t MODE;
@@ -253,6 +319,8 @@ typedef TOPPERS_fp_t FP;
 typedef int_t ER_BOOL;
 typedef int_t ER_ID;
 typedef int_t ER_UINT;
+
+typedef uintptr_t MB_T;
 
 typedef uint32_t ACPTN;
 typedef struct acvct {
@@ -294,7 +362,7 @@ typedef void (*TERRTN)(intptr_t exinf);
 
 
 
-typedef intptr_t STK_T;
+typedef long long STK_T;
 
 
 
@@ -569,26 +637,10 @@ typedef unsigned char uchar_t;
 /*  239 "/usr/include/sys/config.h" 2 3 4 */
 /*  12 "/usr/include/_ansi.h" 2 3 4 */
 /*  21 "/usr/include/sys/types.h" 2 3 4 */
-/*  1 "/usr/include/sys/cdefs.h" 1 3 4 */
-/*  47 "/usr/include/sys/cdefs.h" 3 4 */
-/*  1 "/usr/lib/gcc/x86_64-pc-cygwin/7.3.0/include/stddef.h" 1 3 4 */
-/*  149 "/usr/lib/gcc/x86_64-pc-cygwin/7.3.0/include/stddef.h" 3 4 */
 
-/*  149 "/usr/lib/gcc/x86_64-pc-cygwin/7.3.0/include/stddef.h" 3 4 */
-typedef long int ptrdiff_t;
-/*  216 "/usr/lib/gcc/x86_64-pc-cygwin/7.3.0/include/stddef.h" 3 4 */
-typedef long unsigned int size_t;
-/*  328 "/usr/lib/gcc/x86_64-pc-cygwin/7.3.0/include/stddef.h" 3 4 */
-typedef short unsigned int wchar_t;
-/*  426 "/usr/lib/gcc/x86_64-pc-cygwin/7.3.0/include/stddef.h" 3 4 */
-typedef struct {
-  long long __max_align_ll ;
-  long double __max_align_ld ;
-/*  437 "/usr/lib/gcc/x86_64-pc-cygwin/7.3.0/include/stddef.h" 3 4 */
-} max_align_t;
-/*  48 "/usr/include/sys/cdefs.h" 2 3 4 */
-/*  22 "/usr/include/sys/types.h" 2 3 4 */
 /*  1 "/usr/include/machine/_types.h" 1 3 4 */
+/*  17 "/usr/include/machine/_types.h" 3 4 */
+
 /*  17 "/usr/include/machine/_types.h" 3 4 */
 typedef __int64_t __blkcnt_t;
 
@@ -1053,8 +1105,7 @@ __bswap_64 (unsigned long long __x)
 }
 /*  39 "/usr/include/endian.h" 2 3 4 */
 /*  20 "/usr/include/machine/types.h" 2 3 4 */
-/*  1 "/usr/include/bits/wordsize.h" 1 3 4 */
-/*  21 "/usr/include/machine/types.h" 2 3 4 */
+
 
 
 

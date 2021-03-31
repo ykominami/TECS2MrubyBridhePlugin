@@ -1,7 +1,7 @@
 #include"tecs_mruby.h"
 #include"tTECS2MrubyVM_tecsgen.h"
 
-void mrb_init_mrb(CELLCB *p_cellcb, mrb_state *mrb);
+void mrb_init_mrb(CELLCB *p_cellcb, mrb_state *mrb, mrbc_context *c);
 
 void 
 eTECS2MrubyVM_init(CELLIDX idx)
@@ -9,7 +9,7 @@ eTECS2MrubyVM_init(CELLIDX idx)
 	CELLCB	*p_cellcb = GET_CELLCB(idx);
 	VAR_mrb = mrb_open();
 	VAR_context = mrbc_context_new( VAR_mrb );
-	mrb_init_mrb(p_cellcb, VAR_mrb);
+	mrb_init_mrb(p_cellcb, VAR_mrb, VAR_context);
 	
 }
 mrb_state*
@@ -28,13 +28,15 @@ eTECS2MrubyVM_fin(CELLIDX idx)
 }
 
 void
-mrb_init_mrb(CELLCB	*p_cellcb, mrb_state *mrb)
-{
-  mrb_irep *irep = mrb_read_irep(VAR_mrb, ATTR_irep);
+mrb_init_mrb(CELLCB	*p_cellcb, mrb_state *mrb, mrbc_context *c){
+    
 
-  mrb_run(VAR_mrb, mrb_proc_new(VAR_mrb, irep), mrb_top_self(VAR_mrb));
-  if (VAR_mrb->exc) {
-    mrb_p(VAR_mrb, mrb_obj_value(VAR_mrb->exc));
-    exit(0);
-  }
+    /* £²¤Ä¤Î mruby bytecode ¤òÆ°ºî¤µ¤»¤ë */
+    mrb_load_irep_cxt(mrb, ATTR_irep, c);     //mruby library
+    //mrb_load_irep_cxt(mrb, VAR_irepApp, c);      //mruby application (transferred via Bluetooth)
+
+    if (mrb->exc) {
+        mrb_p(mrb, mrb_obj_value(mrb->exc));
+        exit(0);
+    }
 }

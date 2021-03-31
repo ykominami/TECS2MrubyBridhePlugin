@@ -13,7 +13,7 @@
 TARGET_BASE = mruby_call
 BASE_DIR = .
 GEN_DIR = $(BASE_DIR)/gen
-INCLUDES = -I $(BASE_DIR)/. -I $(BASE_DIR)/../test/cygwin -I $(BASE_DIR)/../../include -I $(TECSPATH) -I $(TECSPATH)/mruby -I $(TECSPATH)/posix -I $(TECSPATH)/rpc -I $(TECSPATH)/TECSInfo -I $(TECSPATH)/TLSFMalloc -I $(GEN_DIR)
+INCLUDES = -I $(BASE_DIR)/. -I $(BASE_DIR)/../../include -I $(BASE_DIR)/../../target/ev3_gcc -I $(BASE_DIR)/../../arch/arm_gcc/am1808 -I $(BASE_DIR)/../../arch -I $(BASE_DIR)/../../arch/arm_gcc/common -I $(BASE_DIR)/../test/cygwin -I $(TECSPATH) -I $(TECSPATH)/mruby -I $(TECSPATH)/posix -I $(TECSPATH)/rpc -I $(TECSPATH)/TECSInfo -I $(TECSPATH)/TLSFMalloc -I $(GEN_DIR)
 DEFINES =
 
 # end of fixed variable (unchangeable by config or plugin)
@@ -53,8 +53,8 @@ PRE_TECSGEN_TARGET =
 POST_TECSGEN_TARGET =
 
 # vpath for C sources and headers
-vpath %.c $(SRC_DIR) $(GEN_DIR)  ../test/cygwin ../../include $(TECSPATH) $(TECSPATH)/mruby $(TECSPATH)/posix $(TECSPATH)/rpc $(TECSPATH)/TECSInfo $(TECSPATH)/TLSFMalloc
-vpath %.h $(SRC_DIR) $(GEN_DIR)  ../test/cygwin ../../include $(TECSPATH) $(TECSPATH)/mruby $(TECSPATH)/posix $(TECSPATH)/rpc $(TECSPATH)/TECSInfo $(TECSPATH)/TLSFMalloc
+vpath %.c $(SRC_DIR) $(GEN_DIR)  ../../include ../../target/ev3_gcc ../../arch/arm_gcc/am1808 ../../arch ../../arch/arm_gcc/common ../test/cygwin $(TECSPATH) $(TECSPATH)/mruby $(TECSPATH)/posix $(TECSPATH)/rpc $(TECSPATH)/TECSInfo $(TECSPATH)/TLSFMalloc
+vpath %.h $(SRC_DIR) $(GEN_DIR)  ../../include ../../target/ev3_gcc ../../arch/arm_gcc/am1808 ../../arch ../../arch/arm_gcc/common ../test/cygwin $(TECSPATH) $(TECSPATH)/mruby $(TECSPATH)/posix $(TECSPATH)/rpc $(TECSPATH)/TECSInfo $(TECSPATH)/TLSFMalloc
 
 # Other objects (out of tecsgen)
 OTHER_OBJS =                      # Add objects out of tecs care.
@@ -80,7 +80,7 @@ clean :
 tecs : $(PRE_TECSGEN_TARGET) $(TIMESTAMP) $(POST_TECSGEN_TARGET)
 
 $(TIMESTAMP) : $(TECS_IMPORTS)
-	$(TECSGEN)  -I ../test/cygwin -I ../../include mruby_call.cdl
+	$(TECSGEN)  -I ../../include -I ../../target/ev3_gcc -I ../../arch/arm_gcc/am1808 -I ../../arch -I ../../arch/arm_gcc/common -I ../test/cygwin mruby_call.cdl
 # generic target for objs
 $(_TECS_OBJ_DIR)%.o : %.c
 	$(CC) -c $(CFLAGS) -o $@ $<

@@ -1,6 +1,4 @@
 def Hello
-	puts "hello"    
+	puts "hello,world....."    
 end
 
-
-Hello
