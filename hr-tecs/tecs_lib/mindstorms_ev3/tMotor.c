@@ -103,21 +103,8 @@ eMotor_setPower(CELLIDX idx, int power)
 	if (VALID_IDX(idx)) {
 		p_cellcb = GET_CELLCB(idx);
 	}
-	int main(void)
-	{
-		mrb_state *mrb = mrb_open();
-		FILE *fd = fopen("power_up.rb","r");
-		mrb_load_irep_file(mrb, fd);
-		struct RClass *M_power = mrb_class_obj_get(mrb,"m_power");
-		mrb_value M_power_value = mrb_obj_value(m_power);
-		mrb_value power_value = mrb_fixnum_value(power);
-		mrb_value mruby_power = mrb_funcall(mrb,M_power_value,"new",1,power_value)
-		mrb_value power_up_value = mrb_funcall(mrb,mruby_power,"power_up",0);
-		mrb_int c_power_up_value = mrb_fixnum(power_up_value);
-		return c_power_value;
-	}
+	return ev3_motor_set_power(ATTR_port, power);
 }
-
 /* #[<ENTRY_FUNC>]# eMotor_stop
  * name:         eMotor_stop
  * global_name:  tMotor_eMotor_stop

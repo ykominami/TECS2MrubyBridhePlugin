@@ -1,0 +1,39 @@
+const int32_t MRUBY_VM_STACK_SIZE = 81920;
+
+import( "kernel.cdl" );
+import("../tecs_lib/common/TECS2MrubyVM.cdl");
+
+signature sMcall {
+ void mcall_lcd(void);
+ //int32_t func2([in]int32_t val, [in]int32_t val6);
+};
+
+celltype tTestMain{
+	call sTECS2MrubyVM cTECS2MrubyVM;
+	call  sMcall cBody2;
+	entry sTaskBody eBody;
+
+};
+cell tTECS2MrubyVM TECS2MrubyVM{
+	mrubyFile = "test_stub.rb";
+};
+generate( TECS2MrubyBridgePlugin, sMcall, "" );
+ cell nTECS2Mruby::tsMcall McallBridge {
+ 	cMethodCall = TECS2MrubyVM.eTECS2MrubyVM;//TWCS2Mruby.cdlのセルを呼び出す。そのためにプラグインで呼び口を追加
+};
+
+cell tTestMain TestMain{
+	cBody2 = McallBridge.eEnt; 
+	cTECS2MrubyVM = TECS2MrubyVM.eTECS2MrubyVM;
+};
+
+[domain(HRP2,"trusted")]
+region rKernel{
+	cell tTask Task{
+		cBody = TestMain.eBody;
+		//stackSize = 81960;
+    	priority  = 10;
+    	taskAttribute =  C_EXP("TA_ACT");//asp用の名前(cygwin_kernel.cdl見ればわかる)
+    	systemStackSize = C_EXP("MRUBY_VM_STACK_SIZE");
+	};
+};

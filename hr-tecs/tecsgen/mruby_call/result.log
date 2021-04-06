@@ -1,0 +1,371 @@
+tecsgen  -I ../test/cygwin -I ../../include mruby_call.cdl
+tecsgen  version 1.5.A.5  Copyright(c) 2008-2017, TOPPERS project. All rights reserved.
+warning: gen/tmp_cygwin_tecs.h: line 586 W9999 double & long incompatible ('long double' is not supported.). Treated as double.
+warning: ../../tecs_lib/common/TECS2MrubyVM.cdl: line 5 W3004 get_mrb pointer type has returned. specify deviate or stop return pointer
+  TECS2MrubyBridgePlugin: [celltype] TECS2Mruby::tsMcall. Create cell then join to entry port 'eEntry' from the caller cell
+2 warnings
+touch tecsgen.timestamp
+make all     # in order to include generated Makefile.tecsgen & Makefile.depend
+make[1]: ディレクトリ '/home/yamas/TECS2MrubyBridgePlugin/hr-tecs/tecsgen/mruby_call' に入ります
+gcc -c -I ./. -I ./../test/cygwin -I ../tecsgen/tecs -I ../tecsgen/tecs/mruby -I ../tecsgen/tecs/posix -I ../tecsgen/tecs/rpc -I ../tecsgen/tecs/TECSInfo -I ../tecsgen/tecs/TLSFMalloc -I ./gen -I ../../../mruby/include -I ../../include -I ../../  -D  "Inline=static inline" -g  -o gen/tTask_tecsgen.o ./gen/tTask_tecsgen.c
+In file included from ../tecsgen/tecs/mruby/tecs_mruby.h:14:0,
+                 from ./gen/global_tecsgen.h:11,
+                 from ./gen/tTask_tecsgen.h:20,
+                 from ./gen/tTask_tecsgen.c:5:
+../tecsgen/tecs/mruby/TECSPointer.h: 関数 ‘VALCHECK_MRB_Int8’ 内:
+../tecsgen/tecs/mruby/TECSPointer.h:104:26: 警告: 左シフト回数 >= 型の幅となっています [-Wshift-count-overflow]
+    if( val >= (((type)1) << (sizeof(mrb_int)*8-1))    \
+                          ^
+../tecsgen/tecs/mruby/TECSPointer.h:146:1: 備考: in expansion of macro ‘VALCHECK_MRB_INT’
+ VALCHECK_MRB_INT( Int8, INT8, int8_t )
+ ^~~~~~~~~~~~~~~~
+../tecsgen/tecs/mruby/TECSPointer.h:105:26: 警告: 左シフト回数 >= 型の幅となっています [-Wshift-count-overflow]
+     || val < -(((type)1) << (sizeof(mrb_int)*8-1)) )  \
+                          ^
+../tecsgen/tecs/mruby/TECSPointer.h:146:1: 備考: in expansion of macro ‘VALCHECK_MRB_INT’
+ VALCHECK_MRB_INT( Int8, INT8, int8_t )
+ ^~~~~~~~~~~~~~~~
+../tecsgen/tecs/mruby/TECSPointer.h: 関数 ‘VALCHECK_MRB_Int16’ 内:
+../tecsgen/tecs/mruby/TECSPointer.h:104:26: 警告: 左シフト回数 >= 型の幅となっています [-Wshift-count-overflow]
+    if( val >= (((type)1) << (sizeof(mrb_int)*8-1))    \
+                          ^
+../tecsgen/tecs/mruby/TECSPointer.h:148:1: 備考: in expansion of macro ‘VALCHECK_MRB_INT’
+ VALCHECK_MRB_INT( Int16, INT16, int16_t )
+ ^~~~~~~~~~~~~~~~
+../tecsgen/tecs/mruby/TECSPointer.h:105:26: 警告: 左シフト回数 >= 型の幅となっています [-Wshift-count-overflow]
+     || val < -(((type)1) << (sizeof(mrb_int)*8-1)) )  \
+                          ^
+../tecsgen/tecs/mruby/TECSPointer.h:148:1: 備考: in expansion of macro ‘VALCHECK_MRB_INT’
+ VALCHECK_MRB_INT( Int16, INT16, int16_t )
+ ^~~~~~~~~~~~~~~~
+../tecsgen/tecs/mruby/TECSPointer.h: 関数 ‘VALCHECK_MRB_Int64’ 内:
+../tecsgen/tecs/mruby/TECSPointer.h:105:14: 警告: 式内で整数がオーバーフローしました [-Woverflow]
+     || val < -(((type)1) << (sizeof(mrb_int)*8-1)) )  \
+              ^
+../tecsgen/tecs/mruby/TECSPointer.h:162:1: 備考: in expansion of macro ‘VALCHECK_MRB_INT’
+ VALCHECK_MRB_INT( Int64, INT64, int64_t )
+ ^~~~~~~~~~~~~~~~
+../tecsgen/tecs/mruby/TECSPointer.h: 関数 ‘VALCHECK_MRB_UInt64’ 内:
+../tecsgen/tecs/mruby/TECSPointer.h:128:26: 警告: 左シフト回数 >= 型の幅となっています [-Wshift-count-overflow]
+    if( val >= (((type)1) << (sizeof(mrb_int)*8)))    \
+                          ^
+../tecsgen/tecs/mruby/TECSPointer.h:163:1: 備考: in expansion of macro ‘VALCHECK_MRB_UINT’
+ VALCHECK_MRB_UINT( UInt64, UINT64, uint64_t )
+ ^~~~~~~~~~~~~~~~~
+gcc -c -I ./. -I ./../test/cygwin -I ../tecsgen/tecs -I ../tecsgen/tecs/mruby -I ../tecsgen/tecs/posix -I ../tecsgen/tecs/rpc -I ../tecsgen/tecs/TECSInfo -I ../tecsgen/tecs/TLSFMalloc -I ./gen -I ../../../mruby/include -I ../../include -I ../../  -D  "Inline=static inline" -g  -o gen/tTECS2MrubyVM_tecsgen.o ./gen/tTECS2MrubyVM_tecsgen.c
+In file included from ../tecsgen/tecs/mruby/tecs_mruby.h:14:0,
+                 from ./gen/global_tecsgen.h:11,
+                 from ./gen/tTECS2MrubyVM_tecsgen.h:20,
+                 from ./gen/tTECS2MrubyVM_tecsgen.c:5:
+../tecsgen/tecs/mruby/TECSPointer.h: 関数 ‘VALCHECK_MRB_Int8’ 内:
+../tecsgen/tecs/mruby/TECSPointer.h:104:26: 警告: 左シフト回数 >= 型の幅となっています [-Wshift-count-overflow]
+    if( val >= (((type)1) << (sizeof(mrb_int)*8-1))    \
+                          ^
+../tecsgen/tecs/mruby/TECSPointer.h:146:1: 備考: in expansion of macro ‘VALCHECK_MRB_INT’
+ VALCHECK_MRB_INT( Int8, INT8, int8_t )
+ ^~~~~~~~~~~~~~~~
+../tecsgen/tecs/mruby/TECSPointer.h:105:26: 警告: 左シフト回数 >= 型の幅となっています [-Wshift-count-overflow]
+     || val < -(((type)1) << (sizeof(mrb_int)*8-1)) )  \
+                          ^
+../tecsgen/tecs/mruby/TECSPointer.h:146:1: 備考: in expansion of macro ‘VALCHECK_MRB_INT’
+ VALCHECK_MRB_INT( Int8, INT8, int8_t )
+ ^~~~~~~~~~~~~~~~
+../tecsgen/tecs/mruby/TECSPointer.h: 関数 ‘VALCHECK_MRB_Int16’ 内:
+../tecsgen/tecs/mruby/TECSPointer.h:104:26: 警告: 左シフト回数 >= 型の幅となっています [-Wshift-count-overflow]
+    if( val >= (((type)1) << (sizeof(mrb_int)*8-1))    \
+                          ^
+../tecsgen/tecs/mruby/TECSPointer.h:148:1: 備考: in expansion of macro ‘VALCHECK_MRB_INT’
+ VALCHECK_MRB_INT( Int16, INT16, int16_t )
+ ^~~~~~~~~~~~~~~~
+../tecsgen/tecs/mruby/TECSPointer.h:105:26: 警告: 左シフト回数 >= 型の幅となっています [-Wshift-count-overflow]
+     || val < -(((type)1) << (sizeof(mrb_int)*8-1)) )  \
+                          ^
+../tecsgen/tecs/mruby/TECSPointer.h:148:1: 備考: in expansion of macro ‘VALCHECK_MRB_INT’
+ VALCHECK_MRB_INT( Int16, INT16, int16_t )
+ ^~~~~~~~~~~~~~~~
+../tecsgen/tecs/mruby/TECSPointer.h: 関数 ‘VALCHECK_MRB_Int64’ 内:
+../tecsgen/tecs/mruby/TECSPointer.h:105:14: 警告: 式内で整数がオーバーフローしました [-Woverflow]
+     || val < -(((type)1) << (sizeof(mrb_int)*8-1)) )  \
+              ^
+../tecsgen/tecs/mruby/TECSPointer.h:162:1: 備考: in expansion of macro ‘VALCHECK_MRB_INT’
+ VALCHECK_MRB_INT( Int64, INT64, int64_t )
+ ^~~~~~~~~~~~~~~~
+../tecsgen/tecs/mruby/TECSPointer.h: 関数 ‘VALCHECK_MRB_UInt64’ 内:
+../tecsgen/tecs/mruby/TECSPointer.h:128:26: 警告: 左シフト回数 >= 型の幅となっています [-Wshift-count-overflow]
+    if( val >= (((type)1) << (sizeof(mrb_int)*8)))    \
+                          ^
+../tecsgen/tecs/mruby/TECSPointer.h:163:1: 備考: in expansion of macro ‘VALCHECK_MRB_UINT’
+ VALCHECK_MRB_UINT( UInt64, UINT64, uint64_t )
+ ^~~~~~~~~~~~~~~~~
+gcc -c -I ./. -I ./../test/cygwin -I ../tecsgen/tecs -I ../tecsgen/tecs/mruby -I ../tecsgen/tecs/posix -I ../tecsgen/tecs/rpc -I ../tecsgen/tecs/TECSInfo -I ../tecsgen/tecs/TLSFMalloc -I ./gen -I ../../../mruby/include -I ../../include -I ../../  -D  "Inline=static inline" -g  -o gen/tTestMain_tecsgen.o ./gen/tTestMain_tecsgen.c
+In file included from ../tecsgen/tecs/mruby/tecs_mruby.h:14:0,
+                 from ./gen/global_tecsgen.h:11,
+                 from ./gen/tTestMain_tecsgen.h:20,
+                 from ./gen/tTestMain_tecsgen.c:5:
+../tecsgen/tecs/mruby/TECSPointer.h: 関数 ‘VALCHECK_MRB_Int8’ 内:
+../tecsgen/tecs/mruby/TECSPointer.h:104:26: 警告: 左シフト回数 >= 型の幅となっています [-Wshift-count-overflow]
+    if( val >= (((type)1) << (sizeof(mrb_int)*8-1))    \
+                          ^
+../tecsgen/tecs/mruby/TECSPointer.h:146:1: 備考: in expansion of macro ‘VALCHECK_MRB_INT’
+ VALCHECK_MRB_INT( Int8, INT8, int8_t )
+ ^~~~~~~~~~~~~~~~
+../tecsgen/tecs/mruby/TECSPointer.h:105:26: 警告: 左シフト回数 >= 型の幅となっています [-Wshift-count-overflow]
+     || val < -(((type)1) << (sizeof(mrb_int)*8-1)) )  \
+                          ^
+../tecsgen/tecs/mruby/TECSPointer.h:146:1: 備考: in expansion of macro ‘VALCHECK_MRB_INT’
+ VALCHECK_MRB_INT( Int8, INT8, int8_t )
+ ^~~~~~~~~~~~~~~~
+../tecsgen/tecs/mruby/TECSPointer.h: 関数 ‘VALCHECK_MRB_Int16’ 内:
+../tecsgen/tecs/mruby/TECSPointer.h:104:26: 警告: 左シフト回数 >= 型の幅となっています [-Wshift-count-overflow]
+    if( val >= (((type)1) << (sizeof(mrb_int)*8-1))    \
+                          ^
+../tecsgen/tecs/mruby/TECSPointer.h:148:1: 備考: in expansion of macro ‘VALCHECK_MRB_INT’
+ VALCHECK_MRB_INT( Int16, INT16, int16_t )
+ ^~~~~~~~~~~~~~~~
+../tecsgen/tecs/mruby/TECSPointer.h:105:26: 警告: 左シフト回数 >= 型の幅となっています [-Wshift-count-overflow]
+     || val < -(((type)1) << (sizeof(mrb_int)*8-1)) )  \
+                          ^
+../tecsgen/tecs/mruby/TECSPointer.h:148:1: 備考: in expansion of macro ‘VALCHECK_MRB_INT’
+ VALCHECK_MRB_INT( Int16, INT16, int16_t )
+ ^~~~~~~~~~~~~~~~
+../tecsgen/tecs/mruby/TECSPointer.h: 関数 ‘VALCHECK_MRB_Int64’ 内:
+../tecsgen/tecs/mruby/TECSPointer.h:105:14: 警告: 式内で整数がオーバーフローしました [-Woverflow]
+     || val < -(((type)1) << (sizeof(mrb_int)*8-1)) )  \
+              ^
+../tecsgen/tecs/mruby/TECSPointer.h:162:1: 備考: in expansion of macro ‘VALCHECK_MRB_INT’
+ VALCHECK_MRB_INT( Int64, INT64, int64_t )
+ ^~~~~~~~~~~~~~~~
+../tecsgen/tecs/mruby/TECSPointer.h: 関数 ‘VALCHECK_MRB_UInt64’ 内:
+../tecsgen/tecs/mruby/TECSPointer.h:128:26: 警告: 左シフト回数 >= 型の幅となっています [-Wshift-count-overflow]
+    if( val >= (((type)1) << (sizeof(mrb_int)*8)))    \
+                          ^
+../tecsgen/tecs/mruby/TECSPointer.h:163:1: 備考: in expansion of macro ‘VALCHECK_MRB_UINT’
+ VALCHECK_MRB_UINT( UInt64, UINT64, uint64_t )
+ ^~~~~~~~~~~~~~~~~
+gcc -c -I ./. -I ./../test/cygwin -I ../tecsgen/tecs -I ../tecsgen/tecs/mruby -I ../tecsgen/tecs/posix -I ../tecsgen/tecs/rpc -I ../tecsgen/tecs/TECSInfo -I ../tecsgen/tecs/TLSFMalloc -I ./gen -I ../../../mruby/include -I ../../include -I ../../  -D  "Inline=static inline" -g  -o gen/nTECS2Mruby_tsMcall_tecsgen.o ./gen/nTECS2Mruby_tsMcall_tecsgen.c
+In file included from ../tecsgen/tecs/mruby/tecs_mruby.h:14:0,
+                 from ./gen/global_tecsgen.h:11,
+                 from ./gen/nTECS2Mruby_tsMcall_tecsgen.h:20,
+                 from ./gen/nTECS2Mruby_tsMcall_tecsgen.c:5:
+../tecsgen/tecs/mruby/TECSPointer.h: 関数 ‘VALCHECK_MRB_Int8’ 内:
+../tecsgen/tecs/mruby/TECSPointer.h:104:26: 警告: 左シフト回数 >= 型の幅となっています [-Wshift-count-overflow]
+    if( val >= (((type)1) << (sizeof(mrb_int)*8-1))    \
+                          ^
+../tecsgen/tecs/mruby/TECSPointer.h:146:1: 備考: in expansion of macro ‘VALCHECK_MRB_INT’
+ VALCHECK_MRB_INT( Int8, INT8, int8_t )
+ ^~~~~~~~~~~~~~~~
+../tecsgen/tecs/mruby/TECSPointer.h:105:26: 警告: 左シフト回数 >= 型の幅となっています [-Wshift-count-overflow]
+     || val < -(((type)1) << (sizeof(mrb_int)*8-1)) )  \
+                          ^
+../tecsgen/tecs/mruby/TECSPointer.h:146:1: 備考: in expansion of macro ‘VALCHECK_MRB_INT’
+ VALCHECK_MRB_INT( Int8, INT8, int8_t )
+ ^~~~~~~~~~~~~~~~
+../tecsgen/tecs/mruby/TECSPointer.h: 関数 ‘VALCHECK_MRB_Int16’ 内:
+../tecsgen/tecs/mruby/TECSPointer.h:104:26: 警告: 左シフト回数 >= 型の幅となっています [-Wshift-count-overflow]
+    if( val >= (((type)1) << (sizeof(mrb_int)*8-1))    \
+                          ^
+../tecsgen/tecs/mruby/TECSPointer.h:148:1: 備考: in expansion of macro ‘VALCHECK_MRB_INT’
+ VALCHECK_MRB_INT( Int16, INT16, int16_t )
+ ^~~~~~~~~~~~~~~~
+../tecsgen/tecs/mruby/TECSPointer.h:105:26: 警告: 左シフト回数 >= 型の幅となっています [-Wshift-count-overflow]
+     || val < -(((type)1) << (sizeof(mrb_int)*8-1)) )  \
+                          ^
+../tecsgen/tecs/mruby/TECSPointer.h:148:1: 備考: in expansion of macro ‘VALCHECK_MRB_INT’
+ VALCHECK_MRB_INT( Int16, INT16, int16_t )
+ ^~~~~~~~~~~~~~~~
+../tecsgen/tecs/mruby/TECSPointer.h: 関数 ‘VALCHECK_MRB_Int64’ 内:
+../tecsgen/tecs/mruby/TECSPointer.h:105:14: 警告: 式内で整数がオーバーフローしました [-Woverflow]
+     || val < -(((type)1) << (sizeof(mrb_int)*8-1)) )  \
+              ^
+../tecsgen/tecs/mruby/TECSPointer.h:162:1: 備考: in expansion of macro ‘VALCHECK_MRB_INT’
+ VALCHECK_MRB_INT( Int64, INT64, int64_t )
+ ^~~~~~~~~~~~~~~~
+../tecsgen/tecs/mruby/TECSPointer.h: 関数 ‘VALCHECK_MRB_UInt64’ 内:
+../tecsgen/tecs/mruby/TECSPointer.h:128:26: 警告: 左シフト回数 >= 型の幅となっています [-Wshift-count-overflow]
+    if( val >= (((type)1) << (sizeof(mrb_int)*8)))    \
+                          ^
+../tecsgen/tecs/mruby/TECSPointer.h:163:1: 備考: in expansion of macro ‘VALCHECK_MRB_UINT’
+ VALCHECK_MRB_UINT( UInt64, UINT64, uint64_t )
+ ^~~~~~~~~~~~~~~~~
+gcc -c -I ./. -I ./../test/cygwin -I ../tecsgen/tecs -I ../tecsgen/tecs/mruby -I ../tecsgen/tecs/posix -I ../tecsgen/tecs/rpc -I ../tecsgen/tecs/TECSInfo -I ../tecsgen/tecs/TLSFMalloc -I ./gen -I ../../../mruby/include -I ../../include -I ../../  -D  "Inline=static inline" -g  -o gen/nTECS2Mruby_tsMcall.o ./gen/nTECS2Mruby_tsMcall.c
+In file included from ../tecsgen/tecs/mruby/tecs_mruby.h:14:0,
+                 from ./gen/global_tecsgen.h:11,
+                 from ./gen/nTECS2Mruby_tsMcall_tecsgen.h:20,
+                 from ./gen/nTECS2Mruby_tsMcall.c:18:
+../tecsgen/tecs/mruby/TECSPointer.h: 関数 ‘VALCHECK_MRB_Int8’ 内:
+../tecsgen/tecs/mruby/TECSPointer.h:104:26: 警告: 左シフト回数 >= 型の幅となっています [-Wshift-count-overflow]
+    if( val >= (((type)1) << (sizeof(mrb_int)*8-1))    \
+                          ^
+../tecsgen/tecs/mruby/TECSPointer.h:146:1: 備考: in expansion of macro ‘VALCHECK_MRB_INT’
+ VALCHECK_MRB_INT( Int8, INT8, int8_t )
+ ^~~~~~~~~~~~~~~~
+../tecsgen/tecs/mruby/TECSPointer.h:105:26: 警告: 左シフト回数 >= 型の幅となっています [-Wshift-count-overflow]
+     || val < -(((type)1) << (sizeof(mrb_int)*8-1)) )  \
+                          ^
+../tecsgen/tecs/mruby/TECSPointer.h:146:1: 備考: in expansion of macro ‘VALCHECK_MRB_INT’
+ VALCHECK_MRB_INT( Int8, INT8, int8_t )
+ ^~~~~~~~~~~~~~~~
+../tecsgen/tecs/mruby/TECSPointer.h: 関数 ‘VALCHECK_MRB_Int16’ 内:
+../tecsgen/tecs/mruby/TECSPointer.h:104:26: 警告: 左シフト回数 >= 型の幅となっています [-Wshift-count-overflow]
+    if( val >= (((type)1) << (sizeof(mrb_int)*8-1))    \
+                          ^
+../tecsgen/tecs/mruby/TECSPointer.h:148:1: 備考: in expansion of macro ‘VALCHECK_MRB_INT’
+ VALCHECK_MRB_INT( Int16, INT16, int16_t )
+ ^~~~~~~~~~~~~~~~
+../tecsgen/tecs/mruby/TECSPointer.h:105:26: 警告: 左シフト回数 >= 型の幅となっています [-Wshift-count-overflow]
+     || val < -(((type)1) << (sizeof(mrb_int)*8-1)) )  \
+                          ^
+../tecsgen/tecs/mruby/TECSPointer.h:148:1: 備考: in expansion of macro ‘VALCHECK_MRB_INT’
+ VALCHECK_MRB_INT( Int16, INT16, int16_t )
+ ^~~~~~~~~~~~~~~~
+../tecsgen/tecs/mruby/TECSPointer.h: 関数 ‘VALCHECK_MRB_Int64’ 内:
+../tecsgen/tecs/mruby/TECSPointer.h:105:14: 警告: 式内で整数がオーバーフローしました [-Woverflow]
+     || val < -(((type)1) << (sizeof(mrb_int)*8-1)) )  \
+              ^
+../tecsgen/tecs/mruby/TECSPointer.h:162:1: 備考: in expansion of macro ‘VALCHECK_MRB_INT’
+ VALCHECK_MRB_INT( Int64, INT64, int64_t )
+ ^~~~~~~~~~~~~~~~
+../tecsgen/tecs/mruby/TECSPointer.h: 関数 ‘VALCHECK_MRB_UInt64’ 内:
+../tecsgen/tecs/mruby/TECSPointer.h:128:26: 警告: 左シフト回数 >= 型の幅となっています [-Wshift-count-overflow]
+    if( val >= (((type)1) << (sizeof(mrb_int)*8)))    \
+                          ^
+../tecsgen/tecs/mruby/TECSPointer.h:163:1: 備考: in expansion of macro ‘VALCHECK_MRB_UINT’
+ VALCHECK_MRB_UINT( UInt64, UINT64, uint64_t )
+ ^~~~~~~~~~~~~~~~~
+gcc -c -I ./. -I ./../test/cygwin -I ../tecsgen/tecs -I ../tecsgen/tecs/mruby -I ../tecsgen/tecs/posix -I ../tecsgen/tecs/rpc -I ../tecsgen/tecs/TECSInfo -I ../tecsgen/tecs/TLSFMalloc -I ./gen -I ../../../mruby/include -I ../../include -I ../../  -D  "Inline=static inline" -g  -o gen/tTask.o ../test/cygwin/tTask.c
+In file included from ../tecsgen/tecs/mruby/tecs_mruby.h:14:0,
+                 from ./gen/global_tecsgen.h:11,
+                 from ./gen/tTask_tecsgen.h:20,
+                 from ../test/cygwin/tTask.c:25:
+../tecsgen/tecs/mruby/TECSPointer.h: 関数 ‘VALCHECK_MRB_Int8’ 内:
+../tecsgen/tecs/mruby/TECSPointer.h:104:26: 警告: 左シフト回数 >= 型の幅となっています [-Wshift-count-overflow]
+    if( val >= (((type)1) << (sizeof(mrb_int)*8-1))    \
+                          ^
+../tecsgen/tecs/mruby/TECSPointer.h:146:1: 備考: in expansion of macro ‘VALCHECK_MRB_INT’
+ VALCHECK_MRB_INT( Int8, INT8, int8_t )
+ ^~~~~~~~~~~~~~~~
+../tecsgen/tecs/mruby/TECSPointer.h:105:26: 警告: 左シフト回数 >= 型の幅となっています [-Wshift-count-overflow]
+     || val < -(((type)1) << (sizeof(mrb_int)*8-1)) )  \
+                          ^
+../tecsgen/tecs/mruby/TECSPointer.h:146:1: 備考: in expansion of macro ‘VALCHECK_MRB_INT’
+ VALCHECK_MRB_INT( Int8, INT8, int8_t )
+ ^~~~~~~~~~~~~~~~
+../tecsgen/tecs/mruby/TECSPointer.h: 関数 ‘VALCHECK_MRB_Int16’ 内:
+../tecsgen/tecs/mruby/TECSPointer.h:104:26: 警告: 左シフト回数 >= 型の幅となっています [-Wshift-count-overflow]
+    if( val >= (((type)1) << (sizeof(mrb_int)*8-1))    \
+                          ^
+../tecsgen/tecs/mruby/TECSPointer.h:148:1: 備考: in expansion of macro ‘VALCHECK_MRB_INT’
+ VALCHECK_MRB_INT( Int16, INT16, int16_t )
+ ^~~~~~~~~~~~~~~~
+../tecsgen/tecs/mruby/TECSPointer.h:105:26: 警告: 左シフト回数 >= 型の幅となっています [-Wshift-count-overflow]
+     || val < -(((type)1) << (sizeof(mrb_int)*8-1)) )  \
+                          ^
+../tecsgen/tecs/mruby/TECSPointer.h:148:1: 備考: in expansion of macro ‘VALCHECK_MRB_INT’
+ VALCHECK_MRB_INT( Int16, INT16, int16_t )
+ ^~~~~~~~~~~~~~~~
+../tecsgen/tecs/mruby/TECSPointer.h: 関数 ‘VALCHECK_MRB_Int64’ 内:
+../tecsgen/tecs/mruby/TECSPointer.h:105:14: 警告: 式内で整数がオーバーフローしました [-Woverflow]
+     || val < -(((type)1) << (sizeof(mrb_int)*8-1)) )  \
+              ^
+../tecsgen/tecs/mruby/TECSPointer.h:162:1: 備考: in expansion of macro ‘VALCHECK_MRB_INT’
+ VALCHECK_MRB_INT( Int64, INT64, int64_t )
+ ^~~~~~~~~~~~~~~~
+../tecsgen/tecs/mruby/TECSPointer.h: 関数 ‘VALCHECK_MRB_UInt64’ 内:
+../tecsgen/tecs/mruby/TECSPointer.h:128:26: 警告: 左シフト回数 >= 型の幅となっています [-Wshift-count-overflow]
+    if( val >= (((type)1) << (sizeof(mrb_int)*8)))    \
+                          ^
+../tecsgen/tecs/mruby/TECSPointer.h:163:1: 備考: in expansion of macro ‘VALCHECK_MRB_UINT’
+ VALCHECK_MRB_UINT( UInt64, UINT64, uint64_t )
+ ^~~~~~~~~~~~~~~~~
+gcc -c -I ./. -I ./../test/cygwin -I ../tecsgen/tecs -I ../tecsgen/tecs/mruby -I ../tecsgen/tecs/posix -I ../tecsgen/tecs/rpc -I ../tecsgen/tecs/TECSInfo -I ../tecsgen/tecs/TLSFMalloc -I ./gen -I ../../../mruby/include -I ../../include -I ../../  -D  "Inline=static inline" -g  -o gen/tTECS2MrubyVM.o tTECS2MrubyVM.c
+In file included from ../tecsgen/tecs/mruby/tecs_mruby.h:14:0,
+                 from tTECS2MrubyVM.c:1:
+../tecsgen/tecs/mruby/TECSPointer.h: 関数 ‘VALCHECK_MRB_Int8’ 内:
+../tecsgen/tecs/mruby/TECSPointer.h:104:26: 警告: 左シフト回数 >= 型の幅となっています [-Wshift-count-overflow]
+    if( val >= (((type)1) << (sizeof(mrb_int)*8-1))    \
+                          ^
+../tecsgen/tecs/mruby/TECSPointer.h:146:1: 備考: in expansion of macro ‘VALCHECK_MRB_INT’
+ VALCHECK_MRB_INT( Int8, INT8, int8_t )
+ ^~~~~~~~~~~~~~~~
+../tecsgen/tecs/mruby/TECSPointer.h:105:26: 警告: 左シフト回数 >= 型の幅となっています [-Wshift-count-overflow]
+     || val < -(((type)1) << (sizeof(mrb_int)*8-1)) )  \
+                          ^
+../tecsgen/tecs/mruby/TECSPointer.h:146:1: 備考: in expansion of macro ‘VALCHECK_MRB_INT’
+ VALCHECK_MRB_INT( Int8, INT8, int8_t )
+ ^~~~~~~~~~~~~~~~
+../tecsgen/tecs/mruby/TECSPointer.h: 関数 ‘VALCHECK_MRB_Int16’ 内:
+../tecsgen/tecs/mruby/TECSPointer.h:104:26: 警告: 左シフト回数 >= 型の幅となっています [-Wshift-count-overflow]
+    if( val >= (((type)1) << (sizeof(mrb_int)*8-1))    \
+                          ^
+../tecsgen/tecs/mruby/TECSPointer.h:148:1: 備考: in expansion of macro ‘VALCHECK_MRB_INT’
+ VALCHECK_MRB_INT( Int16, INT16, int16_t )
+ ^~~~~~~~~~~~~~~~
+../tecsgen/tecs/mruby/TECSPointer.h:105:26: 警告: 左シフト回数 >= 型の幅となっています [-Wshift-count-overflow]
+     || val < -(((type)1) << (sizeof(mrb_int)*8-1)) )  \
+                          ^
+../tecsgen/tecs/mruby/TECSPointer.h:148:1: 備考: in expansion of macro ‘VALCHECK_MRB_INT’
+ VALCHECK_MRB_INT( Int16, INT16, int16_t )
+ ^~~~~~~~~~~~~~~~
+../tecsgen/tecs/mruby/TECSPointer.h: 関数 ‘VALCHECK_MRB_Int64’ 内:
+../tecsgen/tecs/mruby/TECSPointer.h:105:14: 警告: 式内で整数がオーバーフローしました [-Woverflow]
+     || val < -(((type)1) << (sizeof(mrb_int)*8-1)) )  \
+              ^
+../tecsgen/tecs/mruby/TECSPointer.h:162:1: 備考: in expansion of macro ‘VALCHECK_MRB_INT’
+ VALCHECK_MRB_INT( Int64, INT64, int64_t )
+ ^~~~~~~~~~~~~~~~
+../tecsgen/tecs/mruby/TECSPointer.h: 関数 ‘VALCHECK_MRB_UInt64’ 内:
+../tecsgen/tecs/mruby/TECSPointer.h:128:26: 警告: 左シフト回数 >= 型の幅となっています [-Wshift-count-overflow]
+    if( val >= (((type)1) << (sizeof(mrb_int)*8)))    \
+                          ^
+../tecsgen/tecs/mruby/TECSPointer.h:163:1: 備考: in expansion of macro ‘VALCHECK_MRB_UINT’
+ VALCHECK_MRB_UINT( UInt64, UINT64, uint64_t )
+ ^~~~~~~~~~~~~~~~~
+gcc -c -I ./. -I ./../test/cygwin -I ../tecsgen/tecs -I ../tecsgen/tecs/mruby -I ../tecsgen/tecs/posix -I ../tecsgen/tecs/rpc -I ../tecsgen/tecs/TECSInfo -I ../tecsgen/tecs/TLSFMalloc -I ./gen -I ../../../mruby/include -I ../../include -I ../../  -D  "Inline=static inline" -g  -o gen/tTestMain.o tTestMain.c
+In file included from ../tecsgen/tecs/mruby/tecs_mruby.h:14:0,
+                 from ./gen/global_tecsgen.h:11,
+                 from ./gen/tTestMain_tecsgen.h:20,
+                 from tTestMain.c:23:
+../tecsgen/tecs/mruby/TECSPointer.h: 関数 ‘VALCHECK_MRB_Int8’ 内:
+../tecsgen/tecs/mruby/TECSPointer.h:104:26: 警告: 左シフト回数 >= 型の幅となっています [-Wshift-count-overflow]
+    if( val >= (((type)1) << (sizeof(mrb_int)*8-1))    \
+                          ^
+../tecsgen/tecs/mruby/TECSPointer.h:146:1: 備考: in expansion of macro ‘VALCHECK_MRB_INT’
+ VALCHECK_MRB_INT( Int8, INT8, int8_t )
+ ^~~~~~~~~~~~~~~~
+../tecsgen/tecs/mruby/TECSPointer.h:105:26: 警告: 左シフト回数 >= 型の幅となっています [-Wshift-count-overflow]
+     || val < -(((type)1) << (sizeof(mrb_int)*8-1)) )  \
+                          ^
+../tecsgen/tecs/mruby/TECSPointer.h:146:1: 備考: in expansion of macro ‘VALCHECK_MRB_INT’
+ VALCHECK_MRB_INT( Int8, INT8, int8_t )
+ ^~~~~~~~~~~~~~~~
+../tecsgen/tecs/mruby/TECSPointer.h: 関数 ‘VALCHECK_MRB_Int16’ 内:
+../tecsgen/tecs/mruby/TECSPointer.h:104:26: 警告: 左シフト回数 >= 型の幅となっています [-Wshift-count-overflow]
+    if( val >= (((type)1) << (sizeof(mrb_int)*8-1))    \
+                          ^
+../tecsgen/tecs/mruby/TECSPointer.h:148:1: 備考: in expansion of macro ‘VALCHECK_MRB_INT’
+ VALCHECK_MRB_INT( Int16, INT16, int16_t )
+ ^~~~~~~~~~~~~~~~
+../tecsgen/tecs/mruby/TECSPointer.h:105:26: 警告: 左シフト回数 >= 型の幅となっています [-Wshift-count-overflow]
+     || val < -(((type)1) << (sizeof(mrb_int)*8-1)) )  \
+                          ^
+../tecsgen/tecs/mruby/TECSPointer.h:148:1: 備考: in expansion of macro ‘VALCHECK_MRB_INT’
+ VALCHECK_MRB_INT( Int16, INT16, int16_t )
+ ^~~~~~~~~~~~~~~~
+../tecsgen/tecs/mruby/TECSPointer.h: 関数 ‘VALCHECK_MRB_Int64’ 内:
+../tecsgen/tecs/mruby/TECSPointer.h:105:14: 警告: 式内で整数がオーバーフローしました [-Woverflow]
+     || val < -(((type)1) << (sizeof(mrb_int)*8-1)) )  \
+              ^
+../tecsgen/tecs/mruby/TECSPointer.h:162:1: 備考: in expansion of macro ‘VALCHECK_MRB_INT’
+ VALCHECK_MRB_INT( Int64, INT64, int64_t )
+ ^~~~~~~~~~~~~~~~
+../tecsgen/tecs/mruby/TECSPointer.h: 関数 ‘VALCHECK_MRB_UInt64’ 内:
+../tecsgen/tecs/mruby/TECSPointer.h:128:26: 警告: 左シフト回数 >= 型の幅となっています [-Wshift-count-overflow]
+    if( val >= (((type)1) << (sizeof(mrb_int)*8)))    \
+                          ^
+../tecsgen/tecs/mruby/TECSPointer.h:163:1: 備考: in expansion of macro ‘VALCHECK_MRB_UINT’
+ VALCHECK_MRB_UINT( UInt64, UINT64, uint64_t )
+ ^~~~~~~~~~~~~~~~~
+mrbc -BTECS2MrubyVM_irep -oTECS2MrubyVM_mrb.c test_stub.rb
+gcc -I ./. -I ./../test/cygwin -I ../tecsgen/tecs -I ../tecsgen/tecs/mruby -I ../tecsgen/tecs/posix -I ../tecsgen/tecs/rpc -I ../tecsgen/tecs/TECSInfo -I ../tecsgen/tecs/TLSFMalloc -I ./gen -I ../../../mruby/include -I ../../include -I ../../  -D  "Inline=static inline" -g    -c -o TECS2MrubyVM_mrb.o TECS2MrubyVM_mrb.c
+gcc -o mruby_call.exe ./gen/tTask_tecsgen.o ./gen/tTECS2MrubyVM_tecsgen.o ./gen/tTestMain_tecsgen.o  ./gen/nTECS2Mruby_tsMcall_tecsgen.o ./gen/nTECS2Mruby_tsMcall.o  ./gen/tTask.o ./gen/tTECS2MrubyVM.o ./gen/tTestMain.o  TECS2MrubyVM_mrb.o  -L /home/yamas/TECS2MrubyBridgePlugin/mruby/build/host/lib/ -lmruby
+make[1]: ディレクトリ '/home/yamas/TECS2MrubyBridgePlugin/hr-tecs/tecsgen/mruby_call' から出ます

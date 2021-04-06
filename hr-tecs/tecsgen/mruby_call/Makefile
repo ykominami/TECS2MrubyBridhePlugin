@@ -12,11 +12,12 @@
 # fixed variable (unchangeable by config or plugin)
 TARGET_BASE = mruby_call
 BASE_DIR = .
+BASE_DIR_1 = ../tecsgen
 GEN_DIR = $(BASE_DIR)/gen
-INCLUDES = -I $(BASE_DIR)/. -I $(BASE_DIR)/../test/cygwin -I ../tecsgen/tecs \
--I ../tecsgen/tecs/mruby -I ../tecsgen/tecs/posix \
--I ../tecsgen/tecs/rpc -I ../tecsgen/tecs/TECSInfo \
--I ../tecsgen/tecs/TLSFMalloc -I $(GEN_DIR) -I ../../../mruby/include \
+INCLUDES = -I $(BASE_DIR)/. -I $(BASE_DIR)/../test/cygwin -I $(BASE_DIR_1)/tecs \
+-I $(BASE_DIR_1)/tecs/mruby -I $(BASE_DIR_1)/tecs/posix \
+-I $(BASE_DIR_1)/tecs/rpc -I $(BASE_DIR_1)/tecs/TECSInfo \
+-I $(BASE_DIR_1)/tecs/TLSFMalloc -I $(GEN_DIR) -I ../../../mruby/include \
 -I ../../include -I ../../
 DEFINES =
 
