@@ -1,4 +1,4 @@
-TECS_IMPORT_CDLS = mruby_call.cdl ../../include/kernel.cdl ../../tecs_kernel/../tecs_lib/common/TECS2MrubyVM.cdl gen/tmp_plugin_post_code.cdl
+TECS_IMPORT_CDLS = mruby_call.cdl ../../include/kernel.cdl ../../tecs_lib/common/TECS2MrubyVM.cdl gen/tmp_plugin_post_code.cdl
 TECS_IMPORT_HEADERS = ../../include/tecs_kernel.h ../../tecsgen/tecsgen/tecs/mruby/tecs_mruby.h
 TECS_IMPORTS = $(TECS_IMPORT_CDLS) $(TECS_IMPORT_HEADERS)
 

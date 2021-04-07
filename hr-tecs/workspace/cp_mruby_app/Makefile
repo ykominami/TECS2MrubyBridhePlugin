@@ -1,7 +1,7 @@
 #  mrubyのアプリケーションファイル名
 # APP_NAME = bluetooth.rb
 # APP_NAME = battery.rb
-APP_NAME = button.rb
+#APP_NAME = button.rb
 # APP_NAME = color.rb
 # APP_NAME = color2.rb
 # APP_NAME = color3.rb
@@ -20,12 +20,12 @@ APP_NAME = button.rb
 # APP_NAME = speaker2.rb
 # APP_NAME = touch.rb
 # APP_NAME = ultrasonic.rb
-
+  APP_NAME = test_stub.rb
 #  mrubyアプリケーションのディレクトリ
 MRUBY_DIR = ../cp_mruby_app
 
 # SDのドライブ文字を指定
-SD_DIR = /cygdrive/d/
+SD_DIR = /cygdrive/F/
 
 # SD上のアプリケーションディレクトリ
 SD_MRB = $(SD_DIR)mrb_app

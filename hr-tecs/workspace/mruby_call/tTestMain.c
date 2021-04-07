@@ -53,6 +53,7 @@ eBody_main(CELLIDX idx)
 	} /* end if VALID_IDX(idx) */
 
 	cTECS2MrubyVM_init( );
+	
 	cBody2_mcall_lcd( );
 	cTECS2MrubyVM_fin( );
 

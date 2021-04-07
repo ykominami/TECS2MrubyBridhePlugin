@@ -1,7 +1,7 @@
 const int32_t MRUBY_VM_STACK_SIZE = 81920;
 
 import( "kernel.cdl" );
-import("../tecs_lib/common/TECS2MrubyVM.cdl");
+import("../../tecs_lib/common/TECS2MrubyVM.cdl");
 
 signature sMcall {
  void mcall_lcd(void);

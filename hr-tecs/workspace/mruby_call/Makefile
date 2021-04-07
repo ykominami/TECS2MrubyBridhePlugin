@@ -98,7 +98,7 @@ else
     PARAM_SET_NAME = parameter_etrobo.rb
 endif
 
-APP_RB = $(MRUBY_DIR)/$(APP_NAME)
+APP_RB = ./$(APP_NAME)
 
 APP_PARAM_RB = $(MRUBY_DIR)/$(PARAM_NAME)
 APP_PARAM_SET_RB = $(MRUBY_DIR)/$(PARAM_SET_NAME)
