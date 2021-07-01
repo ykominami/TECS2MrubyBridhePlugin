@@ -236,11 +236,6 @@ assert('class to return the last value') do
   assert_equal(m, :m)
 end
 
-assert('class to return nil if body is empty') do
-  assert_nil(class C end)
-  assert_nil(class << self; end)
-end
-
 assert('raise when superclass is not a class') do
   module FirstModule; end
   assert_raise(TypeError, 'should raise TypeError') do
@@ -355,7 +350,7 @@ assert('singleton tests') do
         7
       end
     end
-  end if Object.const_defined?(:Float)
+  end if class_defined?("Float")
 end
 
 assert('clone Class') do
@@ -365,7 +360,7 @@ assert('clone Class') do
     end
   end
 
-  assert_true(Foo.clone.new.func)
+  Foo.clone.new.func
 end
 
 assert('class variable and class << self style class method') do

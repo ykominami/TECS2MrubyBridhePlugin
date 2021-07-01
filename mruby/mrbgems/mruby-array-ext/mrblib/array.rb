@@ -266,6 +266,7 @@ class Array
     self
   end
 
+  NONE=Object.new
   ##
   #  call-seq:
   #     ary.fetch(index)                    -> obj

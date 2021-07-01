@@ -23,7 +23,6 @@ typedef enum debug_command_id {
   DBGCMD_STEP,
   DBGCMD_BREAK,
   DBGCMD_INFO_BREAK,
-  DBGCMD_INFO_LOCAL,
   DBGCMD_WATCH,
   DBGCMD_INFO_WATCH,
   DBGCMD_ENABLE,
@@ -152,7 +151,6 @@ dbgcmd_state dbgcmd_next(mrb_state*, mrdb_state*);
 /* cmdbreak.c */
 dbgcmd_state dbgcmd_break(mrb_state*, mrdb_state*);
 dbgcmd_state dbgcmd_info_break(mrb_state*, mrdb_state*);
-dbgcmd_state dbgcmd_info_local(mrb_state*, mrdb_state*);
 dbgcmd_state dbgcmd_delete(mrb_state*, mrdb_state*);
 dbgcmd_state dbgcmd_enable(mrb_state*, mrdb_state*);
 dbgcmd_state dbgcmd_disable(mrb_state*, mrdb_state*);

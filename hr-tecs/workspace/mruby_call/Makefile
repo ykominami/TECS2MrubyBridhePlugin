@@ -54,7 +54,7 @@ endef
 all:
 
 # SDのドライブ文字を指定
-SD_DIR = /cygdrive/F/
+SD_DIR = /cygdrive/D/
 
 #
 #  ターゲット略称の定義

@@ -20,7 +20,6 @@
 #include <mruby/class.h>
 #include <mruby/range.h>
 #include <mruby/string.h>
-#include <mruby/numeric.h>
 #include <mruby/re.h>
 
 typedef struct mrb_shared_string {
@@ -157,6 +156,13 @@ mrb_str_new(mrb_state *mrb, const char *p, size_t len)
   return mrb_obj_value(str_new(mrb, p, len));
 }
 
+/*
+ *  call-seq: (Caution! NULL string)
+ *     String.new(str="")   => new_str
+ *
+ *  Returns a new string object containing a copy of <i>str</i>.
+ */
+
 MRB_API mrb_value
 mrb_str_new_cstr(mrb_state *mrb, const char *p)
 {
@@ -232,36 +238,27 @@ utf8len(const char* p, const char* e)
   return len;
 }
 
-mrb_int
-mrb_utf8_len(const char *str, mrb_int byte_len)
+static mrb_int
+utf8_strlen(mrb_value str, mrb_int len)
 {
   mrb_int total = 0;
-  const char *p = str;
-  const char *e = p + byte_len;
-
-  while (p < e) {
+  char* p = RSTRING_PTR(str);
+  char* e = p;
+  if (RSTRING(str)->flags & MRB_STR_NO_UTF) {
+    return RSTRING_LEN(str);
+  }
+  e += len < 0 ? RSTRING_LEN(str) : len;
+  while (p<e) {
     p += utf8len(p, e);
     total++;
+  }
+  if (RSTRING_LEN(str) == total) {
+    RSTRING(str)->flags |= MRB_STR_NO_UTF;
   }
   return total;
 }
 
-static mrb_int
-utf8_strlen(mrb_value str)
-{
-  mrb_int byte_len = RSTRING_LEN(str);
-
-  if (RSTRING(str)->flags & MRB_STR_NO_UTF) {
-    return byte_len;
-  }
-  else {
-    mrb_int utf8_len = mrb_utf8_len(RSTRING_PTR(str), byte_len);
-    if (byte_len == utf8_len) RSTRING(str)->flags |= MRB_STR_NO_UTF;
-    return utf8_len;
-  }
-}
-
-#define RSTRING_CHAR_LEN(s) utf8_strlen(s)
+#define RSTRING_CHAR_LEN(s) utf8_strlen(s, -1)
 
 /* map character index to byte offset index */
 static mrb_int
@@ -742,6 +739,12 @@ mrb_str_to_cstr(mrb_state *mrb, mrb_value str0)
   return RSTR_PTR(s);
 }
 
+/*
+ *  call-seq: (Caution! String("abcd") change)
+ *     String("abcdefg") = String("abcd") + String("efg")
+ *
+ *  Returns a new string object containing a copy of <i>str</i>.
+ */
 MRB_API void
 mrb_str_concat(mrb_state *mrb, mrb_value self, mrb_value other)
 {
@@ -749,6 +752,12 @@ mrb_str_concat(mrb_state *mrb, mrb_value self, mrb_value other)
   mrb_str_cat_str(mrb, self, other);
 }
 
+/*
+ *  call-seq: (Caution! String("abcd") remain)
+ *     String("abcdefg") = String("abcd") + String("efg")
+ *
+ *  Returns a new string object containing a copy of <i>str</i>.
+ */
 MRB_API mrb_value
 mrb_str_plus(mrb_state *mrb, mrb_value a, mrb_value b)
 {
@@ -766,13 +775,10 @@ mrb_str_plus(mrb_state *mrb, mrb_value a, mrb_value b)
 /* 15.2.10.5.2  */
 
 /*
- *  call-seq:
- *     str + other_str   -> new_str
+ *  call-seq: (Caution! String("abcd") remain) for stack_argument
+ *     String("abcdefg") = String("abcd") + String("efg")
  *
- *  Concatenation---Returns a new <code>String</code> containing
- *  <i>other_str</i> concatenated to <i>str</i>.
- *
- *     "Hello from " + self.to_s   #=> "Hello from main"
+ *  Returns a new string object containing a copy of <i>str</i>.
  */
 static mrb_value
 mrb_str_plus_m(mrb_state *mrb, mrb_value self)
@@ -973,22 +979,13 @@ mrb_str_equal_m(mrb_state *mrb, mrb_value str1)
   return mrb_bool_value(mrb_str_equal(mrb, str1, str2));
 }
 /* ---------------------------------- */
-mrb_value mrb_mod_to_s(mrb_state *mrb, mrb_value klass);
-
 MRB_API mrb_value
 mrb_str_to_str(mrb_state *mrb, mrb_value str)
 {
-  switch (mrb_type(str)) {
-  case MRB_TT_STRING:
-    return str;
-  case MRB_TT_FIXNUM:
-    return mrb_fixnum_to_str(mrb, str, 10);
-  case MRB_TT_CLASS:
-  case MRB_TT_MODULE:
-    return mrb_mod_to_s(mrb, str);
-  default:
+  if (!mrb_string_p(str)) {
     return mrb_convert_type(mrb, str, MRB_TT_STRING, "String", "to_s");
   }
+  return str;
 }
 
 MRB_API const char*
@@ -1590,6 +1587,8 @@ mrb_str_index_m(mrb_state *mrb, mrb_value str)
   return mrb_fixnum_value(pos);
 }
 
+#define STR_REPLACE_SHARED_MIN 10
+
 /* 15.2.10.5.24 */
 /* 15.2.10.5.28 */
 /*
@@ -2006,7 +2005,7 @@ mrb_str_split_m(mrb_state *mrb, mrb_value str)
   return result;
 }
 
-static mrb_value
+MRB_API mrb_value
 mrb_str_len_to_inum(mrb_state *mrb, const char *str, mrb_int len, mrb_int base, int badcheck)
 {
   const char *p = str;
@@ -2174,7 +2173,7 @@ mrb_str_len_to_inum(mrb_state *mrb, const char *str, mrb_int len, mrb_int base, 
 }
 
 MRB_API mrb_value
-mrb_cstr_to_inum(mrb_state *mrb, const char *str, mrb_int base, mrb_bool badcheck)
+mrb_cstr_to_inum(mrb_state *mrb, const char *str, int base, int badcheck)
 {
   return mrb_str_len_to_inum(mrb, str, strlen(str), base, badcheck);
 }
@@ -2755,7 +2754,6 @@ mrb_init_string(mrb_state *mrb)
 #endif
   mrb_define_method(mrb, s, "to_i",            mrb_str_to_i,            MRB_ARGS_ANY());  /* 15.2.10.5.39 */
   mrb_define_method(mrb, s, "to_s",            mrb_str_to_s,            MRB_ARGS_NONE()); /* 15.2.10.5.40 */
-  mrb_define_method(mrb, s, "to_str",          mrb_str_to_s,            MRB_ARGS_NONE());
   mrb_define_method(mrb, s, "to_sym",          mrb_str_intern,          MRB_ARGS_NONE()); /* 15.2.10.5.41 */
   mrb_define_method(mrb, s, "upcase",          mrb_str_upcase,          MRB_ARGS_NONE()); /* 15.2.10.5.42 */
   mrb_define_method(mrb, s, "upcase!",         mrb_str_upcase_bang,     MRB_ARGS_NONE()); /* 15.2.10.5.43 */
@@ -2844,7 +2842,7 @@ mrb_float_read(const char *string, char **endPtr)
      */
 
     p = string;
-    while (ISSPACE(*p)) {
+    while (isspace(*p)) {
       p += 1;
     }
     if (*p == '-') {
@@ -2867,7 +2865,7 @@ mrb_float_read(const char *string, char **endPtr)
     for (mantSize = 0; ; mantSize += 1)
     {
       c = *p;
-      if (!ISDIGIT(c)) {
+      if (!isdigit(c)) {
         if ((c != '.') || (decPt >= 0)) {
           break;
         }
@@ -2952,7 +2950,7 @@ mrb_float_read(const char *string, char **endPtr)
         }
         expSign = FALSE;
       }
-      while (ISDIGIT(*p)) {
+      while (isdigit(*p)) {
         exp = exp * 10 + (*p - '0');
         if (exp > 19999) {
           exp = 19999;

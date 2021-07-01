@@ -122,7 +122,7 @@ enum mrb_vtype {
   MRB_TT_MAXDEFINE    /*  25 */
 };
 
-#include "object.h"
+#include <mruby/object.h>
 
 #ifdef MRB_DOCUMENTATION_BLOCK
 
@@ -159,10 +159,6 @@ typedef void mrb_value;
 #endif
 #ifndef mrb_bool
 #define mrb_bool(o)   (mrb_type(o) != MRB_TT_FALSE)
-#endif
-#if !defined(MRB_SYMBOL_BITSIZE)
-#define MRB_SYMBOL_BITSIZE (sizeof(mrb_sym) * CHAR_BIT)
-#define MRB_SYMBOL_MAX      UINT32_MAX
 #endif
 #ifndef MRB_WITHOUT_FLOAT
 #define mrb_float_p(o) (mrb_type(o) == MRB_TT_FLOAT)

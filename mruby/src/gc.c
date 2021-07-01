@@ -739,7 +739,14 @@ gc_mark_children(mrb_state *mrb, mrb_gc *gc, struct RBasic *obj)
     break;
 
   case MRB_TT_RANGE:
-    mrb_gc_mark_range(mrb, (struct RRange*)obj);
+    {
+      struct RRange *r = (struct RRange*)obj;
+
+      if (r->edges) {
+        mrb_gc_mark_value(mrb, r->edges->beg);
+        mrb_gc_mark_value(mrb, r->edges->end);
+      }
+    }
     break;
 
   default:
@@ -863,7 +870,7 @@ obj_free(mrb_state *mrb, struct RBasic *obj, int end)
     break;
 
   case MRB_TT_RANGE:
-    mrb_gc_free_range(mrb, ((struct RRange*)obj));
+    mrb_free(mrb, ((struct RRange*)obj)->edges);
     break;
 
   case MRB_TT_DATA:

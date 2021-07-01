@@ -52,6 +52,9 @@ module Kernel
     def printf(*args)
       raise NotImplementedError.new('printf not available')
     end
+    def sprintf(*args)
+      raise NotImplementedError.new('sprintf not available')
+    end
   else
     def printf(*args)
       __printstr__(sprintf(*args))

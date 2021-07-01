@@ -10,7 +10,6 @@
 #endif
 #include <limits.h>
 #include <stdlib.h>
-#include <string.h>
 
 #include <mruby.h>
 #include <mruby/array.h>
@@ -24,9 +23,9 @@
 #define floor(f) floorf(f)
 #define ceil(f) ceilf(f)
 #define fmod(x,y) fmodf(x,y)
-#define FLO_TO_STR_PREC 8
+#define MRB_FLO_TO_STR_FMT "%.8g"
 #else
-#define FLO_TO_STR_PREC 16
+#define MRB_FLO_TO_STR_FMT "%.16g"
 #endif
 #endif
 
@@ -154,22 +153,6 @@ num_div(mrb_state *mrb, mrb_value x)
 #endif
 }
 
-static mrb_value
-num_coerce_step_counter(mrb_state *mrb, mrb_value self)
-{
-  mrb_value counter = self, num, step;
-
-  mrb_get_args(mrb, "oo", &num, &step);
-
-#ifndef MRB_WITHOUT_FLOAT
-  if (mrb_float_p(self) || mrb_float_p(num) || mrb_float_p(step)) {
-    counter = mrb_funcall(mrb, counter, "to_f", 0);
-  }
-#endif
-
-  return counter;
-}
-
 #ifndef MRB_WITHOUT_FLOAT
 /********************************************************************
  *
@@ -194,49 +177,10 @@ num_coerce_step_counter(mrb_state *mrb, mrb_value self)
 static mrb_value
 flo_to_s(mrb_state *mrb, mrb_value flt)
 {
-  mrb_float f = mrb_float(flt);
-
-  if (isinf(f)) {
-    return f < 0 ? mrb_str_new_lit(mrb, "-Infinity")
-                 : mrb_str_new_lit(mrb, "Infinity");
-  }
-  else if (isnan(f)) {
+  if (isnan(mrb_float(flt))) {
     return mrb_str_new_lit(mrb, "NaN");
   }
-  else {
-    char fmt[] = "%." MRB_STRINGIZE(FLO_TO_STR_PREC) "g";
-    mrb_value str = mrb_float_to_str(mrb, flt, fmt);
-    mrb_int len;
-    char *begp;
-
-    insert_dot_zero:
-    begp = RSTRING_PTR(str);
-    len = RSTRING_LEN(str);
-    for (char *p = begp, *endp = p + len; p < endp; ++p) {
-      if (*p == '.') {
-        return str;
-      }
-      else if (*p == 'e') {
-        ptrdiff_t e_pos = p - begp;
-        mrb_str_cat(mrb, str, ".0", 2);
-        p = RSTRING_PTR(str) + e_pos;
-        memmove(p + 2, p, len - e_pos);
-        memcpy(p, ".0", 2);
-        return str;
-      }
-    }
-
-    if (FLO_TO_STR_PREC + (begp[0] == '-') <= len) {
-      --fmt[sizeof(fmt) - 3];  /* %.16g(%.8g) -> %.15g(%.7g) */
-      str = mrb_float_to_str(mrb, flt, fmt);
-      goto insert_dot_zero;
-    }
-    else {
-      mrb_str_cat(mrb, str, ".0", 2);
-    }
-
-    return str;
-  }
+  return mrb_float_to_str(mrb, flt, MRB_FLO_TO_STR_FMT);
 }
 
 /* 15.2.9.3.2  */
@@ -369,7 +313,7 @@ flo_eql(mrb_state *mrb, mrb_value x)
 
   mrb_get_args(mrb, "o", &y);
   if (!mrb_float_p(y)) return mrb_false_value();
-  return mrb_bool_value(mrb_float(x) == mrb_float(y));
+  return mrb_bool_value(mrb_float(x) == (mrb_float)mrb_fixnum(y));
 }
 
 /* 15.2.9.3.7  */
@@ -1206,7 +1150,7 @@ fix_to_f(mrb_state *mrb, mrb_value num)
  *  (in particular infinite or NaN)
  *  to numerical classes which don't support them.
  *
- *     Float::INFINITY.to_i
+ *     Float::INFINITY.to_r
  *
  *  <em>raises the exception:</em>
  *
@@ -1225,7 +1169,12 @@ mrb_flo_to_fixnum(mrb_state *mrb, mrb_value x)
   else {
     mrb_float d = mrb_float(x);
 
-    mrb_check_num_exact(mrb, d);
+    if (isinf(d)) {
+      mrb_raise(mrb, E_FLOATDOMAIN_ERROR, d < 0 ? "-Infinity" : "Infinity");
+    }
+    if (isnan(d)) {
+      mrb_raise(mrb, E_FLOATDOMAIN_ERROR, "NaN");
+    }
     if (FIXABLE_FLOAT(d)) {
       z = (mrb_int)d;
     }
@@ -1538,12 +1487,10 @@ flo_plus(mrb_state *mrb, mrb_value x)
 void
 mrb_init_numeric(mrb_state *mrb)
 {
-  struct RClass *numeric, *integer, *fixnum, *integral;
+  struct RClass *numeric, *integer, *fixnum;
 #ifndef MRB_WITHOUT_FLOAT
   struct RClass *fl;
 #endif
-
-  integral = mrb_define_module(mrb, "Integral");
 
   /* Numeric Class */
   numeric = mrb_define_class(mrb, "Numeric",  mrb->object_class);                /* 15.2.7 */
@@ -1558,14 +1505,12 @@ mrb_init_numeric(mrb_state *mrb)
   mrb_define_method(mrb, numeric, ">=",       num_ge,          MRB_ARGS_REQ(1));
   mrb_define_method(mrb, numeric, "finite?",  num_finite_p,    MRB_ARGS_NONE());
   mrb_define_method(mrb, numeric, "infinite?",num_infinite_p,  MRB_ARGS_NONE());
-  mrb_define_method(mrb, numeric, "__coerce_step_counter", num_coerce_step_counter,  MRB_ARGS_REQ(2));
 
   /* Integer Class */
   integer = mrb_define_class(mrb, "Integer",  numeric);                          /* 15.2.8 */
   MRB_SET_INSTANCE_TT(integer, MRB_TT_FIXNUM);
   mrb_undef_class_method(mrb, integer, "new");
   mrb_define_method(mrb, integer, "to_i",     int_to_i,        MRB_ARGS_NONE()); /* 15.2.8.3.24 */
-  mrb_define_method(mrb, integer, "to_int",   int_to_i,        MRB_ARGS_NONE());
 #ifndef MRB_WITHOUT_FLOAT
   mrb_define_method(mrb, integer, "ceil",     int_to_i,        MRB_ARGS_REQ(1)); /* 15.2.8.3.8 (x) */
   mrb_define_method(mrb, integer, "floor",    int_to_i,        MRB_ARGS_REQ(1)); /* 15.2.8.3.10 (x) */
@@ -1617,7 +1562,6 @@ mrb_init_numeric(mrb_state *mrb)
   mrb_define_method(mrb, fl,      "round",     flo_round,      MRB_ARGS_OPT(1)); /* 15.2.9.3.12 */
   mrb_define_method(mrb, fl,      "to_f",      flo_to_f,       MRB_ARGS_NONE()); /* 15.2.9.3.13 */
   mrb_define_method(mrb, fl,      "to_i",      flo_truncate,   MRB_ARGS_NONE()); /* 15.2.9.3.14 */
-  mrb_define_method(mrb, fl,      "to_int",    flo_truncate,   MRB_ARGS_NONE());
   mrb_define_method(mrb, fl,      "truncate",  flo_truncate,   MRB_ARGS_NONE()); /* 15.2.9.3.15 */
   mrb_define_method(mrb, fl,      "divmod",    flo_divmod,     MRB_ARGS_REQ(1));
   mrb_define_method(mrb, fl,      "eql?",      flo_eql,        MRB_ARGS_REQ(1)); /* 15.2.8.3.16 */
@@ -1632,7 +1576,6 @@ mrb_init_numeric(mrb_state *mrb)
 #ifdef NAN
   mrb_define_const(mrb, fl, "NAN", mrb_float_value(mrb, NAN));
 #endif
-
-  mrb_include_module(mrb, fl, integral);
 #endif
+  mrb_define_module(mrb, "Integral");
 }

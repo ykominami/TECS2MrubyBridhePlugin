@@ -8,15 +8,15 @@ MRuby::Build.new do |conf|
 
     # ... (snip) ...
 
-    conf.gem :core => 'mruby-sleep'
+    conf.gem :git => 'https://github.com/matsumoto-r/mruby-sleep.git'
 end
 ```
 
 ## example
 
 ```ruby
-sleep(10)
-usleep(10000)
+Sleep::sleep(10)
+Sleep::usleep(10000)
 ```
 
 # License

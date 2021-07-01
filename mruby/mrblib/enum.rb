@@ -13,8 +13,6 @@
 # @ISO 15.3.2
 module Enumerable
 
-  NONE = Object.new
-
   ##
   # Call the given block for each element
   # which is yield by +each+. Return false

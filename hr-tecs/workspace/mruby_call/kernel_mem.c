@@ -98,7 +98,7 @@ void *const _kernel_memtop_table[83] = {
 	&__start_rodata_kernel__std /* c000c000 */,
 	&__start_rodata_kernel__ffffffff_0 /* c0038000 */,
 	&__start_rodata_shared__std /* c004a000 */,
-	&__limit_rodata_shared__std /* c011b000 */,
+	&__limit_rodata_shared__std /* c011a000 */,
 	&__start_bss_kernel__ffffffff_ffffffff_ffffffff /* c0508000 */,
 	&__start_data_kernel__std /* c060a000 */,
 	&__start_bss_kernel__std /* c060a0f0 */,
@@ -110,8 +110,8 @@ void *const _kernel_memtop_table[83] = {
 	&__start_bss_kernel__0_ffffffff_0 /* c079c934 */,
 	&__start_prsv_kernel__0_ffffffff_0 /* c07bebec */,
 	&__start_data_shared__std /* c07bf000 */,
-	&__start_bss_shared__std /* c07bf808 */,
-	&__start_prsv_shared__std /* c083aa24 */,
+	&__start_bss_shared__std /* c07bf810 */,
+	&__start_prsv_shared__std /* c083aa50 */,
 	&__limit_prsv_shared__std /* c083b000 */,
 	(void *)(0xFFFEE000) /* fffee000 */,
 	(void *)(0xFFFF0000) /* ffff0000 */,
@@ -5921,7 +5921,7 @@ const uint32_t _kernel_page_table[TNUM_DOMID * ARM_PAGE_TABLE_NUM][ARM_PAGE_TABL
 		ARMV5_MMU_DSCR2_SMALL|ARMV5_MMU_DSCR2_AP10|ARMV5_MMU_DSCR2_CB11|0xc0117000U, /* 0xc0117000 */
 		ARMV5_MMU_DSCR2_SMALL|ARMV5_MMU_DSCR2_AP10|ARMV5_MMU_DSCR2_CB11|0xc0118000U, /* 0xc0118000 */
 		ARMV5_MMU_DSCR2_SMALL|ARMV5_MMU_DSCR2_AP10|ARMV5_MMU_DSCR2_CB11|0xc0119000U, /* 0xc0119000 */
-		ARMV5_MMU_DSCR2_SMALL|ARMV5_MMU_DSCR2_AP10|ARMV5_MMU_DSCR2_CB11|0xc011a000U, /* 0xc011a000 */
+		ARMV5_MMU_DSCR2_FAULT, /* 0xc011a000 */
 		ARMV5_MMU_DSCR2_FAULT, /* 0xc011b000 */
 		ARMV5_MMU_DSCR2_FAULT, /* 0xc011c000 */
 		ARMV5_MMU_DSCR2_FAULT, /* 0xc011d000 */

@@ -263,10 +263,10 @@ assert('Exception 13') do
 end
 
 assert('Exception 14') do
-  def (o = Object.new).exception_test14; UnknownConstant end
+  def exception_test14; UnknownConstant; end
   a = :ng
   begin
-    o.__send__(:exception_test14)
+    send(:exception_test14)
   rescue
     a = :ok
   end

@@ -82,12 +82,6 @@ static help_msg help_msg_list[] = {
     "Arguments are breakpoint numbers with spaces in between.\n"
   },
   {
-    "i[nfo]", "l[ocals]", "Print name of local variables",
-    "Usage: info locals\n"
-    "\n"
-    "Print name of local variables.\n"
-  },
-  {
     "l[ist]", NULL, "List specified line",
     "Usage: list\n"
     "       list first[,last]\n"
@@ -501,7 +495,7 @@ dbgcmd_quit(mrb_state *mrb, mrdb_state *mrdb)
 
   if (mrdb->dbg->xm == DBG_QUIT) {
     struct RClass *exc;
-    exc = mrb_define_class(mrb, "DebuggerExit", mrb->eException_class);
+    exc = mrb_define_class(mrb, "DebuggerExit", mrb_class_get(mrb, "Exception"));
     mrb_raise(mrb, exc, "Exit mrdb.");
   }
   return DBGST_PROMPT;

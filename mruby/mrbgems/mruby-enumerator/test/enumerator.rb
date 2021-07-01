@@ -6,11 +6,11 @@ class << @obj
   end
 end
 
-assert 'Enumerator.class' do
+assert 'Enumerator' do
   assert_equal Class, Enumerator.class
 end
 
-assert 'Enumerator.superclass' do
+assert 'Enumerator' do
   assert_equal Object, Enumerator.superclass
 end
 
@@ -19,8 +19,10 @@ assert 'Enumerator.new' do
   assert_equal [:x,:y,:z], [:x,:y,:z].each.map{|i| i}.sort
   assert_equal [[:x,1],[:y,2]], {x:1, y:2}.each.map{|i| i}.sort
   assert_equal [1,2,3], @obj.to_enum(:foo, 1,2,3).to_a
+  assert_equal [1,2,3], Enumerator.new(@obj, :foo, 1,2,3).to_a
   assert_equal [1,2,3], Enumerator.new { |y| i = 0; loop { y << (i += 1) } }.take(3)
   assert_raise(ArgumentError) { Enumerator.new }
+  assert_raise(ArgumentError) { @obj.to_enum }
 
   # examples
   fib = Enumerator.new do |y|
@@ -90,13 +92,11 @@ end
 
 assert 'Enumerator#inspect' do
   e = (0..10).each
-  assert_equal('#<Enumerator: 0..10:each>', e.inspect)
-  e = 'FooObject'.enum_for(:foo, 1)
-  assert_equal('#<Enumerator: "FooObject":foo(1)>', e.inspect)
-  e = 'FooObject'.enum_for(:foo, 1, 2, 3)
-  assert_equal('#<Enumerator: "FooObject":foo(1, 2, 3)>', e.inspect)
-  e = nil.enum_for(:to_s)
-  assert_equal('#<Enumerator: nil:to_s>', e.inspect)
+  assert_equal("#<Enumerator: 0..10:each>", e.inspect)
+  e = Enumerator.new("FooObject", :foo, 1)
+  assert_equal("#<Enumerator: FooObject:foo(1)>", e.inspect)
+  e = Enumerator.new("FooObject", :foo, 1, 2, 3)
+  assert_equal("#<Enumerator: FooObject:foo(1, 2, 3)>", e.inspect)
 end
 
 assert 'Enumerator#each' do
@@ -418,10 +418,8 @@ assert 'nested iteration' do
 end
 
 assert 'Kernel#to_enum' do
-  e = nil
   assert_equal Enumerator, [].to_enum.class
-  assert_nothing_raised { e = [].to_enum(:_not_implemented_) }
-  assert_raise(NoMethodError) { e.first }
+  assert_raise(ArgumentError){ nil.to_enum }
 end
 
 assert 'modifying existing methods' do

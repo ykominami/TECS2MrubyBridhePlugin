@@ -1,29 +1,36 @@
+def run_with_catching_error &b
+  e = nil
+  begin
+    b.call
+  rescue => _e
+    e = _e
+  end
+
+  return e
+end
+
 assert("sleep works") do
-  assert_nothing_raised { sleep(1) }
-  assert_nothing_raised { sleep(0) }
+  e = run_with_catching_error { sleep 1 }
+
+  assert_nil e
 end
 
-assert("sleep would accept non-negative float value") do
-  skip unless Object.const_defined?(:Float)
-  assert_nothing_raised { sleep(0.01) }
-  assert_nothing_raised { sleep(0.0) }
-  assert_nothing_raised { sleep(-0.0) }
-end
+assert("sleep would not accept negative value") do
+  e = run_with_catching_error{ sleep(-1) }
 
-assert("sleep would not accept negative integer value") do
-  assert_raise(ArgumentError) { sleep(-1) }
-end
-
-assert("sleep would not accept negative float value") do
-  skip unless Object.const_defined?(:Float)
-  assert_raise(ArgumentError) { sleep(-0.1) }
+  assert_not_equal e, nil
+  assert_equal e.class, ArgumentError
 end
 
 assert("usleep works") do
-  assert_nothing_raised { usleep(100) }
-  assert_nothing_raised { usleep(0) }
+  e = run_with_catching_error { usleep 100 }
+
+  assert_nil e
 end
 
 assert("usleep would not accept negative value") do
-  assert_raise(ArgumentError) { usleep(-100) }
+  e = run_with_catching_error{ usleep(-100) }
+
+  assert_not_equal e, nil
+  assert_equal e.class, ArgumentError
 end

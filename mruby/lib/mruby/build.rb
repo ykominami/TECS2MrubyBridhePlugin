@@ -1,6 +1,8 @@
 require "mruby/build/load_gems"
 require "mruby/build/command"
 
+require 'shellwords'
+
 module MRuby
   class << self
     def targets
@@ -94,7 +96,6 @@ module MRuby
 
         MRuby.targets[@name] = self
       end
-
       MRuby::Build.current = MRuby.targets[@name]
       MRuby.targets[@name].instance_eval(&block)
 
@@ -162,6 +163,8 @@ module MRuby
     end
 
     def compile_as_cxx src, cxx_src, obj = nil, includes = []
+      src = File.absolute_path src
+      cxx_src = File.absolute_path cxx_src
       obj = objfile(cxx_src) if obj.nil?
 
       file cxx_src => [src, __FILE__] do |t|
@@ -173,7 +176,7 @@ module MRuby
 #ifndef MRB_ENABLE_CXX_ABI
 extern "C" {
 #endif
-#include "#{File.absolute_path src}"
+#include "#{src}"
 #ifndef MRB_ENABLE_CXX_ABI
 }
 #endif
@@ -259,22 +262,26 @@ EOS
       end
     end
 
-    def cygwin_filename(name)
+    def to_path(mode, name)
       if name.is_a?(Array)
-        name.flatten.map { |n| cygwin_filename(n) }
+        name.flatten.map { |n| to_path(mode, n) }
       else
-        '"%s"' % `cygpath -w "#{filename(name)}"`.strip
+        case mode
+        when :CYGWIN_TO_WIN_WITH_ESCAPE
+          Shellwords.escape(`cygpath -w "#{filename(name)}"`.strip)
+        when :CYGWIN_TO_WIN
+          `cygpath -w "#{filename(name)}"`.strip
+        else
+          filename(name)
+        end
       end
     end
 
     def exefile(name)
       if name.is_a?(Array)
         name.flatten.map { |n| exefile(n) }
-      elsif File.extname(name).empty?
-        "#{name}#{exts.executable}"
       else
-        # `name` sometimes have (non-standard) extension (e.g. `.bat`).
-        name
+        "#{name}#{exts.executable}"
       end
     end
 
@@ -314,7 +321,6 @@ EOS
     end
 
     def run_bintest
-      puts ">>> Bintest #{name} <<<"
       targets = @gems.select { |v| File.directory? "#{v.dir}/bintest" }.map { |v| filename v.dir }
       targets << filename(".") if File.directory? "./bintest"
       sh "ruby test/bintest.rb#{verbose_flag} #{targets.join ' '}"

@@ -283,20 +283,6 @@ local_add(parser_state *p, mrb_sym sym)
   }
 }
 
-static void
-local_add_blk(parser_state *p, mrb_sym blk)
-{
-  /* allocate register for block */
-  local_add_f(p, blk ? blk : mrb_intern_lit(p->mrb, "&"));
-}
-
-static void
-local_add_kw(parser_state *p, mrb_sym kwd)
-{
-  /* allocate register for keywords hash */
-  local_add_f(p, kwd ? kwd : mrb_intern_lit(p->mrb, "**"));
-}
-
 static node*
 locals_node(parser_state *p)
 {
@@ -740,11 +726,13 @@ new_args_tail(parser_state *p, node *kws, node *kwrest, mrb_sym blk)
 {
   node *k;
 
+  /* allocate register for keywords hash */
   if (kws || kwrest) {
-    local_add_kw(p, (kwrest && kwrest->cdr)? sym(kwrest->cdr) : 0);
+    local_add_f(p, (kwrest && kwrest->cdr)? sym(kwrest->cdr) :  mrb_intern_lit(p->mrb, "**"));
   }
 
-  local_add_blk(p, blk);
+  /* allocate register for block */
+  local_add_f(p, blk? blk : mrb_intern_lit(p->mrb, "&"));
 
   // allocate register for keywords arguments
   // order is for Proc#parameters
@@ -807,13 +795,6 @@ new_masgn(parser_state *p, node *a, node *b)
   return cons((node*)NODE_MASGN, cons(a, b));
 }
 
-/* (:masgn mlhs mrhs) no check */
-static node*
-new_masgn_param(parser_state *p, node *a, node *b)
-{
-  return cons((node*)NODE_MASGN, cons(a, b));
-}
-
 /* (:asgn lhs rhs) */
 static node*
 new_op_asgn(parser_state *p, node *a, mrb_sym op, node *b)
@@ -850,87 +831,6 @@ static node*
 new_dstr(parser_state *p, node *a)
 {
   return cons((node*)NODE_DSTR, a);
-}
-
-static int
-string_node_p(node *n)
-{
-  return (int)((enum node_type)(intptr_t)n->car == NODE_STR);
-}
-
-static node*
-composite_string_node(parser_state *p, node *a, node *b)
-{
-  size_t newlen = (size_t)a->cdr + (size_t)b->cdr;
-  char *str = (char*)mrb_pool_realloc(p->pool, a->car, (size_t)a->cdr + 1, newlen + 1);
-  memcpy(str + (size_t)a->cdr, b->car, (size_t)b->cdr);
-  str[newlen] = '\0';
-  a->car = (node*)str;
-  a->cdr = (node*)newlen;
-  cons_free(b);
-  return a;
-}
-
-static node*
-concat_string(parser_state *p, node *a, node *b)
-{
-  if (string_node_p(a)) {
-    if (string_node_p(b)) {
-      /* a == NODE_STR && b == NODE_STR */
-      composite_string_node(p, a->cdr, b->cdr);
-      cons_free(b);
-      return a;
-    }
-    else {
-      /* a == NODE_STR && b == NODE_DSTR */
-
-      if (string_node_p(b->cdr->car)) {
-        /* a == NODE_STR && b->[NODE_STR, ...] */
-        composite_string_node(p, a->cdr, b->cdr->car->cdr);
-        cons_free(b->cdr->car);
-        b->cdr->car = a;
-        return b;
-      }
-    }
-  }
-  else if (string_node_p(b)) {
-    /* a == NODE_DSTR && b == NODE_STR */
-
-    node *c;
-    for (c = a; c->cdr != NULL; c = c->cdr) ;
-    if (string_node_p(c->car)) {
-      /* a->[..., NODE_STR] && b == NODE_STR */
-      composite_string_node(p, c->car->cdr, b->cdr);
-      cons_free(b);
-      return a;
-    }
-
-    push(a, b);
-    return a;
-  }
-  else {
-    /* a == NODE_DSTR && b == NODE_DSTR */
-
-    node *c, *d;
-    for (c = a; c->cdr != NULL; c = c->cdr) ;
-    if (string_node_p(c->car) && string_node_p(b->cdr->car)) {
-      /* a->[..., NODE_STR] && b->[NODE_STR, ...] */
-      d = b->cdr;
-      cons_free(b);
-      composite_string_node(p, c->car->cdr, d->car->cdr);
-      cons_free(d->car);
-      c->cdr = d->cdr;
-      cons_free(d);
-      return a;
-    }
-    else {
-      c->cdr = b->cdr;
-      cons_free(b);
-      return a;
-    }
-  }
-
-  return new_dstr(p, list2(a, b));
 }
 
 /* (:str . (s . len)) */
@@ -1281,7 +1181,7 @@ heredoc_end(parser_state *p)
 %token <nd>  tNTH_REF tBACK_REF
 %token <num> tREGEXP_END
 
-%type <nd> singleton string string_fragment string_rep string_interp xstring regexp
+%type <nd> singleton string string_rep string_interp xstring regexp
 %type <nd> literal numeric cpath symbol
 %type <nd> top_compstmt top_stmts top_stmt
 %type <nd> bodystmt compstmt stmts stmt expr arg primary command command_call method_call
@@ -2660,9 +2560,9 @@ block_param     : f_arg ',' f_block_optarg ',' f_rest_arg opt_block_args_tail
                     {
                       $$ = new_args(p, $1, 0, $3, 0, $4);
                     }
-                | f_arg ',' opt_block_args_tail
+                | f_arg ','
                     {
-                      $$ = new_args(p, $1, 0, 0, 0, $3);
+                      $$ = new_args(p, $1, 0, 0, 0, 0);
                     }
                 | f_arg ',' f_rest_arg ',' f_arg opt_block_args_tail
                     {
@@ -2703,24 +2603,19 @@ block_param     : f_arg ',' f_block_optarg ',' f_rest_arg opt_block_args_tail
                 ;
 
 opt_block_param : none
-                    {
-                      local_add_blk(p, 0);
-                      $$ = 0;
-                    }
                 | block_param_def
-                   {
+                    {
                       p->cmd_start = TRUE;
                       $$ = $1;
                     }
                 ;
 
-block_param_def : '|' {local_add_blk(p, 0);} opt_bv_decl '|'
+block_param_def : '|' opt_bv_decl '|'
                     {
                       $$ = 0;
                     }
                 | tOROP
                     {
-                      local_add_blk(p, 0);
                       $$ = 0;
                     }
                 | '|' block_param opt_bv_decl '|'
@@ -2933,14 +2828,7 @@ literal         : numeric
                 | symbols
                 ;
 
-string          : string_fragment
-                | string string_fragment
-                    {
-                      $$ = concat_string(p, $1, $2);
-                    }
-                ;
-
-string_fragment : tCHAR
+string          : tCHAR
                 | tSTRING
                 | tSTRING_BEG tSTRING
                     {
@@ -3162,7 +3050,7 @@ var_ref         : variable
                     }
                 | keyword__FILE__
                     {
-                      const char *fn = mrb_sym2name_len(p->mrb, p->filename_sym, NULL);
+                      const char *fn = p->filename;
                       if (!fn) {
                         fn = "(null)";
                       }
@@ -3414,7 +3302,7 @@ f_arg_item      : f_norm_arg
                     }
                   f_margs rparen
                     {
-                      $$ = new_masgn_param(p, $3, p->locals->car);
+                      $$ = new_masgn(p, $3, p->locals->car);
                       local_resume(p, $<nd>2);
                       local_add_f(p, 0);
                     }
@@ -3566,7 +3454,7 @@ assoc           : arg tASSOC arg
                       void_expr_error(p, $3);
                       $$ = cons(new_sym(p, $1), $3);
                     }
-                | string_fragment tLABEL_TAG arg
+                | string tLABEL_TAG arg
                     {
                       void_expr_error(p, $3);
                       if ($1->car == (node*)NODE_DSTR) {
@@ -3671,9 +3559,8 @@ yyerror(parser_state *p, const char *s)
 
   if (! p->capture_errors) {
 #ifndef MRB_DISABLE_STDIO
-    if (p->filename_sym) {
-      const char *filename = mrb_sym2name_len(p->mrb, p->filename_sym, NULL);
-      fprintf(stderr, "%s:%d:%d: %s\n", filename, p->lineno, p->column, s);
+    if (p->filename) {
+      fprintf(stderr, "%s:%d:%d: %s\n", p->filename, p->lineno, p->column, s);
     }
     else {
       fprintf(stderr, "line %d:%d: %s\n", p->lineno, p->column, s);
@@ -3708,12 +3595,11 @@ yywarn(parser_state *p, const char *s)
 
   if (! p->capture_errors) {
 #ifndef MRB_DISABLE_STDIO
-    if (p->filename_sym) {
-      const char *filename = mrb_sym2name_len(p->mrb, p->filename_sym, NULL);
-      fprintf(stderr, "%s:%d:%d: warning: %s\n", filename, p->lineno, p->column, s);
+    if (p->filename) {
+      fprintf(stderr, "%s:%d:%d: %s\n", p->filename, p->lineno, p->column, s);
     }
     else {
-      fprintf(stderr, "line %d:%d: warning: %s\n", p->lineno, p->column, s);
+      fprintf(stderr, "line %d:%d: %s\n", p->lineno, p->column, s);
     }
 #endif
   }
@@ -3778,10 +3664,8 @@ void_expr_error(parser_state *p, node *n)
     break;
   case NODE_AND:
   case NODE_OR:
-    if (n->cdr) {
-      void_expr_error(p, n->cdr->car);
-      void_expr_error(p, n->cdr->cdr);
-    }
+    void_expr_error(p, n->cdr->car);
+    void_expr_error(p, n->cdr->cdr);
     break;
   case NODE_BEGIN:
     if (n->cdr) {
@@ -4658,7 +4542,7 @@ parser_yylex(parser_state *p)
       }
       pushback(p, c);
       if (IS_SPCARG(c)) {
-        yywarning(p, "'**' interpreted as argument prefix");
+        yywarning(p, "`**' interpreted as argument prefix");
         c = tDSTAR;
       }
       else if (IS_BEG()) {
@@ -4890,10 +4774,10 @@ parser_yylex(parser_state *p)
     }
     newtok(p);
     /* need support UTF-8 if configured */
-    if ((ISALNUM(c) || c == '_')) {
+    if ((isalnum(c) || c == '_')) {
       int c2 = nextc(p);
       pushback(p, c2);
-      if ((ISALNUM(c2) || c2 == '_')) {
+      if ((isalnum(c2) || c2 == '_')) {
         goto ternary;
       }
     }
@@ -5257,7 +5141,7 @@ parser_yylex(parser_state *p)
     tokfix(p);
     if (is_float) {
 #ifdef MRB_WITHOUT_FLOAT
-      yywarning(p, "floating point numbers are not supported");
+      yywarning_s(p, "floating point numbers are not supported", tok(p));
       pylval.nd = new_int(p, "0", 10);
       return tINTEGER;
 #else
@@ -5461,7 +5345,7 @@ parser_yylex(parser_state *p)
       }
       else {
         term = nextc(p);
-        if (ISALNUM(term)) {
+        if (isalnum(term)) {
           yyerror(p, "unknown type of %string");
           return 0;
         }
@@ -5605,7 +5489,7 @@ parser_yylex(parser_state *p)
       do {
         tokadd(p, c);
         c = nextc(p);
-      } while (c >= 0 && ISDIGIT(c));
+      } while (c >= 0 && isdigit(c));
       pushback(p, c);
       if (last_state == EXPR_FNAME) goto gvar;
       tokfix(p);
@@ -5647,7 +5531,7 @@ parser_yylex(parser_state *p)
         }
         return 0;
       }
-      else if (ISDIGIT(c)) {
+      else if (isdigit(c)) {
         if (p->tidx == 1) {
           yyerror_i(p, "'@%c' is not allowed as an instance variable name", c);
         }
@@ -5804,7 +5688,7 @@ parser_yylex(parser_state *p)
       mrb_sym ident = intern_cstr(tok(p));
 
       pylval.id = ident;
-      if (last_state != EXPR_DOT && ISLOWER(tok(p)[0]) && local_var_p(p, ident)) {
+      if (last_state != EXPR_DOT && islower(tok(p)[0]) && local_var_p(p, ident)) {
         p->lstate = EXPR_END;
       }
     }
@@ -6014,7 +5898,7 @@ mrb_parser_set_filename(struct mrb_parser_state *p, const char *f)
   mrb_sym* new_table;
 
   sym = mrb_intern_cstr(p->mrb, f);
-  p->filename_sym = sym;
+  p->filename = mrb_sym2name_len(p->mrb, sym, NULL);
   p->lineno = (p->filename_table_length > 0)? 0 : 1;
 
   for (i = 0; i < p->filename_table_length; ++i) {
@@ -6038,11 +5922,11 @@ mrb_parser_set_filename(struct mrb_parser_state *p, const char *f)
   p->filename_table[p->filename_table_length - 1] = sym;
 }
 
-MRB_API mrb_sym
+MRB_API char const*
 mrb_parser_get_filename(struct mrb_parser_state* p, uint16_t idx) {
-  if (idx >= p->filename_table_length) return 0;
+  if (idx >= p->filename_table_length) return NULL;
   else {
-    return p->filename_table[idx];
+    return mrb_sym2name_len(p->mrb, p->filename_table[idx], NULL);
   }
 }
 

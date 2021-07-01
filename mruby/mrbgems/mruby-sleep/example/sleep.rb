@@ -1,3 +1,3 @@
-sleep(10)
-usleep(10000)
+Sleep::sleep(10)
+Sleep::usleep(10000)
 

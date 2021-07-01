@@ -60,39 +60,19 @@ enum {
 #define PACK_BASE64_IGNORE	0xff
 #define PACK_BASE64_PADDING	0xfe
 
+static int littleendian = 0;
+
 const static unsigned char base64chars[] =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 static unsigned char base64_dec_tab[128];
 
-#if !defined(BYTE_ORDER) && defined(__BYTE_ORDER__)
-# define BYTE_ORDER __BYTE_ORDER__
-#endif
-#if !defined(BIG_ENDIAN) && defined(__ORDER_BIG_ENDIAN__)
-# define BIG_ENDIAN __ORDER_BIG_ENDIAN__
-#endif
-#if !defined(LITTLE_ENDIAN) && defined(__ORDER_LITTLE_ENDIAN__)
-# define LITTLE_ENDIAN __ORDER_LITTLE_ENDIAN__
-#endif
 
-#ifdef BYTE_ORDER
-# if BYTE_ORDER == BIG_ENDIAN
-#  define littleendian 0
-#  define check_little_endian() (void)0
-# elif BYTE_ORDER == LITTLE_ENDIAN
-#  define littleendian 1
-#  define check_little_endian() (void)0
-# endif
-#endif
-#ifndef littleendian
-/* can't distinguish endian in compile time */
-static int littleendian = 0;
-static void
+static int
 check_little_endian(void)
 {
   unsigned int n = 1;
-  littleendian = (*(unsigned char *)&n == 1);
+  return (*(unsigned char *)&n == 1);
 }
-#endif
 
 static unsigned int
 hex2int(unsigned char ch)
@@ -333,23 +313,21 @@ pack_double(mrb_state *mrb, mrb_value o, mrb_value str, mrb_int sidx, unsigned i
   d = mrb_float(o);
 
   if (flags & PACK_FLAG_LITTLEENDIAN) {
-    if (littleendian) {
-      memcpy(RSTRING_PTR(str) + sidx, buffer, 8);
+#ifdef MRB_ENDIAN_BIG
+    for (i = 0; i < 8; ++i) {
+      RSTRING_PTR(str)[sidx + i] = buffer[8 - i - 1];
     }
-    else {
-      for (i = 0; i < 8; ++i) {
-        RSTRING_PTR(str)[sidx + i] = buffer[8 - i - 1];
-      }
-    }
+#else
+    memcpy(RSTRING_PTR(str) + sidx, buffer, 8);
+#endif
   } else {
-    if (littleendian) {
-      for (i = 0; i < 8; ++i) {
-        RSTRING_PTR(str)[sidx + i] = buffer[8 - i - 1];
-      }
+#ifdef MRB_ENDIAN_BIG
+    memcpy(RSTRING_PTR(str) + sidx, buffer, 8);
+#else
+    for (i = 0; i < 8; ++i) {
+      RSTRING_PTR(str)[sidx + i] = buffer[8 - i - 1];
     }
-    else {
-      memcpy(RSTRING_PTR(str) + sidx, buffer, 8);
-    }
+#endif
   }
 
   return 8;
@@ -363,23 +341,21 @@ unpack_double(mrb_state *mrb, const unsigned char * src, int srclen, mrb_value a
   uint8_t *buffer = (uint8_t *)&d;
 
   if (flags & PACK_FLAG_LITTLEENDIAN) {
-    if (littleendian) {
-      memcpy(buffer, src, 8);
+#ifdef MRB_ENDIAN_BIG
+    for (i = 0; i < 8; ++i) {
+      buffer[8 - i - 1] = src[i];
     }
-    else {
-      for (i = 0; i < 8; ++i) {
-        buffer[8 - i - 1] = src[i];
-      }
-    }
+#else
+    memcpy(buffer, src, 8);
+#endif
   } else {
-    if (littleendian) {
-      for (i = 0; i < 8; ++i) {
-        buffer[8 - i - 1] = src[i];
-      }
+#ifdef MRB_ENDIAN_BIG
+    memcpy(buffer, src, 8);
+#else
+    for (i = 0; i < 8; ++i) {
+      buffer[8 - i - 1] = src[i];
     }
-    else {
-      memcpy(buffer, src, 8);
-    }
+#endif
   }
   mrb_ary_push(mrb, ary, mrb_float_value(mrb, d));
 
@@ -396,23 +372,21 @@ pack_float(mrb_state *mrb, mrb_value o, mrb_value str, mrb_int sidx, unsigned in
   f = (float)mrb_float(o);
 
   if (flags & PACK_FLAG_LITTLEENDIAN) {
-    if (littleendian) {
-      memcpy(RSTRING_PTR(str) + sidx, buffer, 4);
+#ifdef MRB_ENDIAN_BIG
+    for (i = 0; i < 4; ++i) {
+      RSTRING_PTR(str)[sidx + i] = buffer[4 - i - 1];
     }
-    else {
-      for (i = 0; i < 4; ++i) {
-        RSTRING_PTR(str)[sidx + i] = buffer[4 - i - 1];
-      }
-    }
+#else
+    memcpy(RSTRING_PTR(str) + sidx, buffer, 4);
+#endif
   } else {
-    if (littleendian) {
-      for (i = 0; i < 4; ++i) {
-        RSTRING_PTR(str)[sidx + i] = buffer[4 - i - 1];
-      }
+#ifdef MRB_ENDIAN_BIG
+    memcpy(RSTRING_PTR(str) + sidx, buffer, 4);
+#else
+    for (i = 0; i < 4; ++i) {
+      RSTRING_PTR(str)[sidx + i] = buffer[4 - i - 1];
     }
-    else {
-      memcpy(RSTRING_PTR(str) + sidx, buffer, 4);
-    }
+#endif
   }
 
   return 4;
@@ -426,23 +400,21 @@ unpack_float(mrb_state *mrb, const unsigned char * src, int srclen, mrb_value ar
   uint8_t *buffer = (uint8_t *)&f;
 
   if (flags & PACK_FLAG_LITTLEENDIAN) {
-    if (littleendian) {
-      memcpy(buffer, src, 4);
+#ifdef MRB_ENDIAN_BIG
+    for (i = 0; i < 4; ++i) {
+      buffer[4 - i - 1] = src[i];
     }
-    else {
-      for (i = 0; i < 4; ++i) {
-        buffer[4 - i - 1] = src[i];
-      }
-    }
+#else
+    memcpy(buffer, src, 4);
+#endif
   } else {
-    if (littleendian) {
-      for (i = 0; i < 4; ++i) {
-        buffer[4 - i - 1] = src[i];
-      }
+#ifdef MRB_ENDIAN_BIG
+    memcpy(buffer, src, 4);
+#else
+    for (i = 0; i < 4; ++i) {
+      buffer[4 - i - 1] = src[i];
     }
-    else {
-      memcpy(buffer, src, 4);
-    }
+#endif
   }
   mrb_ary_push(mrb, ary, mrb_float_value(mrb, f));
 
@@ -457,6 +429,11 @@ pack_utf8(mrb_state *mrb, mrb_value o, mrb_value str, mrb_int sidx, long count, 
   int len = 0;
   uint32_t c = 0;
 
+#ifndef MRB_WITHOUT_FLOAT
+  if (mrb_float_p(o)) {
+    goto range_error;
+  }
+#endif
   c = (uint32_t)mrb_fixnum(o);
 
   /* Unicode character */
@@ -484,6 +461,9 @@ pack_utf8(mrb_state *mrb, mrb_value o, mrb_value str, mrb_int sidx, long count, 
     len = 4;
   }
   else {
+#ifndef MRB_WITHOUT_FLOAT
+range_error:
+#endif
     mrb_raise(mrb, E_RANGE_ERROR, "pack(U): value out of range");
   }
 
@@ -627,7 +607,7 @@ unpack_a(mrb_state *mrb, const void *src, int slen, mrb_value ary, long count, u
     }
   }
   else if (!(flags & PACK_FLAG_a)) {  /* "A" */
-    while (copylen > 0 && (sptr[copylen - 1] == '\0' || ISSPACE(sptr[copylen - 1]))) {
+    while (copylen > 0 && (sptr[copylen - 1] == '\0' || isspace(sptr[copylen - 1]))) {
       copylen--;
     }
   }
@@ -1072,9 +1052,9 @@ alias:
   /* read suffix [0-9*_!<>] */
   while (tmpl->idx < tlen) {
     ch = tptr[tmpl->idx++];
-    if (ISDIGIT(ch)) {
+    if (isdigit(ch)) {
       count = ch - '0';
-      while (tmpl->idx < tlen && ISDIGIT(tptr[tmpl->idx])) {
+      while (tmpl->idx < tlen && isdigit(tptr[tmpl->idx])) {
         count = count * 10 + (tptr[tmpl->idx++] - '0');
         if (count < 0) {
           mrb_raise(mrb, E_RUNTIME_ERROR, "too big template length");
@@ -1317,7 +1297,7 @@ mrb_pack_unpack1(mrb_state *mrb, mrb_value str)
 void
 mrb_mruby_pack_gem_init(mrb_state *mrb)
 {
-  check_little_endian();
+  littleendian = check_little_endian();
   make_base64_dec_tab();
 
   mrb_define_method(mrb, mrb->array_class, "pack", mrb_pack_pack, MRB_ARGS_REQ(1));
