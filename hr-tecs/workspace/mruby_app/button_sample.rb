@@ -1,4 +1,5 @@
 include EV3RT_TECS
+print 9759
 begin
     LCD.font=:medium
     LCD.draw("button sample", 0, 0)

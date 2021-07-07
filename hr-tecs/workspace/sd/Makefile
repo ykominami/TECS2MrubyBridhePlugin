@@ -70,7 +70,7 @@ MRUBY_DIR = ../mruby_app
 
 #  mrubyのアプリケーションファイル名
 # APP_NAME = battery_sample.rb
- APP_NAME = button_sample.rb
+# APP_NAME = button_sample.rb
 # APP_NAME = color_sample.rb
 # APP_NAME = color_sample2.rb
 # APP_NAME = color_sample3.rb
@@ -79,7 +79,7 @@ MRUBY_DIR = ../mruby_app
 # APP_NAME = lcd_sample.rb
 # APP_NAME = lcd_sample2.rb
 # APP_NAME = lcd_sample3.rb
-# APP_NAME = led_sample.rb
+ APP_NAME = led_sample.rb
 # APP_NAME = motor_sample.rb
 # APP_NAME = motor_sample2.rb
 # APP_NAME = rtos_sample.rb

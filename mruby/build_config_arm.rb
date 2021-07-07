@@ -102,6 +102,7 @@ MRuby::CrossBuild.new('ARM') do |conf|
   conf.gem :core => "mruby-compiler"
   conf.gem :core => "mruby-array-ext"
   conf.gem :core => "mruby-lcd"
+  # =>  conf.gem :core => "mruby-lcd"
   conf.build_mrbtest_lib_only
 =begin
   # Use standard Kernel#sprintf method

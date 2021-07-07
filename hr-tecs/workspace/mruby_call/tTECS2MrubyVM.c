@@ -1,5 +1,7 @@
 #include"tecs_mruby.h"
 #include"tTECS2MrubyVM_tecsgen.h"
+#include"ev3api.h"
+
 
 void mrb_init_mrb(CELLCB *p_cellcb, mrb_state *mrb, mrbc_context *c);
 

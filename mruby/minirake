@@ -176,7 +176,7 @@ module MiniRake
         if File.exist?(task_name)
           return FileTask.define_task(task_name)
         end
-        fail "Don't know how to rake #{task_name}"
+        fail "Don't know know how to rake #{task_name}"
       end
 
       # Define a task given +args+ and an option block.  If a rule with

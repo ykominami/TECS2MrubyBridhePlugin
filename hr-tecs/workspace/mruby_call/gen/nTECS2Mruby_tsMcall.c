@@ -18,6 +18,7 @@
 #include "nTECS2Mruby_tsMcall_tecsgen.h"
 #include <mruby.h>
 #include <mruby/dump.h>
+#include"ev3api.h"
 
 #ifndef E_OK
 #define	E_OK	0		/* success */

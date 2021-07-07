@@ -30,11 +30,15 @@ mrb_mruby_lcd_print(mrb_state *mrb, mrb_value self)
 void
 mrb_mruby_lcd_gem_init(mrb_state* mrb)
 {
-	struct RClass * ev3rt_class = mrb_class_get(mrb, "EV3RT");
-	struct RClass * lcd_class = mrb_define_class_under(mrb, ev3rt_class, "LCD", mrb->object_class);
+	struct RClass *ev3rt_class = mrb_define_class(mrb, "LCD", mrb->object_class);
+
+	//struct RClass *ev3rt_class = mrb_class_get(mrb, "LCD");
+	mrb_define_method(mrb, ev3rt_class, "print", mrb_mruby_lcd_print, MRB_ARGS_REQ(1));
+	/*struct RClass * lcd_class = mrb_define_class_under(mrb, ev3rt_class, "LCD", mrb->object_class);
 
 	mrb_define_method(mrb, lcd_class, "initialize", mrb_mruby_lcd_initialize, MRB_ARGS_NONE());
 	mrb_define_class_method(mrb, lcd_class, "print", mrb_mruby_lcd_print, MRB_ARGS_REQ(1));
+	*/
 }
 
 void

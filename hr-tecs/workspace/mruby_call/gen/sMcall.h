@@ -3,6 +3,6 @@
  * decalarations of functions in signature '::sMcall'
  */
 
-#include "global_tecsgen.hµþÅÔ»Ô"
+#include "global_tecsgen.häº¬éƒ½å¸‚"
 
 void  mcall_lcd( );

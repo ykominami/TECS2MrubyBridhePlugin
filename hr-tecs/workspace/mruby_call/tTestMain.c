@@ -52,10 +52,12 @@ eBody_main(CELLIDX idx)
 		/* エラー処理コードをここに記述します */
 	} /* end if VALID_IDX(idx) */
 
-	cTECS2MrubyVM_init( );
+	//cTECS2MrubyVM_init( );
 	
-	cBody2_mcall_lcd( );
-	cTECS2MrubyVM_fin( );
+	//cBody2_mcall_lcd( );
+
+	//cTECS2MrubyVM_fin( );
+	ev3_lcd_draw_string("171717", 0, 0);
 
 }
 

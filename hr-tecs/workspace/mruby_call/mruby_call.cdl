@@ -2,9 +2,9 @@ const int32_t MRUBY_VM_STACK_SIZE = 81920;
 
 import( "kernel.cdl" );
 import("../../tecs_lib/common/TECS2MrubyVM.cdl");
-
+//import("EV3_common.cdl");
 signature sMcall {
- void mcall_lcd(void);
+void mcall_lcd(void);
  //int32_t func2([in]int32_t val, [in]int32_t val6);
 };
 
@@ -15,7 +15,7 @@ celltype tTestMain{
 
 };
 cell tTECS2MrubyVM TECS2MrubyVM{
-	mrubyFile = "test_stub.rb";
+	mrubyFile = "test_stub_sample.rb";
 };
 generate( TECS2MrubyBridgePlugin, sMcall, "" );
  cell nTECS2Mruby::tsMcall McallBridge {
