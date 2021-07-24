@@ -53,6 +53,7 @@ endef
 #
 all:
 
+#
 # SDのドライブ文字を指定
 SD_DIR = /cygdrive/D/
 
@@ -65,31 +66,8 @@ MRUBY_DIR = ../mruby_app
 # RUNNING_BODY = ev3way
  RUNNING_BODY = etrobo
 
-RUNNING_BODY_TIRE = normal
+ RUNNING_BODY_TIRE = normal
  #RUNNING_BODY_TIRE = big
-
-#  mrubyのアプリケーションファイル名
-# APP_NAME = battery_sample.rb
- #APP_NAME = button_sample.rb
-# APP_NAME = color_sample.rb
-# APP_NAME = color_sample2.rb
-# APP_NAME = color_sample3.rb
-# APP_NAME = ev3way_sample.rb
-# APP_NAME = gyro_sample.rb
-# APP_NAME = lcd_sample.rb
-# APP_NAME = lcd_sample2.rb
-# APP_NAME = lcd_sample3.rb
-# APP_NAME = led_sample.rb
-# APP_NAME = motor_sample.rb
-# APP_NAME = motor_sample2.rb
-# APP_NAME = rtos_sample.rb
-# APP_NAME = sharedmemory_sample.rb
-# APP_NAME = sharedmemory_sample2.rb
-# APP_NAME = speaker_sample.rb
-# APP_NAME = speaker_sample2.rb
-# APP_NAME = touch_sample.rb
-# APP_NAME = ultrasonic_sample.rb
-  APP_NAME = test_stub.rb
 
 PARAM_NAME = parameter.rb
 ifeq ($(RUNNING_BODY),ev3way)
@@ -98,7 +76,7 @@ else
     PARAM_SET_NAME = parameter_etrobo.rb
 endif
 
-APP_RB = ./$(APP_NAME)
+APP_RB = $(MRUBY_DIR)/$(APP_NAME)
 
 APP_PARAM_RB = $(MRUBY_DIR)/$(PARAM_NAME)
 APP_PARAM_SET_RB = $(MRUBY_DIR)/$(PARAM_SET_NAME)
@@ -187,6 +165,7 @@ TECSGEN = $(RUBY) $(TECSGEN_DIR)/tecsgen.rb -L $(RUBYLIB) -k euc --cpp="$(GCC_TA
 TECSLIB_DIR = $(SRCDIR)/tecs_lib
 MRUBY_LIB_DIR = $(SRCDIR)/mruby_lib
 
+
 PRE_TECSGEN_TARGET =
 POST_TECSGEN_TARGET =
 
@@ -222,8 +201,11 @@ TARGETDIR = $(SRCDIR)/target/$(TARGET)
 include $(TARGETDIR)/Makefile.ev3
 include $(TARGETDIR)/api/Makefile
 
+# #
 # zmodem/Makefile のインクルード
-# include $(PWD)/zmodem/Makefile
+#
+include $(PWD)/zmodem/Makefile
+
 
 # =begin added by ishikawa for tmp
 USE_SYSLOG = true
@@ -277,7 +259,6 @@ INCLUDES := -I. -I./gen -I$(SRCDIR)/tecs_kernel \
 			-I$(TECSGEN_DIR)/tecs/mruby \
 			-I$(TECSGEN_DIR)/tecs/TLSFMalloc \
             -I$(TECSGEN_DIR)/tecs/posix $(INCLUDES) \
-      -I$(SRCDIR)/target/ev3_gcc/drivers/fatfs/ff10b/src
 
 
 LDFLAGS := $(LDFLAGS) -L $(MRUBY_SRC_DIR)/build/ARM/lib/
@@ -560,6 +541,7 @@ $(OBJFILE): $(APPL_CFG) kernel_cfg.timestamp $(ALL_OBJS) $(LIBS_DEP)
 			$(APPL_OBJS) $(MRUBY_LIB) $(SYSSVC_OBJS) $(CFG_OBJS) $(ALL_LIBS) $(END_OBJS)
 	$(NM) -n $(OBJFILE) > $(OBJNAME).syms
 ifdef USE_CFG_PASS3
+	# TODO: remove to ignore wornings
 	# diff cfg3_out.syms $(OBJNAME).syms
 else
 	# diff cfg2_out.syms $(OBJNAME).syms
@@ -634,13 +616,14 @@ tecs.timestamp: $(APPL_CDL) $(TECS_IMPORTS) Makefile
 tecs: tecs.timestamp
 
 #
-#  TECSインタフェースジェネレータの実行(--all-generate-templ付)
+#  TECSインタフェースジェネレータの実行(テンプレート生成)
 #
 tecs-gen-templ.timestamp: $(APPL_CDL) $(TECS_IMPORTS)
 	$(call print_cmd, "TECSGEN", $<)
-	$(TECSGEN) --all-generate-templ -R -D TECSGEN -D TECS_CPP \
+	$(TECSGEN) -R -D TECSGEN -D TECS_CPP \
+					--generate-all-template \
 					-I$(TECSGEN_DIR)/tecslib/plugin $(INCLUDES) $(APPL_CDL)
-	touch tecs.timestamp
+	touch tecs-gen-templ.timestamp
 
 .PHONY: tecs-gen-templ
 tecs-gen-templ: tecs-gen-templ.timestamp
@@ -648,7 +631,6 @@ tecs-gen-templ: tecs-gen-templ.timestamp
 show-config:
 	@echo RUNNING_BODY=$(RUNNING_BODY)
 	@echo RUNNING_BODY_TIRE=$(RUNNING_BODY_TIRE)
-	@echo APP_RB=$(APP_RB)
 
 .PHONY: mrb
 mrb:

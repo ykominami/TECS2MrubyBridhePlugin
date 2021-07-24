@@ -53,9 +53,11 @@ endef
 #
 all:
 
+BUILD_LOADER := 1
+
 #
 # SDのドライブ文字を指定
-SD_DIR = /cygdrive/e/
+SD_DIR = /cygdrive/D/
 
 #
 #  ターゲット略称の定義
