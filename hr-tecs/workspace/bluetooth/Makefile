@@ -53,7 +53,7 @@ endef
 #
 all:
 
-BUILD_LOADER := 1
+BUILD_LOADER = 1
 
 #
 # SDのドライブ文字を指定
@@ -252,7 +252,7 @@ endif
 ifndef OMIT_OPTIMIZATION
   COPTS := $(COPTS) -O2
 endif
-CDEFS := $(CDEFS)
+CDEFS := $(CDEFS) 
 INCLUDES := -I. -I./gen -I$(SRCDIR)/tecs_kernel \
 			-I$(SRCDIR)/include -I$(SRCDIR)/arch -I$(SRCDIR) -I$(SRCDIR)/target/ev3_gcc/api/src\
       		-I$(MRUBY_SRC_DIR)/include \
@@ -268,7 +268,7 @@ CFG1_OUT_LDFLAGS := $(CFG1_OUT_LDFLAGS) -L $(MRUBY_SRC_DIR)/build/ARM/lib/
 CFG2_OUT_LDFLAGS := $(CFG2_OUT_LDFLAGS) -L $(MRUBY_SRC_DIR)/build/ARM/lib/
 CFG3_OUT_LDFLAGS := $(CFG3_OUT_LDFLAGS) -L $(MRUBY_SRC_DIR)/build/ARM/lib/
 LIBS := $(LIBS) $(CXXLIBS)
-CFLAGS = $(COPTS) $(CDEFS) $(INCLUDES)
+CFLAGS = $(COPTS) $(CDEFS) $(INCLUDES) 
 
 #
 #  アプリケーションプログラムに関する定義
