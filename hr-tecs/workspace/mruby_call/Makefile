@@ -1,4 +1,4 @@
-F#
+#
 #  TOPPERS/HRP Kernel
 #      Toyohashi Open Platform for Embedded Real-Time Systems/
 #      High Reliable system Profile Kernel
@@ -54,7 +54,7 @@ endef
 all:
 
 # SDのドライブ文字を指定
-SD_DIR = /cygdrive/D/
+SD_DIR = /cygdrive/E/
 
 #
 #  ターゲット略称の定義
@@ -89,7 +89,7 @@ RUNNING_BODY_TIRE = normal
 # APP_NAME = speaker_sample2.rb
 # APP_NAME = touch_sample.rb
 # APP_NAME = ultrasonic_sample.rb
-  APP_NAME = test_stub.rb
+  #APP_NAME = test_stub.rb
 
 PARAM_NAME = parameter.rb
 ifeq ($(RUNNING_BODY),ev3way)

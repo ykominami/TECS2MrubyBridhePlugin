@@ -18,6 +18,8 @@
 #include "nTECS2Mruby_tsMcall_tecsgen.h"
 #include <mruby.h>
 #include <mruby/dump.h>
+#include <mruby/string.h>
+
 
 #ifndef E_OK
 #define	E_OK	0		/* success */
@@ -48,8 +50,12 @@ eEnt_mcall_lcd(CELLIDX idx)
   }
 
   
-
-  mrb_value mcall_lcd_call = mrb_funcall(mrb ,mrb_top_self(mrb), "mcall_lcd", 0);
+  struct RClass *shimo = mrb_class_obj_get(mrb, "Shimo");
+  mrb_value shimo_value = mrb_obj_value(shimo);
+  mrb_value  yamashina = mrb_funcall(mrb, shimo_value, "new", 0);
+  //mrb_value mcall_lcd_call = 
+  mrb_funcall(mrb ,yamashina, "mcall_lcd", 0);
+ 
 }
 
 /* #[<POSTAMBLE>]#
