@@ -20,7 +20,7 @@ struct tag_sMcall_VDES {
 
 /* シグニチャ関数テーブル #_SFT_# */
 struct tag_sMcall_VMT {
-    void           (*mcall_lcd__T)( const struct tag_sMcall_VDES *edp );
+    void           (*lcd__T)( const struct tag_sMcall_VDES *edp );
 };
 
 /* シグニチャディスクリプタ(動的結合用) #_SDES_# */
@@ -31,6 +31,6 @@ typedef struct { struct tag_sMcall_VDES *vdes; } Descriptor( sMcall );
 #endif /* TOPPERS_MACRO_ONLY */
 
 /* function id */
-#define	FUNCID_SMCALL_MCALL_LCD                (1)
+#define	FUNCID_SMCALL_LCD                      (1)
 
 #endif /* sMcall_TECSGEN_H */

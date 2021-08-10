@@ -18,8 +18,6 @@
 #include "nTECS2Mruby_tsMcall_tecsgen.h"
 #include <mruby.h>
 #include <mruby/dump.h>
-#include <mruby/string.h>
-
 
 #ifndef E_OK
 #define	E_OK	0		/* success */
@@ -33,13 +31,13 @@
  * context:    task
  * #[</ENTRY_PORT>]# */
 
-/* #[<ENTRY_FUNC>]# eEnt_mcall_lcd
- * name:         eEnt_mcall_lcd
- * global_name:  nTECS2Mruby_tsMcall_eEnt_mcall_lcd
+/* #[<ENTRY_FUNC>]# eEnt_lcd
+ * name:         eEnt_lcd
+ * global_name:  nTECS2Mruby_tsMcall_eEnt_lcd
  * oneway:       false
  * #[</ENTRY_FUNC>]# */
 void
-eEnt_mcall_lcd(CELLIDX idx)
+eEnt_lcd(CELLIDX idx)
 {
   CELLCB    *p_cellcb;
   mrb_state *mrb = cMethodCall_get_mrb();
@@ -50,12 +48,11 @@ eEnt_mcall_lcd(CELLIDX idx)
   }
 
   
-  struct RClass *shimo = mrb_class_obj_get(mrb, "Shimo");
+
+  struct RClass *shimo = mrb_class_get(mrb, "Shimo");
   mrb_value shimo_value = mrb_obj_value(shimo);
   mrb_value  yamashina = mrb_funcall(mrb, shimo_value, "new", 0);
-  //mrb_value mcall_lcd_call = 
-  mrb_funcall(mrb ,yamashina, "mcall_lcd", 0);
- 
+  mrb_funcall(mrb ,mrb_top_self(mrb), "lcd", 0);
 }
 
 /* #[<POSTAMBLE>]#

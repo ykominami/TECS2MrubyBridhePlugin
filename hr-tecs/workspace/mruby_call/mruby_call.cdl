@@ -4,7 +4,7 @@ import( "kernel.cdl" );
 import("../../tecs_lib/common/TECS2MrubyVM.cdl");
 //import("EV3_common.cdl");
 signature sMcall {
-void mcall_lcd(void);
+void lcd(void);
  //int32_t func2([in]int32_t val, [in]int32_t val6);
 };
 

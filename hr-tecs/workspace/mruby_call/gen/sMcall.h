@@ -5,4 +5,4 @@
 
 #include "global_tecsgen.hตþลิปิ"
 
-void  mcall_lcd( );
+void  lcd( );

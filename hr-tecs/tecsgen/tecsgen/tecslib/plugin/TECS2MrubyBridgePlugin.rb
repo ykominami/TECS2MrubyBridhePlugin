@@ -153,7 +153,7 @@ EOT
           
 
       #file.print( "  cCal_get_mrb();" )
-      file.print( "  mrb_value #{func_name}_call = mrb_funcall(mrb ,mrb_top_self(mrb), \"#{func_name}\", #{params.size}" )
+      file.print( "  struct RClass *shimo = mrb_class_get(mrb, \"Shimo\");\n  mrb_value shimo_value = mrb_obj_value(shimo);\n  mrb_value  yamashina = mrb_funcall(mrb, shimo_value, \"new\", 0);\n  mrb_funcall(mrb ,mrb_top_self(mrb), \"#{func_name}\", #{params.size}" )
       #param2 = ["st", "\"#{func_name}_inst\""]
       #if ! b_ret_void then
         delim = ","
