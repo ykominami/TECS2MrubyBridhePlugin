@@ -47,7 +47,7 @@ typedef const struct tag_nTECS2Mruby_tsMcall_INIB *nTECS2Mruby_tsMcall_IDX;
 
 /* 受け口関数プロトタイプ宣言 #_EPP_# */
 /* sMcall */
-void         nTECS2Mruby_tsMcall_eEnt_lcd(nTECS2Mruby_tsMcall_IDX idx);
+void         nTECS2Mruby_tsMcall_eEnt_mcall_lcd(nTECS2Mruby_tsMcall_IDX idx, const char* x);
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */
@@ -131,7 +131,7 @@ extern "C" {
 
 
 /* 受け口関数マクロ（短縮形） #_EPM_# */
-#define eEnt_lcd         nTECS2Mruby_tsMcall_eEnt_lcd
+#define eEnt_mcall_lcd   nTECS2Mruby_tsMcall_eEnt_mcall_lcd
 
 /* イテレータコード (FOREACH_CELL)の生成 #_FEC_# */
 #define FOREACH_CELL(i,p_cb)   \

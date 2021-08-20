@@ -55,7 +55,9 @@ eBody_main(CELLIDX idx)
 	cTECS2MrubyVM_init( );
 	
 	cBody2_mcall_lcd( );
+
 	cTECS2MrubyVM_fin( );
+	//ev3_lcd_draw_string("171717", 0, 0);
 
 }
 

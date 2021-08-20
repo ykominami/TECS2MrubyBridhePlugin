@@ -3,8 +3,8 @@ class Shimo
     	@lcd = EV3RT::LCD.new
 	end
 	
-	def mcall_lcd
-		@lcd.print "975917171717"
+	def mcall_lcd(number)
+		@lcd.print number
 	end
 
 	def lcd

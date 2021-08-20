@@ -31,13 +31,13 @@
  * context:    task
  * #[</ENTRY_PORT>]# */
 
-/* #[<ENTRY_FUNC>]# eEnt_lcd
- * name:         eEnt_lcd
- * global_name:  nTECS2Mruby_tsMcall_eEnt_lcd
+/* #[<ENTRY_FUNC>]# eEnt_mcall_lcd
+ * name:         eEnt_mcall_lcd
+ * global_name:  nTECS2Mruby_tsMcall_eEnt_mcall_lcd
  * oneway:       false
  * #[</ENTRY_FUNC>]# */
 void
-eEnt_lcd(CELLIDX idx)
+eEnt_mcall_lcd(CELLIDX idx, const char* x)
 {
   CELLCB    *p_cellcb;
   mrb_state *mrb = cMethodCall_get_mrb();
@@ -51,8 +51,9 @@ eEnt_lcd(CELLIDX idx)
 
   struct RClass *shimo = mrb_class_get(mrb, "Shimo");
   mrb_value shimo_value = mrb_obj_value(shimo);
-  mrb_value  yamashina = mrb_funcall(mrb, shimo_value, "new", 0);
-  mrb_funcall(mrb ,mrb_top_self(mrb), "lcd", 0);
+  mrb_value x_params = mrb_str_new_cstr(mrb, x);  
+  mrb_value  yamashina = mrb_funcall(mrb, shimo_value, "new", 0);  
+  mrb_funcall(mrb ,yamashina, "mcall_lcd", 1, x_params);
 }
 
 /* #[<POSTAMBLE>]#

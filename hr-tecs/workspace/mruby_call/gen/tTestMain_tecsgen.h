@@ -85,9 +85,9 @@ void         tTestMain_eBody_main(tTestMain_IDX idx);
 #define tTestMain_cTECS2MrubyVM_fin( p_that ) \
 	  tTECS2MrubyVM_eTECS2MrubyVM_fin( \
 	   &tTECS2MrubyVM_CB_tab[0] )
-#define tTestMain_cBody2_lcd( p_that ) \
-	  nTECS2Mruby_tsMcall_eEnt_lcd( \
-	   &nTECS2Mruby_tsMcall_CB_tab[0] )
+#define tTestMain_cBody2_mcall_lcd( p_that, x ) \
+	  nTECS2Mruby_tsMcall_eEnt_mcall_lcd( \
+	   &nTECS2Mruby_tsMcall_CB_tab[0], (x) )
 
 #endif /* TOPPERS_CB_TYPE_ONLY */
 
@@ -130,8 +130,8 @@ extern "C" {
           ((void)p_cellcb, tTestMain_cTECS2MrubyVM_get_mrb( p_cellcb ))
 #define cTECS2MrubyVM_fin( ) \
           ((void)p_cellcb, tTestMain_cTECS2MrubyVM_fin( p_cellcb ))
-#define cBody2_lcd( ) \
-          ((void)p_cellcb, tTestMain_cBody2_lcd( p_cellcb ))
+#define cBody2_mcall_lcd( x ) \
+          ((void)p_cellcb, tTestMain_cBody2_mcall_lcd( p_cellcb, x ))
 
 
 

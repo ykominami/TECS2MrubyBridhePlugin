@@ -150,16 +150,37 @@ EOT
     # else
     #   file.print( "  " )
     # end
+      #excahnges = []
+      #a = params.size
+      #b = 0
+      #c = 1
+      #while b <= a-1 do
+      #  excahnges[b] = "#{c}_params"
+      #  b +=1
+      #  c +=1  
+      #end
           
 
       #file.print( "  cCal_get_mrb();" )
-      file.print( "  struct RClass *shimo = mrb_class_get(mrb, \"Shimo\");\n  mrb_value shimo_value = mrb_obj_value(shimo);\n  mrb_value  yamashina = mrb_funcall(mrb, shimo_value, \"new\", 0);\n  mrb_funcall(mrb ,mrb_top_self(mrb), \"#{func_name}\", #{params.size}" )
+      file.print( "  struct RClass *shimo = mrb_class_get(mrb, \"Shimo\");
+  mrb_value shimo_value = mrb_obj_value(shimo);")
+  params.each{|param|
+          file.print("\n  mrb_value #{param.get_name}_params = mrb_str_new_cstr(mrb, #{param.get_name});")
+        }
+  file.print("  
+  mrb_value  yamashina = mrb_funcall(mrb, shimo_value, \"new\", 0);  
+  mrb_funcall(mrb ,yamashina, \"#{func_name}\", #{params.size}" )
       #param2 = ["st", "\"#{func_name}_inst\""]
       #if ! b_ret_void then
+        # delim = ","
+        # params.each{ |param|
+        #   file.printf( "#{delim} #{param.get_name}" )
+        #   delim = ","
+        # }
+
         delim = ","
-        params.each{ |param|
-          file.printf( "#{delim} #{param.get_name}" )
-          delim = ","
+        params.each{|param|
+          file.print("#{delim} #{param.get_name}_params")
         }
     
       file.print( ");\n" )

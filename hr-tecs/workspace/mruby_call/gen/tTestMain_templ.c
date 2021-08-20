@@ -15,7 +15,7 @@
  *   mrb_state*     cTECS2MrubyVM_get_mrb( );
  *   void           cTECS2MrubyVM_fin( );
  * call port: cBody2 signature: sMcall context:task
- *   void           cBody2_lcd( );
+ *   void           cBody2_mcall_lcd( const char* x );
  *
  * #[</PREAMBLE>]# */
 
