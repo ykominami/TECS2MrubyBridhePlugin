@@ -13,13 +13,15 @@
 
 #ifndef TOPPERS_MACRO_ONLY
 
- extern void nTECS2Mruby_tsMcall_CB_initialize();
+ extern void nTECS2Mruby_tsShimo_CB_initialize();
+ extern void nTECS2Mruby_tsRyo_CB_initialize();
  extern void tTask_CB_initialize();
  extern void tTECS2MrubyVM_CB_initialize();
  extern void tTestMain_CB_initialize();
 
 #define INITIALIZE_TECS() \
- 	nTECS2Mruby_tsMcall_CB_initialize();\
+ 	nTECS2Mruby_tsShimo_CB_initialize();\
+ 	nTECS2Mruby_tsRyo_CB_initialize();\
  	tTask_CB_initialize();\
  	tTECS2MrubyVM_CB_initialize();\
  	tTestMain_CB_initialize();\

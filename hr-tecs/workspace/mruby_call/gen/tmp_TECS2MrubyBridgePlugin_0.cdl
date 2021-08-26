@@ -1,6 +1,6 @@
 namespace nTECS2Mruby{
-  celltype tsMcall {
+  celltype tsShimo {
     call sTECS2MrubyVM cMethodCall;  
-    entry ::sMcall eEnt;
+    entry ::sShimo eEnt;
   };
 };

@@ -60,7 +60,7 @@ SECTIONS {
 		__limit_rodata_shared__0 = .;
 
 		__start_rodata_shared__std = .;
-		ev3api.o(.text) ev3api.o(.rodata .rodata.str1.4) ev3api_cfg.o(.text) ev3api_cfg.o(.rodata .rodata.str1.4) ev3api_battery.o(.text) ev3api_battery.o(.rodata .rodata.str1.4) ev3api_brick.o(.text) ev3api_brick.o(.rodata .rodata.str1.4) ev3api_fs.o(.text) ev3api_fs.o(.rodata .rodata.str1.4) ev3api_newlib.o(.text) ev3api_newlib.o(.rodata .rodata.str1.4) ev3api_lcd.o(.text) ev3api_lcd.o(.rodata .rodata.str1.4) ev3api_motor.o(.text) ev3api_motor.o(.rodata .rodata.str1.4) ev3api_sensor.o(.text) ev3api_sensor.o(.rodata .rodata.str1.4) ev3api_speaker.o(.text) ev3api_speaker.o(.rodata .rodata.str1.4) tTECS2MrubyVM_tecsgen.o(.text) tTECS2MrubyVM_tecsgen.o(.rodata .rodata.str1.4) tTECS2MrubyVM.o(.text) tTECS2MrubyVM.o(.rodata .rodata.str1.4) nTECS2Mruby_tsMcall_tecsgen.o(.text) nTECS2Mruby_tsMcall_tecsgen.o(.rodata .rodata.str1.4) nTECS2Mruby_tsMcall.o(.text) nTECS2Mruby_tsMcall.o(.rodata .rodata.str1.4) tTestMain_tecsgen.o(.text) tTestMain_tecsgen.o(.rodata .rodata.str1.4) tTestMain.o(.text) tTestMain.o(.rodata .rodata.str1.4) libmruby.a(.text) libmruby.a(.rodata .rodata.str1.4) *(.text) *(.rodata .rodata.str1.4) *(.text.*) *(.rodata.*) *(.text_shared) *(.rodata_shared) 
+		ev3api.o(.text) ev3api.o(.rodata .rodata.str1.4) ev3api_cfg.o(.text) ev3api_cfg.o(.rodata .rodata.str1.4) ev3api_battery.o(.text) ev3api_battery.o(.rodata .rodata.str1.4) ev3api_brick.o(.text) ev3api_brick.o(.rodata .rodata.str1.4) ev3api_fs.o(.text) ev3api_fs.o(.rodata .rodata.str1.4) ev3api_newlib.o(.text) ev3api_newlib.o(.rodata .rodata.str1.4) ev3api_lcd.o(.text) ev3api_lcd.o(.rodata .rodata.str1.4) ev3api_motor.o(.text) ev3api_motor.o(.rodata .rodata.str1.4) ev3api_sensor.o(.text) ev3api_sensor.o(.rodata .rodata.str1.4) ev3api_speaker.o(.text) ev3api_speaker.o(.rodata .rodata.str1.4) tTECS2MrubyVM_tecsgen.o(.text) tTECS2MrubyVM_tecsgen.o(.rodata .rodata.str1.4) tTECS2MrubyVM.o(.text) tTECS2MrubyVM.o(.rodata .rodata.str1.4) nTECS2Mruby_tsShimo_tecsgen.o(.text) nTECS2Mruby_tsShimo_tecsgen.o(.rodata .rodata.str1.4) nTECS2Mruby_tsShimo.o(.text) nTECS2Mruby_tsShimo.o(.rodata .rodata.str1.4) nTECS2Mruby_tsRyo_tecsgen.o(.text) nTECS2Mruby_tsRyo_tecsgen.o(.rodata .rodata.str1.4) nTECS2Mruby_tsRyo.o(.text) nTECS2Mruby_tsRyo.o(.rodata .rodata.str1.4) tTestMain_tecsgen.o(.text) tTestMain_tecsgen.o(.rodata .rodata.str1.4) tTestMain.o(.text) tTestMain.o(.rodata .rodata.str1.4) libmruby.a(.text) libmruby.a(.rodata .rodata.str1.4) *(.text) *(.rodata .rodata.str1.4) *(.text.*) *(.rodata.*) *(.text_shared) *(.rodata_shared) 
 	} > ROM
 	.preinit_array ALIGN(4) : {
 		PROVIDE_HIDDEN (__preinit_array_start = .);
@@ -246,7 +246,7 @@ SECTIONS {
 		__start_ram_shared = .;
 		__start_data_shared = .;
 		__start_data_shared__std = .;
-		ev3api.o(.data) ev3api_cfg.o(.data) ev3api_battery.o(.data) ev3api_brick.o(.data) ev3api_fs.o(.data) ev3api_newlib.o(.data) ev3api_lcd.o(.data) ev3api_motor.o(.data) ev3api_sensor.o(.data) ev3api_speaker.o(.data) tTECS2MrubyVM_tecsgen.o(.data) tTECS2MrubyVM.o(.data) nTECS2Mruby_tsMcall_tecsgen.o(.data) nTECS2Mruby_tsMcall.o(.data) tTestMain_tecsgen.o(.data) tTestMain.o(.data) libmruby.a(.data) *(.data) *(.data.*) *(.data_shared) 
+		ev3api.o(.data) ev3api_cfg.o(.data) ev3api_battery.o(.data) ev3api_brick.o(.data) ev3api_fs.o(.data) ev3api_newlib.o(.data) ev3api_lcd.o(.data) ev3api_motor.o(.data) ev3api_sensor.o(.data) ev3api_speaker.o(.data) tTECS2MrubyVM_tecsgen.o(.data) tTECS2MrubyVM.o(.data) nTECS2Mruby_tsShimo_tecsgen.o(.data) nTECS2Mruby_tsShimo.o(.data) nTECS2Mruby_tsRyo_tecsgen.o(.data) nTECS2Mruby_tsRyo.o(.data) tTestMain_tecsgen.o(.data) tTestMain.o(.data) libmruby.a(.data) *(.data) *(.data.*) *(.data_shared) 
 		__end_data_shared__std = .;
 		__end_data_shared = .;
 	} > RAM AT > ROM
@@ -258,7 +258,7 @@ SECTIONS {
 	.bss_shared ALIGN(4) (NOLOAD) : {
 		__start_bss_shared = .;
 		__start_bss_shared__std = .;
-		ev3api.o(.bss COMMON) ev3api_cfg.o(.bss COMMON) ev3api_battery.o(.bss COMMON) ev3api_brick.o(.bss COMMON) ev3api_fs.o(.bss COMMON) ev3api_newlib.o(.bss COMMON) ev3api_lcd.o(.bss COMMON) ev3api_motor.o(.bss COMMON) ev3api_sensor.o(.bss COMMON) ev3api_speaker.o(.bss COMMON) tTECS2MrubyVM_tecsgen.o(.bss COMMON) tTECS2MrubyVM.o(.bss COMMON) nTECS2Mruby_tsMcall_tecsgen.o(.bss COMMON) nTECS2Mruby_tsMcall.o(.bss COMMON) tTestMain_tecsgen.o(.bss COMMON) tTestMain.o(.bss COMMON) libmruby.a(.bss COMMON) *(.bss COMMON) *(.bss_shared) 
+		ev3api.o(.bss COMMON) ev3api_cfg.o(.bss COMMON) ev3api_battery.o(.bss COMMON) ev3api_brick.o(.bss COMMON) ev3api_fs.o(.bss COMMON) ev3api_newlib.o(.bss COMMON) ev3api_lcd.o(.bss COMMON) ev3api_motor.o(.bss COMMON) ev3api_sensor.o(.bss COMMON) ev3api_speaker.o(.bss COMMON) tTECS2MrubyVM_tecsgen.o(.bss COMMON) tTECS2MrubyVM.o(.bss COMMON) nTECS2Mruby_tsShimo_tecsgen.o(.bss COMMON) nTECS2Mruby_tsShimo.o(.bss COMMON) nTECS2Mruby_tsRyo_tecsgen.o(.bss COMMON) nTECS2Mruby_tsRyo.o(.bss COMMON) tTestMain_tecsgen.o(.bss COMMON) tTestMain.o(.bss COMMON) libmruby.a(.bss COMMON) *(.bss COMMON) *(.bss_shared) 
 		__end_bss_shared__std = .;
 		__end_bss_shared = .;
 	} > RAM AT > RAM
@@ -269,7 +269,7 @@ SECTIONS {
 	.prsv_shared ALIGN(4) (NOLOAD) : {
 		__start_prsv_shared = .;
 		__start_prsv_shared__std = .;
-		ev3api.o(.prsv) ev3api_cfg.o(.prsv) ev3api_battery.o(.prsv) ev3api_brick.o(.prsv) ev3api_fs.o(.prsv) ev3api_newlib.o(.prsv) ev3api_lcd.o(.prsv) ev3api_motor.o(.prsv) ev3api_sensor.o(.prsv) ev3api_speaker.o(.prsv) tTECS2MrubyVM_tecsgen.o(.prsv) tTECS2MrubyVM.o(.prsv) nTECS2Mruby_tsMcall_tecsgen.o(.prsv) nTECS2Mruby_tsMcall.o(.prsv) tTestMain_tecsgen.o(.prsv) tTestMain.o(.prsv) libmruby.a(.prsv) *(.prsv) *(.prsv_shared) 
+		ev3api.o(.prsv) ev3api_cfg.o(.prsv) ev3api_battery.o(.prsv) ev3api_brick.o(.prsv) ev3api_fs.o(.prsv) ev3api_newlib.o(.prsv) ev3api_lcd.o(.prsv) ev3api_motor.o(.prsv) ev3api_sensor.o(.prsv) ev3api_speaker.o(.prsv) tTECS2MrubyVM_tecsgen.o(.prsv) tTECS2MrubyVM.o(.prsv) nTECS2Mruby_tsShimo_tecsgen.o(.prsv) nTECS2Mruby_tsShimo.o(.prsv) nTECS2Mruby_tsRyo_tecsgen.o(.prsv) nTECS2Mruby_tsRyo.o(.prsv) tTestMain_tecsgen.o(.prsv) tTestMain.o(.prsv) libmruby.a(.prsv) *(.prsv) *(.prsv_shared) 
 		__end_prsv_shared__std = .;
 		__end_prsv_shared = .;
 	} > RAM

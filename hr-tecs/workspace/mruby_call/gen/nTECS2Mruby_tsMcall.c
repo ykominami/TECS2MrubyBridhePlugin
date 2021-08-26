@@ -49,7 +49,7 @@ eEnt_mcall_lcd(CELLIDX idx, const char* x)
 
   
 
-  struct RClass *shimo = mrb_class_get(mrb, "Shimo");
+  struct RClass *shimo = mrb_class_get(mrb, "Mcall");
   mrb_value shimo_value = mrb_obj_value(shimo);
   mrb_value x_params = mrb_str_new_cstr(mrb, x);  
   mrb_value  yamashina = mrb_funcall(mrb, shimo_value, "new", 0);  

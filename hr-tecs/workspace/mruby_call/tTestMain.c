@@ -14,8 +14,10 @@
  *   void           cTECS2MrubyVM_init( );
  *   mrb_state*     cTECS2MrubyVM_get_mrb( );
  *   void           cTECS2MrubyVM_fin( );
- * call port: cBody2 signature: sMcall context:task
+ * call port: cBody2 signature: sShimo context:task
  *   void           cBody2_mcall_lcd( const char* x );
+ * call port: cBody3 signature: sRyo context:task
+ *   void           cBody3_hyoji( );
  *
  * #[</PREAMBLE>]# */
 
@@ -57,6 +59,7 @@ eBody_main(CELLIDX idx)
 	//cBody2_mcall_lcd( );
 	//cBody2_lcd( );
     cBody2_mcall_lcd("5432112345");
+    cBody3_hyoji( );
 	cTECS2MrubyVM_fin( );
 	//ev3_lcd_draw_string("171717", 0, 0);
 

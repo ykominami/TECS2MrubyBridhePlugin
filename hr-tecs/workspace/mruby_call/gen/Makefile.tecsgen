@@ -27,18 +27,21 @@ SIGNATURE_HEADERS = \
 	$(GEN_DIR)/siKernel_tecsgen.h \
 	$(GEN_DIR)/sMessageBuffer_tecsgen.h \
 	$(GEN_DIR)/sTECS2MrubyVM_tecsgen.h \
-	$(GEN_DIR)/sMcall_tecsgen.h \
+	$(GEN_DIR)/sShimo_tecsgen.h \
+	$(GEN_DIR)/sRyo_tecsgen.h \
 # SIGNATURE_HEADERS terminator
 
 CELLTYPE_TECSGEN_HEADERS = \
- 	$(GEN_DIR)/nTECS2Mruby_tsMcall_tecsgen.h \
+ 	$(GEN_DIR)/nTECS2Mruby_tsShimo_tecsgen.h \
+ 	$(GEN_DIR)/nTECS2Mruby_tsRyo_tecsgen.h \
  	$(GEN_DIR)/tTask_tecsgen.h \
  	$(GEN_DIR)/tTECS2MrubyVM_tecsgen.h \
  	$(GEN_DIR)/tTestMain_tecsgen.h \
 # CELLTYPE_TECSGEN_HEADERS terminator
 
 CELLTYPE_FACTORY_HEADERS = \
- 	$(GEN_DIR)/nTECS2Mruby_tsMcall_factory.h \
+ 	$(GEN_DIR)/nTECS2Mruby_tsShimo_factory.h \
+ 	$(GEN_DIR)/nTECS2Mruby_tsRyo_factory.h \
  	$(GEN_DIR)/tTask_factory.h \
  	$(GEN_DIR)/tTECS2MrubyVM_factory.h \
  	$(GEN_DIR)/tTestMain_factory.h \
@@ -54,7 +57,8 @@ TECS_INLINE_HEADERS = \
 # TECS_INLINE_HEADERS terminator
 
 PLUGIN_INLINE_HEADERS = \
- 	nTECS2Mruby_tsMcall_tecsgen.h \
+ 	nTECS2Mruby_tsShimo_tecsgen.h \
+ 	nTECS2Mruby_tsRyo_tecsgen.h \
 # PLUGIN_INLINE_HEADERS terminator
 
 # TECS_COBJS: all objects of TECS, include both user written code and tecsgen automatically generated code
@@ -106,8 +110,10 @@ PLUGIN_rKernel_COBJS = \
 # PLUGIN_rKernel_COBJS terminator
 
 PLUGIN_Root__COBJS = \
- 	$(_TECS_OBJ_DIR)nTECS2Mruby_tsMcall_tecsgen.o \
- 	$(_TECS_OBJ_DIR)nTECS2Mruby_tsMcall.o \
+ 	$(_TECS_OBJ_DIR)nTECS2Mruby_tsShimo_tecsgen.o \
+ 	$(_TECS_OBJ_DIR)nTECS2Mruby_tsRyo_tecsgen.o \
+ 	$(_TECS_OBJ_DIR)nTECS2Mruby_tsShimo.o \
+ 	$(_TECS_OBJ_DIR)nTECS2Mruby_tsRyo.o \
 # PLUGIN_Root__COBJS terminator
 
 # CELLTYPE_COBJS: objects of celltype code written by user
@@ -135,8 +141,10 @@ PLUGIN_rKernel_SRCS = \
 # PLUGIN_rKernel_SRCS terminator
 
 PLUGIN_Root__SRCS = \
- 	$(GEN_DIR)/nTECS2Mruby_tsMcall_tecsgen.c \
- 	$(GEN_DIR)/nTECS2Mruby_tsMcall.c \
+ 	$(GEN_DIR)/nTECS2Mruby_tsShimo_tecsgen.c \
+ 	$(GEN_DIR)/nTECS2Mruby_tsRyo_tecsgen.c \
+ 	$(GEN_DIR)/nTECS2Mruby_tsShimo.c \
+ 	$(GEN_DIR)/nTECS2Mruby_tsRyo.c \
 # PLUGIN_Root__SRCS terminator
 
 clean_mrb_c :

@@ -21,7 +21,8 @@
 
 /* シグニチャヘッダ #_ISH_# */
 #include "sTECS2MrubyVM_tecsgen.h"
-#include "sMcall_tecsgen.h"
+#include "sShimo_tecsgen.h"
+#include "sRyo_tecsgen.h"
 #include "sTaskBody_tecsgen.h"
 
 #ifndef TOPPERS_MACRO_ONLY
@@ -60,7 +61,8 @@ void         tTestMain_eBody_main(tTestMain_IDX idx);
 #define TOPPERS_CB_TYPE_ONLY
 #endif  /* TOPPERS_CB_TYPE_ONLY */
 #include "tTECS2MrubyVM_tecsgen.h"
-#include "nTECS2Mruby_tsMcall_tecsgen.h"
+#include "nTECS2Mruby_tsShimo_tecsgen.h"
+#include "nTECS2Mruby_tsRyo_tecsgen.h"
 #ifdef  tTestMain_CB_TYPE_ONLY
 #undef TOPPERS_CB_TYPE_ONLY
 #endif /* tTestMain_CB_TYPE_ONLY */
@@ -86,8 +88,11 @@ void         tTestMain_eBody_main(tTestMain_IDX idx);
 	  tTECS2MrubyVM_eTECS2MrubyVM_fin( \
 	   &tTECS2MrubyVM_CB_tab[0] )
 #define tTestMain_cBody2_mcall_lcd( p_that, x ) \
-	  nTECS2Mruby_tsMcall_eEnt_mcall_lcd( \
-	   &nTECS2Mruby_tsMcall_CB_tab[0], (x) )
+	  nTECS2Mruby_tsShimo_eEnt_mcall_lcd( \
+	   &nTECS2Mruby_tsShimo_CB_tab[0], (x) )
+#define tTestMain_cBody3_hyoji( p_that ) \
+	  nTECS2Mruby_tsRyo_eEnt_hyoji( \
+	   &nTECS2Mruby_tsRyo_CB_tab[0] )
 
 #endif /* TOPPERS_CB_TYPE_ONLY */
 
@@ -132,6 +137,8 @@ extern "C" {
           ((void)p_cellcb, tTestMain_cTECS2MrubyVM_fin( p_cellcb ))
 #define cBody2_mcall_lcd( x ) \
           ((void)p_cellcb, tTestMain_cBody2_mcall_lcd( p_cellcb, x ))
+#define cBody3_hyoji( ) \
+          ((void)p_cellcb, tTestMain_cBody3_hyoji( p_cellcb ))
 
 
 

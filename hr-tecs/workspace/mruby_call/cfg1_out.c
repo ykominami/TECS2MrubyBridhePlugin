@@ -2095,19 +2095,25 @@ const unsigned_t TOPPERS_cfg_static_api_258 = 258;
 const char TOPPERS_cfg_valueof_module_258[] = "tTECS2MrubyVM.o"; 
 #line 11 "gen/tecsgen.cfg"
 const unsigned_t TOPPERS_cfg_static_api_259 = 259;
-const char TOPPERS_cfg_valueof_module_259[] = "nTECS2Mruby_tsMcall_tecsgen.o"; 
+const char TOPPERS_cfg_valueof_module_259[] = "nTECS2Mruby_tsShimo_tecsgen.o"; 
 #line 12 "gen/tecsgen.cfg"
 const unsigned_t TOPPERS_cfg_static_api_260 = 260;
-const char TOPPERS_cfg_valueof_module_260[] = "nTECS2Mruby_tsMcall.o"; 
+const char TOPPERS_cfg_valueof_module_260[] = "nTECS2Mruby_tsShimo.o"; 
 #line 13 "gen/tecsgen.cfg"
 const unsigned_t TOPPERS_cfg_static_api_261 = 261;
-const char TOPPERS_cfg_valueof_module_261[] = "tTestMain_tecsgen.o"; 
+const char TOPPERS_cfg_valueof_module_261[] = "nTECS2Mruby_tsRyo_tecsgen.o"; 
 #line 14 "gen/tecsgen.cfg"
 const unsigned_t TOPPERS_cfg_static_api_262 = 262;
-const char TOPPERS_cfg_valueof_module_262[] = "tTestMain.o"; 
-#line 3 "mruby_call.cfg"
+const char TOPPERS_cfg_valueof_module_262[] = "nTECS2Mruby_tsRyo.o"; 
+#line 15 "gen/tecsgen.cfg"
 const unsigned_t TOPPERS_cfg_static_api_263 = 263;
-const char TOPPERS_cfg_valueof_module_263[] = "libmruby.a"; /* #include "mruby_call.h" */
+const char TOPPERS_cfg_valueof_module_263[] = "tTestMain_tecsgen.o"; 
+#line 16 "gen/tecsgen.cfg"
+const unsigned_t TOPPERS_cfg_static_api_264 = 264;
+const char TOPPERS_cfg_valueof_module_264[] = "tTestMain.o"; 
+#line 3 "mruby_call.cfg"
+const unsigned_t TOPPERS_cfg_static_api_265 = 265;
+const char TOPPERS_cfg_valueof_module_265[] = "libmruby.a"; /* #include "mruby_call.h" */
 
 #ifdef TOPPERS_cfg_inside_of_TDOM_KERNEL
 #error missing '}'
