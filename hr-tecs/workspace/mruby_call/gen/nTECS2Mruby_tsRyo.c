@@ -1,20 +1,20 @@
 /*
- * ¤³¤Î¥Õ¥¡¥¤¥ë¤Ï tecsgen ¤Ë¤è¤ê¼«Æ°À¸À®¤µ¤ì¤Þ¤·¤¿
- * ¤³¤Î¥Õ¥¡¥¤¥ë¤òÊÔ½¸¤·¤Æ»ÈÍÑ¤¹¤ë¤³¤È¤Ï¡¢°Õ¿Þ¤µ¤ì¤Æ¤¤¤Þ¤»¤ó
- */
+ * ???Î¥Õ¥????? tecsgen ?Ë¤???Æ°????????????
+ * ???Î¥Õ¥???????????Æ»?Ñ¤??ë¤³?È¤Ï¡??Õ¿Þ¤??????Þ¤??? */
 /* #[<PREAMBLE>]#
- * #[<...>]# ¤«¤é #[</...>]# ¤Ç°Ï¤Þ¤ì¤¿¥³¥á¥ó¥È¤ÏÊÔ½¸¤·¤Ê¤¤¤Ç¤¯¤À¤µ¤¤
- * tecsmerge ¤Ë¤è¤ë¥Þ¡¼¥¸¤Ë»ÈÍÑ¤µ¤ì¤Þ¤¹
+ * #[<...>]# ????#[</...>]# ?Ç°Ï¤Þ¤ì¤¿?????È¤?Ô½????Ê¤??Ç¤???????
+ * tecsmerge ?Ë¤??Þ¡????Ë»?Ñ¤?????
  *
- * ¸Æ¤Ó¸ý´Ø¿ô #_TCPF_#
+ * ?Æ¤Ó¸??Ø¿?#_TCPF_#
  * call port: cMethodCall signature: sTECS2MrubyVM context:task
  *   void           cMethodCall_init( );
  *   mrb_state*     cMethodCall_get_mrb( );
  *   void           cMethodCall_fin( );
+ *   void*          cMethodCall_instance_create( );
  *
  * #[</PREAMBLE>]# */
 
-/* ¥×¥í¥È¥¿¥¤¥×Àë¸À¤äÊÑ¿ô¤ÎÄêµÁ¤ò¤³¤³¤Ë½ñ¤­¤Þ¤¹ #_PAC_# */
+/* ?×¥?È¥????????Ñ¿????ò¤³¤??Ë½ñ¤­¤Þ¤? #_PAC_# */
 #include "nTECS2Mruby_tsRyo_tecsgen.h"
 #include <mruby.h>
 #include <mruby/dump.h>
@@ -24,7 +24,7 @@
 #define	E_ID	(-18)	/* illegal ID */
 #endif
 
-/* ¼õ¤±¸ý´Ø¿ô #_TEPF_# */
+/* ???????Ø¿?#_TEPF_# */
 /* #[<ENTRY_PORT>]# eEnt
  * entry port: eEnt
  * signature:  sRyo
@@ -41,6 +41,7 @@ eEnt_hyoji(CELLIDX idx)
 {
   CELLCB    *p_cellcb;
   mrb_state *mrb = cMethodCall_get_mrb();
+  mrb_value *yamashina = cMethodCall_instance_create( );
   if( VALID_IDX( idx ) ){
     p_cellcb = GET_CELLCB(idx);
   }else{
@@ -49,14 +50,12 @@ eEnt_hyoji(CELLIDX idx)
 
   
 
-  struct RClass *shimo = mrb_class_get(mrb, "Ryo");
-  //mrb_value shimo_value = mrb_obj_value(shimo);  
-  //mrb_value  yamashina = mrb_funcall(mrb, shimo_value, "new", 0);  
-  struct RClass *yamashina = mrb_class_new(mrb, shimo);
-  mrb_value shimo_value = mrb_obj_value(yamashina);
-  mrb_funcall(mrb ,shimo_value, "hyoji", 0);
+  // struct RClass *shimo = mrb_class_get(mrb, "Ryo");
+  // mrb_value shimo_value = mrb_obj_value(shimo);  
+  // mrb_value  yamashina = mrb_funcall(mrb, shimo_value, "new", 0);  
+  mrb_funcall(mrb ,yamashina, "hyoji", 0);
 }
 
 /* #[<POSTAMBLE>]#
- *   ¤³¤ì¤è¤ê²¼¤ËÈó¼õ¤±¸ý´Ø¿ô¤ò½ñ¤­¤Þ¤¹
+ *   ?????ê²¼????????Ø¿?????Þ¤?
  * #[</POSTAMBLE>]#*/

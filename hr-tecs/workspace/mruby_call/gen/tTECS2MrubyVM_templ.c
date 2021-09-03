@@ -11,6 +11,7 @@
  *
  * 属性アクセスマクロ #_CAAM_#
  * irep             const uint8_t*   ATTR_irep       
+ * yamashina        void*            VAR_yamashina   
  * mrb              mrb_state*       VAR_mrb         
  * context          mrbc_context*    VAR_context     
  *
@@ -80,6 +81,26 @@ eTECS2MrubyVM_get_mrb(CELLIDX idx)
  * #[</ENTRY_FUNC>]# */
 void
 eTECS2MrubyVM_fin(CELLIDX idx)
+{
+	CELLCB	*p_cellcb;
+	if (VALID_IDX(idx)) {
+		p_cellcb = GET_CELLCB(idx);
+	}
+	else {
+		/* エラー処理コードをここに記述します */
+	} /* end if VALID_IDX(idx) */
+
+	/* ここに処理本体を記述します #_TEFB_# */
+
+}
+
+/* #[<ENTRY_FUNC>]# eTECS2MrubyVM_instance_create
+ * name:         eTECS2MrubyVM_instance_create
+ * global_name:  tTECS2MrubyVM_eTECS2MrubyVM_instance_create
+ * oneway:       false
+ * #[</ENTRY_FUNC>]# */
+void*
+eTECS2MrubyVM_instance_create(CELLIDX idx)
 {
 	CELLCB	*p_cellcb;
 	if (VALID_IDX(idx)) {

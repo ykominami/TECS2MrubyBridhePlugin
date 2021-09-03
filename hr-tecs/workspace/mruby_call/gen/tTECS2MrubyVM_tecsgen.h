@@ -38,6 +38,7 @@ typedef struct tag_tTECS2MrubyVM_CB {
     tTECS2MrubyVM_INIB  *_inib;
     /* call port #_NEP_# */ 
     /* var #_VA_# */ 
+    void*          yamashina;
     mrb_state*     mrb;
     mrbc_context*  context;
 }  tTECS2MrubyVM_CB;
@@ -51,6 +52,7 @@ typedef struct tag_tTECS2MrubyVM_CB *tTECS2MrubyVM_IDX;
 void         tTECS2MrubyVM_eTECS2MrubyVM_init(tTECS2MrubyVM_IDX idx);
 mrb_state*   tTECS2MrubyVM_eTECS2MrubyVM_get_mrb(tTECS2MrubyVM_IDX idx);
 void         tTECS2MrubyVM_eTECS2MrubyVM_fin(tTECS2MrubyVM_IDX idx);
+void*        tTECS2MrubyVM_eTECS2MrubyVM_instance_create(tTECS2MrubyVM_IDX idx);
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */
@@ -75,9 +77,12 @@ void         tTECS2MrubyVM_eTECS2MrubyVM_fin(tTECS2MrubyVM_IDX idx);
 
 
 /* var アクセスマクロ #_VAM_# */
+#define tTECS2MrubyVM_VAR_yamashina(p_that)	((p_that)->yamashina)
 #define tTECS2MrubyVM_VAR_mrb(p_that)	((p_that)->mrb)
 #define tTECS2MrubyVM_VAR_context(p_that)	((p_that)->context)
 
+#define tTECS2MrubyVM_GET_yamashina(p_that)	((p_that)->yamashina)
+#define tTECS2MrubyVM_SET_yamashina(p_that,val)	((p_that)->yamashina=(val))
 #define tTECS2MrubyVM_GET_mrb(p_that)	((p_that)->mrb)
 #define tTECS2MrubyVM_SET_mrb(p_that,val)	((p_that)->mrb=(val))
 #define tTECS2MrubyVM_GET_context(p_that)	((p_that)->context)
@@ -123,6 +128,7 @@ extern "C" {
 
 
 /* var アクセスマクロ(短縮形) #_VAMA_# */
+#define VAR_yamashina        tTECS2MrubyVM_VAR_yamashina( p_cellcb )
 #define VAR_mrb              tTECS2MrubyVM_VAR_mrb( p_cellcb )
 #define VAR_context          tTECS2MrubyVM_VAR_context( p_cellcb )
 
@@ -133,6 +139,7 @@ extern "C" {
 #define eTECS2MrubyVM_init tTECS2MrubyVM_eTECS2MrubyVM_init
 #define eTECS2MrubyVM_get_mrb tTECS2MrubyVM_eTECS2MrubyVM_get_mrb
 #define eTECS2MrubyVM_fin tTECS2MrubyVM_eTECS2MrubyVM_fin
+#define eTECS2MrubyVM_instance_create tTECS2MrubyVM_eTECS2MrubyVM_instance_create
 
 /* イテレータコード (FOREACH_CELL)の生成 #_FEC_# */
 #define FOREACH_CELL(i,p_cb)   \

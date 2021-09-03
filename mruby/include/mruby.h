@@ -578,7 +578,7 @@ MRB_API mrb_value mrb_instance_new(mrb_state *mrb, mrb_value cv);
  *        struct RClass *example_class;
  *
  *        mrb_value obj;
- *        example_class = mrb_class_new(mrb, mrb->object_class);
+ *        example_class = mrb_class_new(mrb, mrb->object_classobject_class);
  *        obj = mrb_obj_new(mrb, example_class, 0, NULL); // => #<#<Class:0x9a945b8>:0x9a94588>
  *        mrb_p(mrb, obj); // => Kernel#p
  *       }

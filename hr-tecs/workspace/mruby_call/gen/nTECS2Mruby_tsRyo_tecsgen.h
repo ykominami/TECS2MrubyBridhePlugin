@@ -83,6 +83,9 @@ void         nTECS2Mruby_tsRyo_eEnt_hyoji(nTECS2Mruby_tsRyo_IDX idx);
 #define nTECS2Mruby_tsRyo_cMethodCall_fin( p_that ) \
 	  tTECS2MrubyVM_eTECS2MrubyVM_fin( \
 	   &tTECS2MrubyVM_CB_tab[0] )
+#define nTECS2Mruby_tsRyo_cMethodCall_instance_create( p_that ) \
+	  tTECS2MrubyVM_eTECS2MrubyVM_instance_create( \
+	   &tTECS2MrubyVM_CB_tab[0] )
 
 #endif /* TOPPERS_CB_TYPE_ONLY */
 
@@ -126,6 +129,8 @@ extern "C" {
           ((void)p_cellcb, nTECS2Mruby_tsRyo_cMethodCall_get_mrb( p_cellcb ))
 #define cMethodCall_fin( ) \
           ((void)p_cellcb, nTECS2Mruby_tsRyo_cMethodCall_fin( p_cellcb ))
+#define cMethodCall_instance_create( ) \
+          ((void)p_cellcb, nTECS2Mruby_tsRyo_cMethodCall_instance_create( p_cellcb ))
 
 
 

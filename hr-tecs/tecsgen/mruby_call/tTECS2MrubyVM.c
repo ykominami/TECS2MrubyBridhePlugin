@@ -1,5 +1,6 @@
 #include"tecs_mruby.h"
 #include"tTECS2MrubyVM_tecsgen.h"
+#include <mruby.h>
 
 void mrb_init_mrb(CELLCB *p_cellcb, mrb_state *mrb, mrbc_context *c);
 
@@ -27,6 +28,7 @@ eTECS2MrubyVM_fin(CELLIDX idx)
 	mrb_close( VAR_mrb );
 }
 
+
 void
 mrb_init_mrb(CELLCB	*p_cellcb, mrb_state *mrb, mrbc_context *c){
     
@@ -39,4 +41,11 @@ mrb_init_mrb(CELLCB	*p_cellcb, mrb_state *mrb, mrbc_context *c){
         mrb_p(mrb, mrb_obj_value(mrb->exc));
         exit(0);
     }
+}
+mrb_value*
+eTECS2MrubyVM_instance_create(CELLIDX idx);
+{
+	struct RClass *shimo = mrb_class_get(VAR_mrb, "Ryo");
+	mrb_value shimo_value = mrb_obj_value(shimo);  
+	mrb_value VAR_yamashina = mrb_funcall(VAR_mrb, shimo_value, "new", 0); 
 }

@@ -23,6 +23,7 @@ struct tag_sTECS2MrubyVM_VMT {
     void           (*init__T)( const struct tag_sTECS2MrubyVM_VDES *edp );
     mrb_state*     (*get_mrb__T)( const struct tag_sTECS2MrubyVM_VDES *edp );
     void           (*fin__T)( const struct tag_sTECS2MrubyVM_VDES *edp );
+    void*          (*instance_create__T)( const struct tag_sTECS2MrubyVM_VDES *edp );
 };
 
 /* シグニチャディスクリプタ(動的結合用) #_SDES_# */
@@ -36,5 +37,6 @@ typedef struct { struct tag_sTECS2MrubyVM_VDES *vdes; } Descriptor( sTECS2MrubyV
 #define	FUNCID_STECS2MRUBYVM_INIT              (1)
 #define	FUNCID_STECS2MRUBYVM_GET_MRB           (2)
 #define	FUNCID_STECS2MRUBYVM_FIN               (3)
+#define	FUNCID_STECS2MRUBYVM_INSTANCE_CREATE   (4)
 
 #endif /* sTECS2MrubyVM_TECSGEN_H */

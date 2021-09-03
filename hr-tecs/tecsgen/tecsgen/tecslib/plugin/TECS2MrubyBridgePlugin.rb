@@ -150,19 +150,12 @@ EOT
     # else
     #   file.print( "  " )
     # end
-      #excahnges = []
-      #a = params.size
-      #b = 0
-      #c = 1
-      #while b <= a-1 do
-      #  excahnges[b] = "#{c}_params"
-      #  b +=1
-      #  c +=1  
-      #end
-          
+       
+      class_name = "#{sig_name}"
+      class_name[0] = ""   
 
       #file.print( "  cCal_get_mrb();" )
-      file.print( "  struct RClass *shimo = mrb_class_get(mrb, \"Shimo\");
+      file.print( "  struct RClass *shimo = mrb_class_get(mrb, \"#{class_name}\");
   mrb_value shimo_value = mrb_obj_value(shimo);")
   params.each{|param|
           file.print("\n  mrb_value #{param.get_name}_params = mrb_str_new_cstr(mrb, #{param.get_name});")

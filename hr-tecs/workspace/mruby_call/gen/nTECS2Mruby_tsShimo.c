@@ -11,6 +11,7 @@
  *   void           cMethodCall_init( );
  *   mrb_state*     cMethodCall_get_mrb( );
  *   void           cMethodCall_fin( );
+ *   void*          cMethodCall_instance_create( );
  *
  * #[</PREAMBLE>]# */
 
