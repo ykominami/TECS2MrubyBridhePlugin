@@ -46,6 +46,9 @@ TECSGEN = tecsgen
 #Time Stamp
 TIMESTAMP = $(GEN_DIR)/tecsgen.timestamp
 
+#Time Stamp cygwin
+TIMESTAMP_CYGWIN = $(GEN_DIR)/tecsgen_cygwin.timestamp
+
 #default relocatable object (.o) directory
 _TECS_OBJ_DIR = $(GEN_DIR)/
 
@@ -87,6 +90,11 @@ clean :
 tecs : $(PRE_TECSGEN_TARGET) $(TIMESTAMP) 
 	touch tecsgen.timestamp
 $(TIMESTAMP) : $(TECS_IMPORTS)
+	$(TECSGEN) -t -I ../../include -I ../../target/ev3_gcc -I ../../arch/arm_gcc/am1808 mruby_call.cdl
+
+tecs_cygwin : $(PRE_TECSGEN_TARGET) $(TIMESTAMP_CYGWIN) 
+	touch tecsgen_cywin.timestamp
+$(TIMESTAMP_CYGWIN) : $(TECS_IMPORTS)
 	$(TECSGEN)  -I ../test/cygwin -I ../../include mruby_call.cdl
 # generic target for objs
 $(_TECS_OBJ_DIR)%.o : %.c
