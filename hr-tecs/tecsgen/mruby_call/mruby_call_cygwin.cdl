@@ -1,0 +1,3 @@
+import( "../test/cygwin/cygwin_kernel.cdl" );
+import("mruby_call_0.cdl");
+

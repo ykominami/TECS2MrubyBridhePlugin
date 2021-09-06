@@ -8,6 +8,9 @@
 # vpath, CFLAGS, OTHER_OBJS などを調整する必要があるかもしれません
 # 他の環境やターゲットの場合、このファイルを元に変更する必要があります
 
+TECSGEN_DEBUG_OPT = -t
+# TECSGEN_DEBUG_OPT = 
+
 # 変数 #_MVAR_#
 # fixed variable (unchangeable by config or plugin)
 TARGET_BASE = mruby_call
@@ -45,6 +48,9 @@ TECSGEN = tecsgen
 
 #Time Stamp
 TIMESTAMP = $(GEN_DIR)/tecsgen.timestamp
+
+#Time Stamp cygwin
+TIMESTAMP_CYGWIN = $(GEN_DIR)/tecsgen_cygwin.timestamp
 
 #default relocatable object (.o) directory
 _TECS_OBJ_DIR = $(GEN_DIR)/
@@ -87,7 +93,12 @@ clean :
 tecs : $(PRE_TECSGEN_TARGET) $(TIMESTAMP) 
 	touch tecsgen.timestamp
 $(TIMESTAMP) : $(TECS_IMPORTS)
-	$(TECSGEN)  -I ../test/cygwin -I ../../include mruby_call.cdl
+	$(TECSGEN) $(TECSGEN_DEBUG_OPT) -I ../../include -I ../../target/ev3_gcc -I ../../arch/arm_gcc/am1808  -I ../../arch -I ../../arch/arm_gcc/common mruby_call.cdl
+
+tecs_cygwin : $(PRE_TECSGEN_TARGET) $(TIMESTAMP_CYGWIN) 
+	touch tecsgen_cywin.timestamp
+$(TIMESTAMP_CYGWIN) : $(TECS_IMPORTS)
+	$(TECSGEN)  -I ../test/cygwin -I ../../include mruby_call_cygwin.cdl
 # generic target for objs
 $(_TECS_OBJ_DIR)%.o : %.c
 	$(CC) -c $(CFLAGS) -o $@ $<

@@ -1,4 +1,5 @@
-EV3RT_PATH="/home/shimo/TECS2MrubyBridhePlugin/hr-tecs"
+# EV3RT_PATH=ENV["EV3RT_PATH"]
+EV3RT_PATH="../hr-tecs"
 
 MRuby::CrossBuild.new('ARM') do |conf|
 
@@ -45,7 +46,6 @@ MRuby::CrossBuild.new('ARM') do |conf|
                        arch/arm_gcc/common
                        arch/gcc
                        workspace/mruby_call)
-
   conf.cc.defines = %w(DISABLE_STDIO)
   conf.bins = []
 
