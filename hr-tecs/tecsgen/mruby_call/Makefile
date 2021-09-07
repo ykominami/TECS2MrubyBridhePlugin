@@ -98,7 +98,8 @@ $(TIMESTAMP) : $(TECS_IMPORTS)
 tecs_cygwin : $(PRE_TECSGEN_TARGET) $(TIMESTAMP_CYGWIN) 
 	touch tecsgen_cywin.timestamp
 $(TIMESTAMP_CYGWIN) : $(TECS_IMPORTS)
-	$(TECSGEN)  -I ../test/cygwin -I ../../include mruby_call_cygwin.cdl
+	$(TECSGEN) $(TECSGEN_DEBUG_OPT) -I ../test/cygwin -I ../../include -I ../../target/ev3_gcc -I ../../arch/arm_gcc/am1808  -I ../../arch -I ../../arch/arm_gcc/common mruby_call.cdl
+
 # generic target for objs
 $(_TECS_OBJ_DIR)%.o : %.c
 	$(CC) -c $(CFLAGS) -o $@ $<
