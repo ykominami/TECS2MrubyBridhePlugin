@@ -8,8 +8,12 @@
 # vpath, CFLAGS, OTHER_OBJS などを調整する必要があるかもしれません
 # 他の環境やターゲットの場合、このファイルを元に変更する必要があります
 
-TECSGEN_DEBUG_OPT = -t
-# TECSGEN_DEBUG_OPT = 
+# TECSGEN_DEBUG_OPT = -t
+TECSGEN_DEBUG_OPT = 
+# ROOT_DIR = /cygdrive/c/Users/ykomi/repo/TECS2MrubyBridhePlugin_yk3
+ROOT_DIR = ../../..
+MRUBY_DIR = $(ROOT_DIR)/mruby
+MRUBY_BIN_DIR = $(MRUBY_DIR)/build/host/bin
 
 # 変数 #_MVAR_#
 # fixed variable (unchangeable by config or plugin)
@@ -17,11 +21,18 @@ TARGET_BASE = mruby_call
 BASE_DIR = .
 BASE_DIR_1 = ../tecsgen
 GEN_DIR = $(BASE_DIR)/gen
-INCLUDES = -I $(BASE_DIR)/. -I $(BASE_DIR)/../test/cygwin -I $(BASE_DIR_1)/tecs \
+INCLUDES = -I $(BASE_DIR)/. -I $(BASE_DIR_1)/tecs \
 -I $(BASE_DIR_1)/tecs/mruby -I $(BASE_DIR_1)/tecs/posix \
 -I $(BASE_DIR_1)/tecs/rpc -I $(BASE_DIR_1)/tecs/TECSInfo \
 -I $(BASE_DIR_1)/tecs/TLSFMalloc -I $(GEN_DIR) -I ../../../mruby/include \
 -I ../../include -I ../../
+
+INCLUDES_CYGWIN = -I $(BASE_DIR)/../test/cygwin $(INCLUDES)
+
+ifneq ($(TECS_CYGWIN), '')
+  INCLUDES = $(INCLUDES_CYGWIN)
+endif
+
 DEFINES =
 
 # end of fixed variable (unchangeable by config or plugin)
@@ -29,13 +40,13 @@ DEFINES =
 CC = gcc
 
 #default C Compiler options
-CFLAGS = $(INCLUDES) $(DEFINES) -D  "Inline=static inline" -g 
+CFLAGS = $(INCLUDES) $(DEFINES) -D  "Inline=static inline" -g
 
 #default Liknker
 LD = gcc
 
 #default Liknker Options
-LDFLAGS = -L /home/yamas/TECS2MrubyBridgePlugin/mruby/build/host/lib/ -lmruby
+LDFLAGS = -L $(ROOT_DIR)/mruby/build/host/lib/ -lmruby
 
 #default source directory
 SRC_DIR = $(BASE_DIR)/src
@@ -55,7 +66,8 @@ TIMESTAMP_CYGWIN = $(GEN_DIR)/tecsgen_cygwin.timestamp
 #default relocatable object (.o) directory
 _TECS_OBJ_DIR = $(GEN_DIR)/
 
-MRBC = mrbc
+#MRBC = mrbc
+MRBC = $(MRUBY_BIN_DIR)/mrbc
 
 # Pre-tecsgen target
 PRE_TECSGEN_TARGET =
@@ -64,8 +76,8 @@ PRE_TECSGEN_TARGET =
 POST_TECSGEN_TARGET =
 
 # vpath for C sources and headers
-vpath %.c $(SRC_DIR) $(GEN_DIR)  ../test/cygwin /home/yamas/TECS2MrubyBridgePlugin/hr-tecs/tecsgen/tecsgen/tecs /home/yamas/TECS2MrubyBridgePlugin/hr-tecs/tecsgen/tecsgen/tecs/mruby /home/yamas/TECS2MrubyBridgePlugin/hr-tecs/tecsgen/tecsgen/tecs/posix /home/yamas/TECS2MrubyBridgePlugin/hr-tecs/tecsgen/tecsgen/tecs/rpc /home/yamas/TECS2MrubyBridgePlugin/hr-tecs/tecsgen/tecsgen/tecs/TECSInfo /home/yamas/TECS2MrubyBridgePlugin/hr-tecs/tecsgen/tecsgen/tecs/TLSFMalloc
-vpath %.h $(SRC_DIR) $(GEN_DIR)  ../test/cygwin /home/yamas/TECS2MrubyBridgePlugin/hr-tecs/tecsgen/tecsgen/tecs /home/yamas/TECS2MrubyBridgePlugin/hr-tecs/tecsgen/tecsgen/tecs/mruby /home/yamas/TECS2MrubyBridgePlugin/hr-tecs/tecsgen/tecsgen/tecs/posix /home/yamas/TECS2MrubyBridgePlugin/hr-tecs/tecsgen/tecsgen/tecs/rpc /home/yamas/TECS2MrubyBridgePlugin/hr-tecs/tecsgen/tecsgen/tecs/TECSInfo /home/yamas/TECS2MrubyBridgePlugin/hr-tecs/tecsgen/tecsgen/tecs/TLSFMalloc
+vpath %.c $(SRC_DIR) $(GEN_DIR)  ../test/cygwin $(ROOT_DIR)/hr-tecs/tecsgen/tecsgen/tecs $(ROOT_DIR)/hr-tecs/tecsgen/tecsgen/tecs/mruby $(ROOT_DIR)/hr-tecs/tecsgen/tecsgen/tecs/posix $(ROOT_DIR)/hr-tecs/tecsgen/tecsgen/tecs/rpc $(ROOT_DIR)/hr-tecs/tecsgen/tecsgen/tecs/TECSInfo $(ROOT_DIR)/hr-tecs/tecsgen/tecsgen/tecs/TLSFMalloc
+vpath %.h $(SRC_DIR) $(GEN_DIR)  ../test/cygwin $(ROOT_DIR)/hr-tecs/tecsgen/tecsgen/tecs $(ROOT_DIR)/hr-tecs/tecsgen/tecsgen/tecs/mruby $(ROOT_DIR)/hr-tecs/tecsgen/tecsgen/tecs/posix $(ROOT_DIR)/hr-tecs/tecsgen/tecsgen/tecs/rpc $(ROOT_DIR)/hr-tecs/tecsgen/tecsgen/tecs/TECSInfo $(ROOT_DIR)/hr-tecs/tecsgen/tecsgen/tecs/TLSFMalloc
 
 # Other objects (out of tecsgen)
 OTHER_OBJS =                      # Add objects out of tecs care.
@@ -90,15 +102,15 @@ clean :
 	rm -f $(CELLTYPE_COBJS) $(TECSGEN_COBJS) $(PLUGIN_COBJS) $(OTHER_OBJS) $(TARGET)  $(TIMESTAMP)
 	rm -rf $(GEN_DIR)
 
-tecs : $(PRE_TECSGEN_TARGET) $(TIMESTAMP) 
-	touch tecsgen.timestamp
+tecs : $(PRE_TECSGEN_TARGET) $(TIMESTAMP)
+	touch $(TIMESTAMP)
 $(TIMESTAMP) : $(TECS_IMPORTS)
 	$(TECSGEN) $(TECSGEN_DEBUG_OPT) -I ../../include -I ../../target/ev3_gcc -I ../../arch/arm_gcc/am1808  -I ../../arch -I ../../arch/arm_gcc/common mruby_call.cdl
 
-tecs_cygwin : $(PRE_TECSGEN_TARGET) $(TIMESTAMP_CYGWIN) 
-	touch tecsgen_cywin.timestamp
+tecs_cygwin : $(PRE_TECSGEN_TARGET) $(TIMESTAMP_CYGWIN)
+	touch $(TIMESTAMP_CYGWIN)
 $(TIMESTAMP_CYGWIN) : $(TECS_IMPORTS)
-	$(TECSGEN) $(TECSGEN_DEBUG_OPT) -I ../test/cygwin -I ../../include -I ../../target/ev3_gcc -I ../../arch/arm_gcc/am1808  -I ../../arch -I ../../arch/arm_gcc/common mruby_call.cdl
+	$(TECSGEN) $(TECSGEN_DEBUG_OPT) -I ../test/cygwin -I ../../include -I ../../target/ev3_gcc -I ../../arch/arm_gcc/am1808  -I ../../arch -I ../../arch/arm_gcc/common mruby_call_cygwin.cdl
 
 # generic target for objs
 $(_TECS_OBJ_DIR)%.o : %.c
@@ -106,13 +118,13 @@ $(_TECS_OBJ_DIR)%.o : %.c
 
 $(_TECS_OBJ_DIR)tTask.o : tTask.c
 	$(CC) -c $(CFLAGS) -o $@ $<
- 
+
 $(_TECS_OBJ_DIR)tMrubyCaller.o : tMrubyCaller.c
 	$(CC) -c $(CFLAGS) -o $@ $<
- 
+
 $(_TECS_OBJ_DIR)tTestMain.o : tTestMain.c
 	$(CC) -c $(CFLAGS) -o $@ $<
- 
+
 $(_TECS_OBJ_DIR)nTECS2Mruby_tsmcall.o : nTECS2Mruby_tsmcall.c
 	$(CC) -c $(CFLAGS) -o $@ $<
- 
+
