@@ -21,16 +21,18 @@ TARGET_BASE = mruby_call
 BASE_DIR = .
 BASE_DIR_1 = ../tecsgen
 GEN_DIR = $(BASE_DIR)/gen
-INCLUDES = -I $(BASE_DIR)/. -I $(BASE_DIR_1)/tecs \
+INCLUDES_TECS = -I $(BASE_DIR)/. -I $(BASE_DIR_1)/tecs \
 -I $(BASE_DIR_1)/tecs/mruby -I $(BASE_DIR_1)/tecs/posix \
 -I $(BASE_DIR_1)/tecs/rpc -I $(BASE_DIR_1)/tecs/TECSInfo \
 -I $(BASE_DIR_1)/tecs/TLSFMalloc -I $(GEN_DIR) -I ../../../mruby/include \
 -I ../../include -I ../../
 
-INCLUDES_CYGWIN = -I $(BASE_DIR)/../test/cygwin $(INCLUDES)
+INCLUDES_CYGWIN = -I $(BASE_DIR)/../test/cygwin $(INCLUDES_TECS)
 
 ifneq ($(TECS_CYGWIN), '')
   INCLUDES = $(INCLUDES_CYGWIN)
+else
+  INCLUDES = $(INCLUDES_TECS)
 endif
 
 DEFINES =
