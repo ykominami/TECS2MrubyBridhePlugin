@@ -47,7 +47,7 @@ struct  RProc  {int dummy;};
 
 typedef int CELLCB;
 
-typedef int mrb_value;
+/* typedef int mrb_value; */
 
 #endif /* TECSGEN */
 

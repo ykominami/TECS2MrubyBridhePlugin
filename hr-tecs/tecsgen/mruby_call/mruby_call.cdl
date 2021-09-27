@@ -1,2 +1,14 @@
+import_C( "/cygdrive/c/GTAE/6_2017-q1-update/arm-none-eabi/include/stdint.h" );
+
+import_C( "../../../mruby/include/mruby/value.h" );
+
+
+/* import_C( "../../../mruby/include/mruby/boxing_nan.h" ); */
+/* import_C( "../../../mruby/include/mruby/boxing_no.h" ); */
+/* import_C( "../../../mruby/include/mruby/boxing_word.h" ); */
+
+/*
 import( "../../include/kernel.cdl" );
 import( "mruby_call_0.cdl" );
+
+*/

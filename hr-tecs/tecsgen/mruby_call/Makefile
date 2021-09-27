@@ -8,8 +8,12 @@
 # vpath, CFLAGS, OTHER_OBJS などを調整する必要があるかもしれません
 # 他の環境やターゲットの場合、このファイルを元に変更する必要があります
 
-# TECSGEN_DEBUG_OPT = -t
-TECSGEN_DEBUG_OPT = 
+ifdef TECS_DEBUG
+  TECSGEN_DEBUG_OPT = -t
+else
+  TECSGEN_DEBUG_OPT =
+endif
+
 # ROOT_DIR = /cygdrive/c/Users/ykomi/repo/TECS2MrubyBridhePlugin_yk3
 ROOT_DIR = ../../..
 MRUBY_DIR = $(ROOT_DIR)/mruby
@@ -107,7 +111,8 @@ clean :
 tecs : $(PRE_TECSGEN_TARGET) $(TIMESTAMP)
 	touch $(TIMESTAMP)
 $(TIMESTAMP) : $(TECS_IMPORTS)
-	$(TECSGEN) $(TECSGEN_DEBUG_OPT) -I ../../include -I ../../target/ev3_gcc -I ../../arch/arm_gcc/am1808  -I ../../arch -I ../../arch/arm_gcc/common mruby_call.cdl
+	$(TECSGEN) $(TECSGEN_DEBUG_OPT) -I ../../include -I ../../target/ev3_gcc -I ../../arch/arm_gcc/am1808  -I ../../arch -I ../../arch/arm_gcc/common -I ../../../../mruby/include mruby_call.cdl
+#	echo TECSGEN_DEBUG_OPT=$(TECSGEN_DEBUG_OPT)
 
 tecs_cygwin : $(PRE_TECSGEN_TARGET) $(TIMESTAMP_CYGWIN)
 	touch $(TIMESTAMP_CYGWIN)
