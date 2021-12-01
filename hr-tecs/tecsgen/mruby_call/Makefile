@@ -8,8 +8,8 @@
 # vpath, CFLAGS, OTHER_OBJS などを調整する必要があるかもしれません
 # 他の環境やターゲットの場合、このファイルを元に変更する必要があります
 
-TECSGEN_DEBUG_OPT = -t
-# TECSGEN_DEBUG_OPT = 
+#TECSGEN_DEBUG_OPT = -t
+ TECSGEN_DEBUG_OPT = 
 
 # 変数 #_MVAR_#
 # fixed variable (unchangeable by config or plugin)
